@@ -17,7 +17,7 @@ buildscript {
     }
 }
 
-def modulePrefix = 'app'
+def modulePrefix = 'kkf'
 
 def globalModule = project(":${modulePrefix}-global")
 def coreModule = project(":${modulePrefix}-core")
@@ -32,11 +32,14 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'eu.maryns.romeo.kinderkankerfonds'
-        version = '0.1'
+        version = "1.0"
         isSnapshot = true
     }
     tomcat {
         dir = "$project.rootDir/deploy/tomcat"
+    }
+    ide {
+        vcs = 'Git'
     }
 }
 
