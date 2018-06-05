@@ -17,7 +17,9 @@
         <collectionDatasource id="geslachtsDs"
                               class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht"
                               view="_minimal">
-            <![CDATA[select e from kinderkankerfonds$Geslacht e]]>
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Geslacht e]]>
+            </query>
         </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
@@ -34,25 +36,6 @@
                        property="geslacht"/>
             </column>
         </fieldGroup>
-        <groupBox id="relatiesBox"
-                  caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.relaties">
-            <table id="relatiesTable"
-                   height="200px"
-                   width="100%">
-                <actions>
-                    <action id="add"/>
-                    <action id="remove"/>
-                </actions>
-                <columns>
-                    <column id="naam"/>
-                </columns>
-                <rows datasource="relatiesDs"/>
-                <buttonsPanel>
-                    <button action="relatiesTable.add"/>
-                    <button action="relatiesTable.remove"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
         <groupBox id="adressenBox"
                   caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.adressen">
             <table id="adressenTable"
@@ -76,6 +59,28 @@
                     <button action="adressenTable.create"/>
                     <button action="adressenTable.edit"/>
                     <button action="adressenTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <groupBox id="relatiesBox"
+                  caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.relaties">
+            <table id="relatiesTable"
+                   height="200px"
+                   width="100%">
+                <actions>
+                    <action id="create"/>
+                    <action id="edit"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="type"/>
+                    <column id="persoon"/>
+                </columns>
+                <rows datasource="relatiesDs"/>
+                <buttonsPanel>
+                    <button action="relatiesTable.create"/>
+                    <button action="relatiesTable.edit"/>
+                    <button action="relatiesTable.remove"/>
                 </buttonsPanel>
             </table>
         </groupBox>

@@ -31,8 +31,8 @@
                 <action id="remove"/>
             </actions>
             <columns>
-                <column id="naam"/>
                 <column id="type"/>
+                <column id="persoon"/>
             </columns>
             <rows datasource="relatiesDs"/>
             <rowsCount/>

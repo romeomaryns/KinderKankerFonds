@@ -82,7 +82,6 @@ create table KINDERKANKERFONDS_RELATIE (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    NAAM varchar(255),
     TYPE_ID varchar(36),
     --
     primary key (ID)
@@ -104,3 +103,10 @@ create table KINDERKANKERFONDS_RELATIE_TYPE (
     primary key (ID)
 )^
 -- end KINDERKANKERFONDS_RELATIE_TYPE
+-- begin KINDERKANKERFONDS_PERSOON_RELATIE_LINK
+create table KINDERKANKERFONDS_PERSOON_RELATIE_LINK (
+    RELATIE_ID varchar(36) not null,
+    PERSOON_ID varchar(36) not null,
+    primary key (RELATIE_ID, PERSOON_ID)
+)^
+-- end KINDERKANKERFONDS_PERSOON_RELATIE_LINK

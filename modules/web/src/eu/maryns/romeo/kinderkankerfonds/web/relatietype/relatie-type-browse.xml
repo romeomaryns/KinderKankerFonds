@@ -32,7 +32,6 @@
             </actions>
             <columns>
                 <column id="naam"/>
-                <column id="tussenvoegsel"/>
             </columns>
             <rows datasource="relatieTypesDs"/>
             <rowsCount/>

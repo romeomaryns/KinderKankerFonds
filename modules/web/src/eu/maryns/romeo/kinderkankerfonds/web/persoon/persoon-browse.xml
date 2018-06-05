@@ -29,14 +29,13 @@
                 <action id="create"/>
                 <action id="edit"/>
                 <action id="remove"/>
-                <action id="excel"/>
             </actions>
             <columns>
                 <column id="voornaam"/>
                 <column id="familienaam"/>
                 <column id="geboortedatum"/>
-                <column id="adressen"/>
                 <column id="geslacht"/>
+                <column id="adressen"/>
             </columns>
             <rows datasource="persoonsDs"/>
             <rowsCount/>

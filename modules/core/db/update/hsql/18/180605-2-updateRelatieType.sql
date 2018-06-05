@@ -1,0 +1,1 @@
+alter table KINDERKANKERFONDS_RELATIE_TYPE add column TUSSENVOEGSEL varchar(255) ;

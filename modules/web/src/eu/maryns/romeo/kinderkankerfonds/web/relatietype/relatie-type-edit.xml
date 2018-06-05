@@ -18,7 +18,6 @@
                     datasource="relatieTypeDs">
             <column width="250px">
                 <field property="naam"/>
-                <field property="tussenvoegsel"/>
             </column>
         </fieldGroup>
         <frame id="windowActions"

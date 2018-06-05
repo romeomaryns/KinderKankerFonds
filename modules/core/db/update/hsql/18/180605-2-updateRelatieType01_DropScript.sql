@@ -1,0 +1,1 @@
+alter table KINDERKANKERFONDS_RELATIE_TYPE drop column TUSSENVOEGSEL__U85922 cascade ;

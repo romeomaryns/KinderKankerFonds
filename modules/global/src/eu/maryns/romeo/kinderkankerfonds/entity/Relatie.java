@@ -16,20 +16,20 @@ import java.util.List;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-@NamePattern("%s - %s|naam,type")
+@NamePattern(" %s: %s|type,persoon")
 @Table(name = "KINDERKANKERFONDS_RELATIE")
 @Entity(name = "kinderkankerfonds$Relatie")
 public class Relatie extends StandardEntity {
     private static final long serialVersionUID = -371006789725188469L;
-
-    @Column(name = "NAAM")
-    protected String naam;
 
     @Lookup(type = LookupType.DROPDOWN)
     @OnDelete(DeletePolicy.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TYPE_ID")
     protected RelatieType type;
+
+
+
 
 
     @JoinTable(name = "KINDERKANKERFONDS_PERSOON_RELATIE_LINK",
@@ -55,14 +55,6 @@ public class Relatie extends StandardEntity {
         return type;
     }
 
-
-    public void setNaam(String naam) {
-        this.naam = naam;
-    }
-
-    public String getNaam() {
-        return naam;
-    }
 
 
 }

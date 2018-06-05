@@ -1,0 +1,1 @@
+drop table KINDERKANKERFONDS_PERSOON_RELATIE_LINK__U73484 if exists cascade ;

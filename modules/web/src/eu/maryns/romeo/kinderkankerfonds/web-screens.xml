@@ -6,8 +6,6 @@
             template="eu/maryns/romeo/kinderkankerfonds/web/adres/adres-browse.xml"/>
     <screen id="kinderkankerfonds$Adres.edit"
             template="eu/maryns/romeo/kinderkankerfonds/web/adres/adres-edit.xml"/>
-    <screen id="kinderkankerfonds$Persoon.edit"
-            template="eu/maryns/romeo/kinderkankerfonds/web/persoon/persoon-edit.xml"/>
     <screen id="kinderkankerfonds$AdresType.browse"
             template="eu/maryns/romeo/kinderkankerfonds/web/adrestype/adres-type-browse.xml"/>
     <screen id="kinderkankerfonds$AdresType.edit"
@@ -26,4 +24,6 @@
             template="eu/maryns/romeo/kinderkankerfonds/web/geslacht/geslacht-browse.xml"/>
     <screen id="kinderkankerfonds$Geslacht.edit"
             template="eu/maryns/romeo/kinderkankerfonds/web/geslacht/geslacht-edit.xml"/>
+    <screen id="kinderkankerfonds$Persoon.edit"
+            template="eu/maryns/romeo/kinderkankerfonds/web/persoon/persoon-edit.xml"/>
 </screen-config>

@@ -8,10 +8,7 @@
     <dsContext>
         <datasource id="relatieDs"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Relatie"
-                    view="relatie-browse-view">
-            <collectionDatasource id="personenDs"
-                                  property="personen"/>
-        </datasource>
+                    view="relatie-browse-view"/>
         <collectionDatasource id="typesDs"
                               class="eu.maryns.romeo.kinderkankerfonds.entity.RelatieType"
                               view="_minimal">
@@ -27,31 +24,11 @@
         <fieldGroup id="fieldGroup"
                     datasource="relatieDs">
             <column width="250px">
-                <field property="naam"/>
                 <field optionsDatasource="typesDs"
                        property="type"/>
+                <field property="persoon"/>
             </column>
         </fieldGroup>
-        <groupBox id="personenBox"
-                  caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Relatie.personen">
-            <table id="personenTable"
-                   height="200px"
-                   width="100%">
-                <actions>
-                    <action id="add"/>
-                    <action id="remove"/>
-                </actions>
-                <columns>
-                    <column id="voornaam"/>
-                    <column id="familienaam"/>
-                </columns>
-                <rows datasource="personenDs"/>
-                <buttonsPanel>
-                    <button action="personenTable.add"/>
-                    <button action="personenTable.remove"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
         <frame id="windowActions"
                screen="editWindowActions"/>
     </layout>

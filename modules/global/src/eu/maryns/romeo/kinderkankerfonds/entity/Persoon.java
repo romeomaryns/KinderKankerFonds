@@ -55,6 +55,7 @@ public class Persoon extends StandardEntity {
         joinColumns = @JoinColumn(name = "PERSOON_ID"),
         inverseJoinColumns = @JoinColumn(name = "RELATIE_ID"))
     @ManyToMany
+    @OnDelete(DeletePolicy.CASCADE)
     protected List<Relatie> relaties;
 
     public void setRelaties(List<Relatie> relaties) {
