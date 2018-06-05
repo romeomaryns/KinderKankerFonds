@@ -8,12 +8,10 @@
     <dsContext>
         <datasource id="adresDs"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
-                    view="_local"/>
+                    view="adres-full-view"/>
         <collectionDatasource id="typesDs"
                               class="eu.maryns.romeo.kinderkankerfonds.entity.AdresType"
-                              view="_minimal">
-            <![CDATA[select e from kinderkankerfonds$AdresType e]]>
-        </collectionDatasource>
+                              view="_minimal"/>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>

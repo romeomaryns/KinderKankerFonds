@@ -1,0 +1,11 @@
+@import "halo-defaults";
+@import "eu.maryns.romeo.kinderkankerfonds/halo-ext-defaults";
+@import "app-components";
+@import "eu.maryns.romeo.kinderkankerfonds/halo-ext";
+
+.halo {
+  // include auto-generated app components SCSS
+  @include app_components;
+  
+  @include eu_maryns_romeo_kinderkankerfonds-halo-ext;
+}
