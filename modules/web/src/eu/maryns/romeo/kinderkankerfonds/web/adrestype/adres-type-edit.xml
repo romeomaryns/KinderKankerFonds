@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="eu.maryns.romeo.kinderkankerfonds.web.adrestype.AdresTypeEdit"
+        datasource="adresTypeDs"
+        focusComponent="fieldGroup"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.adrestype">
+    <dsContext>
+        <datasource id="adresTypeDs"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.AdresType"
+                    view="_local"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="adresTypeDs">
+            <column width="250px">
+                <field property="naam"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="eu.maryns.romeo.kinderkankerfonds.web.persoon.PersoonEdit"
+        datasource="persoonDs"
+        focusComponent="fieldGroup"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.persoon">
+    <dsContext>
+        <datasource id="persoonDs"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
+                    view="persoon-browse-view">
+            <collectionDatasource id="adressenDs"
+                                  property="adressen"/>
+        </datasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="persoonDs">
+            <column width="250px">
+                <field property="voornaam"/>
+                <field property="familienaam"/>
+                <field property="geboortedatum"/>
+            </column>
+        </fieldGroup>
+        <groupBox id="adressenBox"
+                  caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.adressen">
+            <table id="adressenTable"
+                   height="200px"
+                   width="100%">
+                <actions>
+                    <action id="create"/>
+                    <action id="edit"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="straatnaam"/>
+                    <column id="huisnummer"/>
+                    <column id="bus"/>
+                    <column id="postcode"/>
+                    <column id="stad"/>
+                    <column id="type"/>
+                </columns>
+                <rows datasource="adressenDs"/>
+                <buttonsPanel>
+                    <button action="adressenTable.create"/>
+                    <button action="adressenTable.edit"/>
+                    <button action="adressenTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>
