@@ -5,5 +5,8 @@
         <item screen="kinderkankerfonds$Adres.browse"/>
         <item screen="kinderkankerfonds$AdresType.browse"/>
         <item screen="kinderkankerfonds$Persoon.browse"/>
+        <item screen="kinderkankerfonds$RelatieType.browse"/>
+        <item screen="kinderkankerfonds$Relatie.browse"/>
+        <item screen="kinderkankerfonds$Geslacht.browse"/>
     </menu>
 </menu-config>

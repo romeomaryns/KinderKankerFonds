@@ -6,5 +6,8 @@
         <class>eu.maryns.romeo.kinderkankerfonds.entity.Persoon</class>
         <class>eu.maryns.romeo.kinderkankerfonds.entity.Adres</class>
         <class>eu.maryns.romeo.kinderkankerfonds.entity.AdresType</class>
+        <class>eu.maryns.romeo.kinderkankerfonds.entity.Geslacht</class>
+        <class>eu.maryns.romeo.kinderkankerfonds.entity.Relatie</class>
+        <class>eu.maryns.romeo.kinderkankerfonds.entity.RelatieType</class>
     </persistence-unit>
 </persistence>

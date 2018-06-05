@@ -12,6 +12,7 @@ create table KINDERKANKERFONDS_PERSOON (
     VOORNAAM varchar(255),
     FAMILIENAAM varchar(255),
     GEBOORTEDATUM date,
+    GESLACHT_ID varchar(36),
     --
     primary key (ID)
 )^
@@ -54,3 +55,52 @@ create table KINDERKANKERFONDS_ADRES_TYPE (
     primary key (ID)
 )^
 -- end KINDERKANKERFONDS_ADRES_TYPE
+-- begin KINDERKANKERFONDS_GESLACHT
+create table KINDERKANKERFONDS_GESLACHT (
+    ID varchar(36) not null,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    NAAM varchar(255) not null,
+    --
+    primary key (ID)
+)^
+-- end KINDERKANKERFONDS_GESLACHT
+-- begin KINDERKANKERFONDS_RELATIE
+create table KINDERKANKERFONDS_RELATIE (
+    ID varchar(36) not null,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    NAAM varchar(255),
+    TYPE_ID varchar(36),
+    --
+    primary key (ID)
+)^
+-- end KINDERKANKERFONDS_RELATIE
+-- begin KINDERKANKERFONDS_RELATIE_TYPE
+create table KINDERKANKERFONDS_RELATIE_TYPE (
+    ID varchar(36) not null,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    NAAM varchar(255),
+    --
+    primary key (ID)
+)^
+-- end KINDERKANKERFONDS_RELATIE_TYPE

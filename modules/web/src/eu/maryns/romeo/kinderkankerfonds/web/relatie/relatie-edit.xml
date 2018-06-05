@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="eu.maryns.romeo.kinderkankerfonds.web.relatie.RelatieEdit"
+        datasource="relatieDs"
+        focusComponent="fieldGroup"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.relatie">
+    <dsContext>
+        <datasource id="relatieDs"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Relatie"
+                    view="relatie-browse-view">
+            <collectionDatasource id="personenDs"
+                                  property="personen"/>
+        </datasource>
+        <collectionDatasource id="typesDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.RelatieType"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$RelatieType e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="relatieDs">
+            <column width="250px">
+                <field property="naam"/>
+                <field optionsDatasource="typesDs"
+                       property="type"/>
+            </column>
+        </fieldGroup>
+        <groupBox id="personenBox"
+                  caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Relatie.personen">
+            <table id="personenTable"
+                   height="200px"
+                   width="100%">
+                <actions>
+                    <action id="add"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="voornaam"/>
+                    <column id="familienaam"/>
+                </columns>
+                <rows datasource="personenDs"/>
+                <buttonsPanel>
+                    <button action="personenTable.add"/>
+                    <button action="personenTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

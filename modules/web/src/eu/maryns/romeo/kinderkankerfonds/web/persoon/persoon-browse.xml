@@ -36,6 +36,7 @@
                 <column id="familienaam"/>
                 <column id="geboortedatum"/>
                 <column id="adressen"/>
+                <column id="geslacht"/>
             </columns>
             <rows datasource="persoonsDs"/>
             <rowsCount/>

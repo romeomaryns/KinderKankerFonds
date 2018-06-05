@@ -11,7 +11,14 @@
                     view="persoon-browse-view">
             <collectionDatasource id="adressenDs"
                                   property="adressen"/>
+            <collectionDatasource id="relatiesDs"
+                                  property="relaties"/>
         </datasource>
+        <collectionDatasource id="geslachtsDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht"
+                              view="_minimal">
+            <![CDATA[select e from kinderkankerfonds$Geslacht e]]>
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
@@ -23,8 +30,29 @@
                 <field property="voornaam"/>
                 <field property="familienaam"/>
                 <field property="geboortedatum"/>
+                <field optionsDatasource="geslachtsDs"
+                       property="geslacht"/>
             </column>
         </fieldGroup>
+        <groupBox id="relatiesBox"
+                  caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.relaties">
+            <table id="relatiesTable"
+                   height="200px"
+                   width="100%">
+                <actions>
+                    <action id="add"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="naam"/>
+                </columns>
+                <rows datasource="relatiesDs"/>
+                <buttonsPanel>
+                    <button action="relatiesTable.add"/>
+                    <button action="relatiesTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
         <groupBox id="adressenBox"
                   caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.adressen">
             <table id="adressenTable"
