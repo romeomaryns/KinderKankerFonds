@@ -74,7 +74,7 @@
                 </actions>
                 <columns>
                     <column id="type"/>
-                    <column id="persoon"/>
+                    <column id="personen"/>
                 </columns>
                 <rows datasource="relatiesDs"/>
                 <buttonsPanel>

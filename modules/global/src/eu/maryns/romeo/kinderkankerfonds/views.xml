@@ -12,7 +12,10 @@
         <property name="geslacht"
                   view="_minimal"/>
         <property name="relaties"
-                  view="_minimal"/>
+                  view="_minimal">
+            <property name="personen"
+                      view="_minimal"/>
+        </property>
     </view>
     <view class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
           extends="_local"
@@ -26,6 +29,8 @@
           extends="_local"
           name="relatie-browse-view">
         <property name="type"
+                  view="_minimal"/>
+        <property name="personen"
                   view="_minimal"/>
     </view>
 </views>

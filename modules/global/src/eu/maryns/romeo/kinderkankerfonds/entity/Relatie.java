@@ -16,7 +16,7 @@ import java.util.List;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-@NamePattern(" %s: %s|type,persoon")
+@NamePattern(" %s: %s|type,personen")
 @Table(name = "KINDERKANKERFONDS_RELATIE")
 @Entity(name = "kinderkankerfonds$Relatie")
 public class Relatie extends StandardEntity {
