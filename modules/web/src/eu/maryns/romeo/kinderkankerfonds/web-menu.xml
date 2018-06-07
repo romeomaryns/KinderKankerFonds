@@ -2,11 +2,11 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-kinderkankerfonds"
           insertBefore="administration">
-        <item screen="kinderkankerfonds$Adres.browse"/>
-        <item screen="kinderkankerfonds$AdresType.browse"/>
         <item screen="kinderkankerfonds$Persoon.browse"/>
-        <item screen="kinderkankerfonds$RelatieType.browse"/>
+        <item screen="kinderkankerfonds$Adres.browse"/>
         <item screen="kinderkankerfonds$Relatie.browse"/>
+        <item screen="kinderkankerfonds$RelatieType.browse"/>
         <item screen="kinderkankerfonds$Geslacht.browse"/>
+        <item screen="kinderkankerfonds$AdresType.browse"/>
     </menu>
 </menu-config>

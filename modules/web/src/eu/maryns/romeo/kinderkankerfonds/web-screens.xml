@@ -18,12 +18,12 @@
             template="eu/maryns/romeo/kinderkankerfonds/web/relatietype/relatie-type-edit.xml"/>
     <screen id="kinderkankerfonds$Relatie.browse"
             template="eu/maryns/romeo/kinderkankerfonds/web/relatie/relatie-browse.xml"/>
-    <screen id="kinderkankerfonds$Relatie.edit"
-            template="eu/maryns/romeo/kinderkankerfonds/web/relatie/relatie-edit.xml"/>
     <screen id="kinderkankerfonds$Geslacht.browse"
             template="eu/maryns/romeo/kinderkankerfonds/web/geslacht/geslacht-browse.xml"/>
     <screen id="kinderkankerfonds$Geslacht.edit"
             template="eu/maryns/romeo/kinderkankerfonds/web/geslacht/geslacht-edit.xml"/>
     <screen id="kinderkankerfonds$Persoon.edit"
             template="eu/maryns/romeo/kinderkankerfonds/web/persoon/persoon-edit.xml"/>
+    <screen id="kinderkankerfonds$Relatie.edit"
+            template="eu/maryns/romeo/kinderkankerfonds/web/relatie/relatie-edit.xml"/>
 </screen-config>

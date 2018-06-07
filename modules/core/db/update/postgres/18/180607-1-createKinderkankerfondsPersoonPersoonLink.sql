@@ -1,0 +1,5 @@
+create table KINDERKANKERFONDS_PERSOON_PERSOON_LINK (
+    PERSOON_1_ID uuid,
+    PERSOON_2_ID uuid,
+    primary key (PERSOON_1_ID, PERSOON_2_ID)
+);

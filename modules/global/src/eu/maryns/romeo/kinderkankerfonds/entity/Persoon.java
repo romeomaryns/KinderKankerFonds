@@ -22,6 +22,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import java.util.Collection;
 
 @NamePattern("%s %s|voornaam,familienaam")
 @Table(name = "KINDERKANKERFONDS_PERSOON")
@@ -51,20 +52,39 @@ public class Persoon extends StandardEntity {
     @OneToMany(mappedBy = "persoon")
     protected List<Adres> adressen;
 
-    @JoinTable(name = "KINDERKANKERFONDS_PERSOON_RELATIE_LINK",
-        joinColumns = @JoinColumn(name = "PERSOON_ID"),
-        inverseJoinColumns = @JoinColumn(name = "RELATIE_ID"))
-    @ManyToMany
+    @Composition
+    @OneToMany(mappedBy = "persoon")
     @OnDelete(DeletePolicy.CASCADE)
-    protected List<Relatie> relaties;
+    protected Collection<Relatie> relaties;
 
-    public void setRelaties(List<Relatie> relaties) {
+    @Lookup(type = LookupType.SCREEN, actions = {"lookup", "open", "clear"})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RELATIE_ID")
+    protected Relatie relatie;
+
+    public void setRelatie(Relatie relatie) {
+        this.relatie = relatie;
+    }
+
+    public Relatie getRelatie() {
+        return relatie;
+    }
+
+
+    public Collection<Relatie> getRelaties() {
+        return relaties;
+    }
+
+    public void setRelaties(Collection<Relatie> relaties) {
         this.relaties = relaties;
     }
 
-    public List<Relatie> getRelaties() {
-        return relaties;
-    }
+
+
+
+
+
+
 
 
     public void setGeslacht(Geslacht geslacht) {

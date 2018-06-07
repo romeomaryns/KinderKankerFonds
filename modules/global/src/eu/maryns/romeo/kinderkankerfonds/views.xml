@@ -13,7 +13,10 @@
                   view="_minimal"/>
         <property name="relaties"
                   view="_minimal">
-            <property name="personen"
+        </property>
+        <property name="relatie"
+                  view="_minimal">
+            <property name="persoon"
                       view="_minimal"/>
         </property>
     </view>
@@ -31,6 +34,6 @@
         <property name="type"
                   view="_minimal"/>
         <property name="personen"
-                  view="_minimal"/>
+                  view="_local"/>
     </view>
 </views>

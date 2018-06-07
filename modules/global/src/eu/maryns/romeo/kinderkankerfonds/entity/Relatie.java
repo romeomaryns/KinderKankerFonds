@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import java.util.List;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import java.util.Collection;
+import com.haulmont.chile.core.annotations.Composition;
+import javax.persistence.OneToMany;
 
 @NamePattern(" %s: %s|type,personen")
 @Table(name = "KINDERKANKERFONDS_RELATIE")
@@ -32,10 +35,21 @@ public class Relatie extends StandardEntity {
 
 
 
-    @JoinTable(name = "KINDERKANKERFONDS_PERSOON_RELATIE_LINK",
-        joinColumns = @JoinColumn(name = "RELATIE_ID"),
-        inverseJoinColumns = @JoinColumn(name = "PERSOON_ID"))
-    @ManyToMany
+
+
+
+
+
+
+
+    @Lookup(type = LookupType.SCREEN, actions = {"lookup", "open", "clear"})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PERSOON_ID")
+    protected Persoon persoon;
+
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "relatie")
     protected List<Persoon> personen;
 
     public void setPersonen(List<Persoon> personen) {
@@ -44,6 +58,15 @@ public class Relatie extends StandardEntity {
 
     public List<Persoon> getPersonen() {
         return personen;
+    }
+
+
+    public void setPersoon(Persoon persoon) {
+        this.persoon = persoon;
+    }
+
+    public Persoon getPersoon() {
+        return persoon;
     }
 
 

@@ -37,16 +37,19 @@
                    height="200px"
                    width="100%">
                 <actions>
-                    <action id="add"/>
+                    <action id="create"/>
+                    <action id="edit"/>
                     <action id="remove"/>
                 </actions>
                 <columns>
                     <column id="voornaam"/>
                     <column id="familienaam"/>
+                    <column id="geboortedatum"/>
                 </columns>
                 <rows datasource="personenDs"/>
                 <buttonsPanel>
-                    <button action="personenTable.add"/>
+                    <button action="personenTable.create"/>
+                    <button action="personenTable.edit"/>
                     <button action="personenTable.remove"/>
                 </buttonsPanel>
             </table>
