@@ -32,6 +32,7 @@
             </actions>
             <columns>
                 <column id="type"/>
+                <column id="personen"/>
             </columns>
             <rows datasource="relatiesDs"/>
             <rowsCount/>

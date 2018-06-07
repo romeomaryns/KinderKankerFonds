@@ -8,7 +8,19 @@
     <dsContext>
         <datasource id="persoonDs"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
-                    view="_local"/>
+                    view="persoon-browse-view">
+            <collectionDatasource id="adressenDs"
+                                  property="adressen"/>
+            <collectionDatasource id="relatiesDs"
+                                  property="relaties"/>
+        </datasource>
+        <collectionDatasource id="geslachtsDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Geslacht e]]>
+            </query>
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
@@ -20,8 +32,60 @@
                 <field property="voornaam"/>
                 <field property="familienaam"/>
                 <field property="geboortedatum"/>
+                <field optionsDatasource="geslachtsDs"
+                       property="geslacht"/>
+                <field property="relatie"/>
             </column>
         </fieldGroup>
+        <groupBox id="adressenBox"
+                  caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.adressen">
+            <table id="adressenTable"
+                   height="200px"
+                   width="100%">
+                <actions>
+                    <action id="create"/>
+                    <action id="edit"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="straatnaam"/>
+                    <column id="huisnummer"/>
+                    <column id="bus"/>
+                    <column id="postcode"/>
+                    <column id="stad"/>
+                    <column id="type"/>
+                </columns>
+                <rows datasource="adressenDs"/>
+                <buttonsPanel>
+                    <button action="adressenTable.create"/>
+                    <button action="adressenTable.edit"/>
+                    <button action="adressenTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <groupBox id="relatiesBox"
+                  caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.relaties">
+            <table id="relatiesTable"
+                   height="200px"
+                   width="100%">
+                <actions>
+                    <action id="create"/>
+                    <action id="edit"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                    <column id="type"/>
+                    <column id="personen"/>
+                    <column id="persoon"/>
+                </columns>
+                <rows datasource="relatiesDs"/>
+                <buttonsPanel>
+                    <button action="relatiesTable.create"/>
+                    <button action="relatiesTable.edit"/>
+                    <button action="relatiesTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
         <frame id="windowActions"
                screen="editWindowActions"/>
     </layout>

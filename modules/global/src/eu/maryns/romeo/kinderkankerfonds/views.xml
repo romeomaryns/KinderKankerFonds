@@ -13,6 +13,8 @@
                   view="_minimal"/>
         <property name="relaties"
                   view="_minimal">
+            <property name="persoon"
+                      view="_minimal"/>
         </property>
         <property name="relatie"
                   view="_minimal">
