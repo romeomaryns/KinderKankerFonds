@@ -8,15 +8,19 @@
     <dsContext>
         <datasource id="relatieDs"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Relatie"
-                    view="relatie-browse-view">
-            <collectionDatasource id="personenDs"
-                                  property="personen"/>
-        </datasource>
+                    view="relatie-browse-view"/>
         <collectionDatasource id="typesDs"
                               class="eu.maryns.romeo.kinderkankerfonds.entity.RelatieType"
                               view="_minimal">
             <query>
                 <![CDATA[select e from kinderkankerfonds$RelatieType e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="persoonDoelsDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Persoon e]]>
             </query>
         </collectionDatasource>
     </dsContext>
@@ -27,33 +31,14 @@
         <fieldGroup id="fieldGroup"
                     datasource="relatieDs">
             <column width="250px">
+                <field optionsDatasource="persoonDoelsDs"
+                       property="persoonOrigine"/>
                 <field optionsDatasource="typesDs"
                        property="type"/>
+                <field optionsDatasource="persoonDoelsDs"
+                       property="persoonDoel"/>
             </column>
         </fieldGroup>
-        <groupBox id="personenBox"
-                  caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Relatie.personen">
-            <table id="personenTable"
-                   height="200px"
-                   width="100%">
-                <actions>
-                    <action id="create"/>
-                    <action id="edit"/>
-                    <action id="remove"/>
-                </actions>
-                <columns>
-                    <column id="voornaam"/>
-                    <column id="familienaam"/>
-                    <column id="geboortedatum"/>
-                </columns>
-                <rows datasource="personenDs"/>
-                <buttonsPanel>
-                    <button action="personenTable.create"/>
-                    <button action="personenTable.edit"/>
-                    <button action="personenTable.remove"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
         <frame id="windowActions"
                screen="editWindowActions"/>
     </layout>

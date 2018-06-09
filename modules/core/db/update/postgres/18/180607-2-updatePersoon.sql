@@ -1,3 +1,0 @@
-alter table KINDERKANKERFONDS_PERSOON rename column relaties_id to relaties_id__u18587 ;
-drop index IDX_KINDERKANKERFONDS_PERSOON_ON_RELATIES ;
-alter table KINDERKANKERFONDS_PERSOON drop constraint FK_KINDERKANKERFONDS_PERSOON_ON_RELATIES ;

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
         caption="msg://browseCaption"
-        class="eu.maryns.romeo.kinderkankerfonds.web.relatietype.RelatieTypeBrowse"
-        focusComponent="relatieTypesTable"
-        lookupComponent="relatieTypesTable"
-        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.relatietype">
+        class="eu.maryns.romeo.kinderkankerfonds.web.categorie.CategorieBrowse"
+        focusComponent="categoriesTable"
+        lookupComponent="categoriesTable"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.categorie">
     <dsContext>
-        <groupDatasource id="relatieTypesDs"
-                         class="eu.maryns.romeo.kinderkankerfonds.entity.RelatieType"
-                         view="_local">
+        <groupDatasource id="categoriesDs"
+                         class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie"
+                         view="_minimal">
             <query>
-                <![CDATA[select e from kinderkankerfonds$RelatieType e]]>
+                <![CDATA[select e from kinderkankerfonds$Categorie e]]>
             </query>
         </groupDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="relatieTypesTable"
+    <layout expand="categoriesTable"
             spacing="true">
         <filter id="filter"
-                applyTo="relatieTypesTable"
-                datasource="relatieTypesDs">
+                applyTo="categoriesTable"
+                datasource="categoriesDs">
             <properties include=".*"/>
         </filter>
-        <groupTable id="relatieTypesTable"
+        <groupTable id="categoriesTable"
                     width="100%">
             <actions>
                 <action id="create"/>
@@ -32,18 +32,17 @@
             </actions>
             <columns>
                 <column id="naam"/>
-                <column id="tussenvoegsel"/>
             </columns>
-            <rows datasource="relatieTypesDs"/>
+            <rows datasource="categoriesDs"/>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
                 <button id="createBtn"
-                        action="relatieTypesTable.create"/>
+                        action="categoriesTable.create"/>
                 <button id="editBtn"
-                        action="relatieTypesTable.edit"/>
+                        action="categoriesTable.edit"/>
                 <button id="removeBtn"
-                        action="relatieTypesTable.remove"/>
+                        action="categoriesTable.remove"/>
             </buttonsPanel>
         </groupTable>
     </layout>

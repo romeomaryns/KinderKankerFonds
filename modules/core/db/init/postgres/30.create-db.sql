@@ -20,20 +20,20 @@ INSERT INTO public.kinderkankerfonds_geslacht(
 	
 	
 INSERT INTO public.kinderkankerfonds_relatie_type(
-	id, version, create_ts, created_by, update_ts, updated_by, delete_ts, deleted_by, naam)
-	VALUES ('5daa1e18-c15e-0c5c-39ca-296d1aa8c8b9', 1 , current_date ,'admin', current_date, null, null, null, 'Gehuwd');
+	id, version, create_ts, created_by, update_ts, updated_by, delete_ts, deleted_by, naam, tussenvoegsel)
+	VALUES ('5daa1e18-c15e-0c5c-39ca-296d1aa8c8b9', 1 , current_date ,'admin', current_date, null, null, null, 'Gehuwd' , 'met');
 INSERT INTO public.kinderkankerfonds_relatie_type(
-	id, version, create_ts, created_by, update_ts, updated_by, delete_ts, deleted_by, naam)
-	VALUES ('81c49514-6495-0af7-426e-c13a04b6926f', 1 , current_date ,'admin', current_date, null, null, null, 'Gescheiden');
+	id, version, create_ts, created_by, update_ts, updated_by, delete_ts, deleted_by, naam, tussenvoegsel)
+	VALUES ('81c49514-6495-0af7-426e-c13a04b6926f', 1 , current_date ,'admin', current_date, null, null, null, 'Gescheiden', 'van');
 INSERT INTO public.kinderkankerfonds_relatie_type(
-	id, version, create_ts, created_by, update_ts, updated_by, delete_ts, deleted_by, naam)
-	VALUES ('9055fb35-6ab8-a0fe-dc4e-bf9b9a31fb6f', 1 , current_date ,'admin', current_date, null, null, null, 'Broers/Zussen');
+	id, version, create_ts, created_by, update_ts, updated_by, delete_ts, deleted_by, naam, tussenvoegsel)
+	VALUES ('9055fb35-6ab8-a0fe-dc4e-bf9b9a31fb6f', 1 , current_date ,'admin', current_date, null, null, null, 'Broer/Zus', 'van');
 INSERT INTO public.kinderkankerfonds_relatie_type(
-	id, version, create_ts, created_by, update_ts, updated_by, delete_ts, deleted_by, naam)
-	VALUES ('7e8a595e-db61-d436-d9c0-e01a1495dbe0', 1 , current_date ,'admin', current_date, null, null, null, 'Ouders/Kinderen');
+	id, version, create_ts, created_by, update_ts, updated_by, delete_ts, deleted_by, naam, tussenvoegsel)
+	VALUES ('7e8a595e-db61-d436-d9c0-e01a1495dbe0', 1 , current_date ,'admin', current_date, null, null, null, 'Ouder', 'van');
 INSERT INTO public.kinderkankerfonds_relatie_type(
-	id, version, create_ts, created_by, update_ts, updated_by, delete_ts, deleted_by, naam)
-	VALUES ('f603a4f1-f6a7-f9a3-d1fd-66a4f85d39e8', 1 , current_date ,'admin', current_date, null, null, null, 'Samenwonend');
+	id, version, create_ts, created_by, update_ts, updated_by, delete_ts, deleted_by, naam, tussenvoegsel)
+	VALUES ('f603a4f1-f6a7-f9a3-d1fd-66a4f85d39e8', 1 , current_date ,'admin', current_date, null, null, null, 'Kind' , 'van');
 	
 	
 	

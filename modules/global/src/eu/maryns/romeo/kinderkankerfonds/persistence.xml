@@ -9,5 +9,6 @@
         <class>eu.maryns.romeo.kinderkankerfonds.entity.Geslacht</class>
         <class>eu.maryns.romeo.kinderkankerfonds.entity.Relatie</class>
         <class>eu.maryns.romeo.kinderkankerfonds.entity.RelatieType</class>
+        <class>eu.maryns.romeo.kinderkankerfonds.entity.Categorie</class>
     </persistence-unit>
 </persistence>

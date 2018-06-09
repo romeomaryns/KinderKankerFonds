@@ -29,10 +29,12 @@
                 <action id="create"/>
                 <action id="edit"/>
                 <action id="remove"/>
+                <action id="excel"/>
             </actions>
             <columns>
+                <column id="persoonOrigine"/>
                 <column id="type"/>
-                <column id="personen"/>
+                <column id="persoonDoel"/>
             </columns>
             <rows datasource="relatiesDs"/>
             <rowsCount/>
@@ -44,6 +46,8 @@
                         action="relatiesTable.edit"/>
                 <button id="removeBtn"
                         action="relatiesTable.remove"/>
+                <button id="excelBtn"
+                        action="relatiesTable.excel"/>
             </buttonsPanel>
         </groupTable>
     </layout>

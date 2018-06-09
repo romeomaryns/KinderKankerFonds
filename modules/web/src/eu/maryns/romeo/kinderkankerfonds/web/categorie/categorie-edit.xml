@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
         caption="msg://editorCaption"
-        class="eu.maryns.romeo.kinderkankerfonds.web.relatietype.RelatieTypeEdit"
-        datasource="relatieTypeDs"
+        class="eu.maryns.romeo.kinderkankerfonds.web.categorie.CategorieEdit"
+        datasource="categorieDs"
         focusComponent="fieldGroup"
-        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.relatietype">
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.categorie">
     <dsContext>
-        <datasource id="relatieTypeDs"
-                    class="eu.maryns.romeo.kinderkankerfonds.entity.RelatieType"
+        <datasource id="categorieDs"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie"
                     view="_local"/>
     </dsContext>
     <dialogMode height="600"
@@ -15,10 +15,9 @@
     <layout expand="windowActions"
             spacing="true">
         <fieldGroup id="fieldGroup"
-                    datasource="relatieTypeDs">
+                    datasource="categorieDs">
             <column width="250px">
                 <field property="naam"/>
-                <field property="tussenvoegsel"/>
             </column>
         </fieldGroup>
         <frame id="windowActions"

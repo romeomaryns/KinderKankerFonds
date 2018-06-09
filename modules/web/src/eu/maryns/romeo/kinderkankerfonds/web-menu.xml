@@ -2,11 +2,21 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-kinderkankerfonds"
           insertBefore="administration">
-        <item screen="kinderkankerfonds$Persoon.browse"/>
-        <item screen="kinderkankerfonds$Adres.browse"/>
-        <item screen="kinderkankerfonds$Relatie.browse"/>
-        <item screen="kinderkankerfonds$RelatieType.browse"/>
-        <item screen="kinderkankerfonds$Geslacht.browse"/>
-        <item screen="kinderkankerfonds$AdresType.browse"/>
+        <item icon="icons/wf-user-group-button.png"
+              screen="kinderkankerfonds$Persoon.browse"/>
+        <item icon="MAP"
+              screen="kinderkankerfonds$Adres.browse"/>
+        <item icon="RANDOM"
+              screen="kinderkankerfonds$Relatie.browse"/>
+        <separator/>
+        <item icon="WRENCH"
+              screen="kinderkankerfonds$RelatieType.browse"/>
+        <item icon="WRENCH"
+              screen="kinderkankerfonds$Geslacht.browse"/>
+        <item icon="WRENCH"
+              screen="kinderkankerfonds$AdresType.browse"/>
+        <item icon="WRENCH"
+              openType="NEW_TAB"
+              screen="kinderkankerfonds$Categorie.browse"/>
     </menu>
 </menu-config>

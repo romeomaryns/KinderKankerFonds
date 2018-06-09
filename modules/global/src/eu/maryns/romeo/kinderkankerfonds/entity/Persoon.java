@@ -47,37 +47,40 @@ public class Persoon extends StandardEntity {
     @JoinColumn(name = "GESLACHT_ID")
     protected Geslacht geslacht;
 
+    @JoinTable(name = "KINDERKANKERFONDS_PERSOON_CATEGORIE_LINK",
+        joinColumns = @JoinColumn(name = "PERSOON_ID"),
+        inverseJoinColumns = @JoinColumn(name = "CATEGORIE_ID"))
+    @ManyToMany
+    protected List<Categorie> tags;
+
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "persoon")
     protected List<Adres> adressen;
 
-    @Composition
-    @OneToMany(mappedBy = "persoon")
+    @OneToMany(mappedBy = "persoonOrigine")
     @OnDelete(DeletePolicy.CASCADE)
-    protected Collection<Relatie> relaties;
+    protected List<Relatie> relaties;
 
-    @Lookup(type = LookupType.SCREEN, actions = {"lookup", "open", "clear"})
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RELATIE_ID")
-    protected Relatie relatie;
 
-    public void setRelatie(Relatie relatie) {
-        this.relatie = relatie;
+    public void setTags(List<Categorie> tags) {
+        this.tags = tags;
     }
 
-    public Relatie getRelatie() {
-        return relatie;
+    public List<Categorie> getTags() {
+        return tags;
     }
 
 
-    public Collection<Relatie> getRelaties() {
+    public List<Relatie> getRelaties() {
         return relaties;
     }
 
-    public void setRelaties(Collection<Relatie> relaties) {
+    public void setRelaties(List<Relatie> relaties) {
         this.relaties = relaties;
     }
+
+
 
 
 

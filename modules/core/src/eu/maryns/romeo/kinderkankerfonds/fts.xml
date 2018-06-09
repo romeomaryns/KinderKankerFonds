@@ -19,5 +19,8 @@
         <entity class="eu.maryns.romeo.kinderkankerfonds.entity.RelatieType">
             <include re=".*"/>
         </entity>
+        <entity class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie">
+            <include re=".*"/>
+        </entity>
     </entities>
 </fts-config>

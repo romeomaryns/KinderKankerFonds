@@ -19,7 +19,7 @@ import java.util.Collection;
 import com.haulmont.chile.core.annotations.Composition;
 import javax.persistence.OneToMany;
 
-@NamePattern(" %s: %s|type,personen")
+@NamePattern(" %s: |type,persoonDoel")
 @Table(name = "KINDERKANKERFONDS_RELATIE")
 @Entity(name = "kinderkankerfonds$Relatie")
 public class Relatie extends StandardEntity {
@@ -42,32 +42,35 @@ public class Relatie extends StandardEntity {
 
 
 
+
     @Lookup(type = LookupType.SCREEN, actions = {"lookup", "open", "clear"})
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PERSOON_ID")
-    protected Persoon persoon;
+    @JoinColumn(name = "PERSOON_ORIGINE_ID")
+    protected Persoon persoonOrigine;
 
-    @Composition
-    @OnDelete(DeletePolicy.CASCADE)
-    @OneToMany(mappedBy = "relatie")
-    protected List<Persoon> personen;
+    @Lookup(type = LookupType.SCREEN, actions = {"lookup", "open", "clear"})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PERSOON_DOEL_ID")
+    protected Persoon persoonDoel;
 
-    public void setPersonen(List<Persoon> personen) {
-        this.personen = personen;
+
+    public void setPersoonOrigine(Persoon persoonOrigine) {
+        this.persoonOrigine = persoonOrigine;
     }
 
-    public List<Persoon> getPersonen() {
-        return personen;
+    public Persoon getPersoonOrigine() {
+        return persoonOrigine;
     }
 
 
-    public void setPersoon(Persoon persoon) {
-        this.persoon = persoon;
+    public void setPersoonDoel(Persoon persoonDoel) {
+        this.persoonDoel = persoonDoel;
     }
 
-    public Persoon getPersoon() {
-        return persoon;
+    public Persoon getPersoonDoel() {
+        return persoonDoel;
     }
+
 
 
     public void setType(RelatieType type) {

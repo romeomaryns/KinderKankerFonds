@@ -13,7 +13,6 @@ create table KINDERKANKERFONDS_PERSOON (
     FAMILIENAAM varchar(255),
     GEBOORTEDATUM date,
     GESLACHT_ID uuid,
-    RELATIE_ID uuid,
     --
     primary key (ID)
 )^
@@ -84,7 +83,8 @@ create table KINDERKANKERFONDS_RELATIE (
     DELETED_BY varchar(50),
     --
     TYPE_ID uuid,
-    PERSOON_ID uuid,
+    PERSOON_ORIGINE_ID uuid,
+    PERSOON_DOEL_ID uuid,
     --
     primary key (ID)
 )^
@@ -101,7 +101,31 @@ create table KINDERKANKERFONDS_RELATIE_TYPE (
     DELETED_BY varchar(50),
     --
     NAAM varchar(255),
+    TUSSENVOEGSEL varchar(255),
     --
     primary key (ID)
 )^
 -- end KINDERKANKERFONDS_RELATIE_TYPE
+-- begin KINDERKANKERFONDS_CATEGORIE
+create table KINDERKANKERFONDS_CATEGORIE (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    NAAM varchar(255),
+    --
+    primary key (ID)
+)^
+-- end KINDERKANKERFONDS_CATEGORIE
+-- begin KINDERKANKERFONDS_PERSOON_CATEGORIE_LINK
+create table KINDERKANKERFONDS_PERSOON_CATEGORIE_LINK (
+    CATEGORIE_ID uuid,
+    PERSOON_ID uuid,
+    primary key (CATEGORIE_ID, PERSOON_ID)
+)^
+-- end KINDERKANKERFONDS_PERSOON_CATEGORIE_LINK
