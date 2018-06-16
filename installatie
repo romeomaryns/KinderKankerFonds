@@ -1,0 +1,39 @@
+yum upgrade 
+adduser kinderkankerfonds
+passwd kinderkankerfonds
+sudo yum install postgresql-server postgresql-contrib 
+sudo postgresql-setup initdb
+sudo yum install nano 
+sudo nano /var/lib/pgsql/data/pg_hba.conf
+     ident => md5
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+sudo -i -u postgres
+createuser --interactive
+sudo -u postgres psql
+    \password kinderkankerfonds
+    \password postgres
+    \q
+createdb kinderkankerfonds
+sudo nano /etc/sysconfig/selinux
+   disabled
+sudo firewall-cmd --permanent --add-port=5432/tcp
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --reload
+
+sudo nano /var/lib/pgsql/data/postgresql.conf
+  => listen address en port uncomment
+
+ sudo systemctl restart postgresql
+
+.\gradlew clean buildUberJar
+=> sftp kkf.jar naar home folder
+ java -jar kkf.jar
+
+iptables -F
+
+sudo tcpdump -ani enp0s3 port 5432 -vv
+
+
+
+backup => https://www.digitalocean.com/community/tutorials/how-to-backup-postgresql-databases-on-an-ubuntu-vps

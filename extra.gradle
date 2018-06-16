@@ -1,0 +1,9 @@
+apply plugin: 'base'
+
+clean.doFirst {
+    delete "modules/core/bin"
+    delete "modules/web/bin"
+    delete "modules/web/themes/bin"
+    delete "modules/gui/bin"
+    delete "modules/global/bin"
+}

@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  postgres:
+    image: postgres:9.6.6
+    environment:
+      - POSTGRES_PASSWORD=P0ns0nby
+      - POSTGRES_USER=kinderkankerfonds
+      - POSTGRES_DB=kinderkankerfonds
+    ports:
+     - "5433:5432"
+    networks:
+     - kkf-network
+  web:
+    image: kkf
+    ports:
+     - "8080:8080"
+    networks:
+     - kkf-network
+
+networks:
+  kkf-network:

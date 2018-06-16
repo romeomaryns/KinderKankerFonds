@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.9.0'
+    ext.cubaVersion = '6.9.1'
     repositories {
         
         maven {
@@ -121,7 +121,7 @@ configure(coreModule) {
         host = 'localhost'
         dbName = 'kinderkankerfonds'
         dbUser = 'kinderkankerfonds'
-        dbPassword = 'kinderkankerfonds'
+        dbPassword = 'P0ns0nby'
     }
 
     task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {
@@ -129,7 +129,7 @@ configure(coreModule) {
         host = 'localhost'
         dbName = 'kinderkankerfonds'
         dbUser = 'kinderkankerfonds'
-        dbPassword = 'kinderkankerfonds'
+        dbPassword = 'P0ns0nby'
     }
 }
     
@@ -229,4 +229,11 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.3.1'
+}
+
+task buildUberJar(type: CubaUberJarBuilding) {
+    singleJar = true
+    logbackConfigurationFile = 'etc/uber-jar-logback.xml'
+    coreJettyEnvPath = 'modules/core/web/META-INF/jetty-env.xml'
+    appProperties = ['cuba.automaticDatabaseUpdate' : true]
 }
