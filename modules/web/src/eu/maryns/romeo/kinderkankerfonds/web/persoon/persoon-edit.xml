@@ -9,10 +9,14 @@
         <datasource id="persoonDs"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
                     view="persoon-browse-view">
-            <collectionDatasource id="adressenDs"
-                                  property="adressen"/>
             <collectionDatasource id="tagsDs"
                                   property="tags"/>
+            <collectionDatasource id="adressenDs"
+                                  property="adressen"/>
+            <collectionDatasource id="relatiesDs"
+                                  property="relaties"/>
+            <collectionDatasource id="contactinfoDs"
+                                  property="contactinfo"/>
         </datasource>
         <collectionDatasource id="geslachtsDs"
                               class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht"
@@ -21,112 +25,173 @@
                 <![CDATA[select e from kinderkankerfonds$Geslacht e]]>
             </query>
         </collectionDatasource>
-        <collectionDatasource id="linkedRelatiesDs"
-                              class="eu.maryns.romeo.kinderkankerfonds.entity.Relatie"
-                              view="relatie-browse-view">
+        <collectionDatasource id="ziekenhuisesDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Ziekenhuis"
+                              view="_minimal">
             <query>
-                <![CDATA[select e from kinderkankerfonds$Relatie e where e.persoonDoel.id = :ds$persoonDs or e.persoonOrigine.id = :ds$persoonDs]]>
+                <![CDATA[select e from kinderkankerfonds$Ziekenhuis e]]>
             </query>
         </collectionDatasource>
         <collectionDatasource id="categoriesDs"
                               class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie"
-                              view="_minimal"/>
+                              view="_local">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Categorie e]]>
+            </query>
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="windowActions"
+    <layout expand="scrollBox"
             spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="persoonDs"
-                    responsive="true">
-            <column width="250px">
-                <field property="voornaam"/>
-                <field property="familienaam"/>
-                <field property="geboortedatum"/>
-                <field optionsDatasource="geslachtsDs"
-                       property="geslacht"/>
-            </column>
-        </fieldGroup>
-        <tokenList caption="Categorie"
-                   captionProperty="naam"
-                   datasource="tagsDs"
-                   inline="true"
-                   responsive="true">
-            <addButton caption="Toevoegen"
-                       icon="PLUS"/>
-            <lookup captionProperty="naam"
-                    optionsDatasource="categoriesDs"/>
-        </tokenList>
-        <groupBox id="adressenBox"
-                  caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.adressen"
-                  collapsable="true"
-                  responsive="true">
-            <table id="adressenTable"
-                   height="200px"
-                   responsive="true"
-                   width="100%">
-                <actions>
-                    <action id="create"/>
-                    <action id="edit"/>
-                    <action id="remove"/>
-                </actions>
-                <columns>
-                    <column id="straatnaam"/>
-                    <column id="huisnummer"/>
-                    <column id="bus"/>
-                    <column id="postcode"/>
-                    <column id="stad"/>
-                    <column id="type"/>
-                </columns>
-                <rows datasource="adressenDs"/>
-                <buttonsPanel responsive="true">
-                    <button action="adressenTable.create"
-                            responsive="true"/>
-                    <button action="adressenTable.edit"
-                            responsive="true"/>
-                    <button action="adressenTable.remove"
-                            responsive="true"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
-        <groupBox id="relatiesBox"
-                  caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.relaties"
-                  collapsable="true"
-                  collapsed="true"
-                  responsive="true">
-            <table id="linkedRelatiesTable"
-                   height="200px"
-                   responsive="true"
-                   width="100%">
-                <actions>
-                    <action id="create"/>
-                    <action id="edit"/>
-                    <action id="remove"/>
-                </actions>
-                <columns>
-                    <column id="persoonOrigine"
-                            link="true"
-                            linkScreen="kinderkankerfonds$Persoon.edit"
-                            linkScreenOpenType="THIS_TAB"/>
-                    <column id="type"/>
-                    <column id="persoonDoel"
-                            link="true"
-                            linkScreen="kinderkankerfonds$Persoon.edit"
-                            linkScreenOpenType="THIS_TAB"/>
-                </columns>
-                <rows datasource="linkedRelatiesDs"/>
-                <buttonsPanel responsive="true">
-                    <button action="linkedRelatiesTable.create"
-                            responsive="true"/>
-                    <button action="linkedRelatiesTable.edit"
-                            responsive="true"/>
-                    <button action="linkedRelatiesTable.remove"
-                            responsive="true"/>
-                </buttonsPanel>
-            </table>
-        </groupBox>
+        <scrollBox id="scrollBox"
+                   spacing="true">
+            <fieldGroup id="fieldGroup"
+                        datasource="persoonDs">
+                <column width="250px">
+                    <field property="voornaam"/>
+                    <field property="familienaam"/>
+                    <field optionsDatasource="geslachtsDs"
+                           property="geslacht"/>
+                </column>
+                <column>
+                    <field property="geboortedatum"/>
+                    <field property="overlijdensdatum"/>
+                    <field optionsDatasource="ziekenhuisesDs"
+                           property="ziekenhuis"/>
+                </column>
+            </fieldGroup>
+            <tabSheet responsive="true"
+                      tabCaptionsAsHtml="true">
+                <tab id="algemeenTab"
+                     caption="Algemene info"
+                     margin="true,false,false,false"
+                     spacing="true">
+                    <fieldGroup datasource="persoonDs">
+                        <column>
+                            <field property="familiedag"/>
+                            <field property="ontmoetingsdag"/>
+                            <field property="raakpunt"/>
+                            <field property="oudercomite"/>
+                            <field property="actief"/>
+                        </column>
+                    </fieldGroup>
+                    <groupBox id="tagsBox"
+                              caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.tags">
+                        <tokenList caption="categorie"
+                                   datasource="tagsDs"
+                                   inline="true"
+                                   position="TOP"
+                                   responsive="true">
+                            <lookup optionsDatasource="categoriesDs"/>
+                        </tokenList>
+                    </groupBox>
+                </tab>
+                <tab id="contactinfoTab"
+                     caption="Contact info"
+                     lazy="true"
+                     margin="true,false,false,false"
+                     spacing="true">
+                    <groupBox id="contactinfoBox"
+                              caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.relaties"
+                              collapsable="true">
+                        <table id="contactinfoTable"
+                               height="200px"
+                               width="100%">
+                            <actions>
+                                <action id="create"/>
+                                <action id="edit"/>
+                                <action id="remove"/>
+                            </actions>
+                            <columns>
+                                <column id="telefoon"/>
+                                <column id="gsm"/>
+                                <column id="email"/>
+                            </columns>
+                            <rows datasource="contactinfoDs"/>
+                            <buttonsPanel>
+                                <button action="contactinfoTable.create"/>
+                                <button action="contactinfoTable.edit"/>
+                                <button action="contactinfoTable.remove"/>
+                            </buttonsPanel>
+                        </table>
+                    </groupBox>
+                </tab>
+                <tab id="adressenTab"
+                     caption="Adres info"
+                     lazy="true"
+                     margin="true,false,false,false"
+                     spacing="true">
+                    <groupBox id="adressenBox"
+                              caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.adressen"
+                              collapsable="true">
+                        <table id="adressenTable"
+                               height="200px"
+                               width="100%">
+                            <actions>
+                                <action id="create"/>
+                                <action id="edit"/>
+                                <action id="remove"/>
+                            </actions>
+                            <columns>
+                                <column id="straatnaam"/>
+                                <column id="huisnummer"/>
+                                <column id="bus"/>
+                                <column id="postcode"/>
+                                <column id="stad"/>
+                                <column id="actief"/>
+                                <column id="land"/>
+                                <column id="type"/>
+                                <column id="categorie"/>
+                                <column id="notities"/>
+                            </columns>
+                            <rows datasource="adressenDs"/>
+                            <buttonsPanel>
+                                <button action="adressenTable.create"/>
+                                <button action="adressenTable.edit"/>
+                                <button action="adressenTable.remove"/>
+                            </buttonsPanel>
+                        </table>
+                    </groupBox>
+                </tab>
+                <tab id="relatiesTab"
+                     caption="Relatie info"
+                     margin="true,false,false,false"
+                     spacing="true">
+                    <groupBox id="relatiesBox"
+                              caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.relaties"
+                              collapsable="true">
+                        <table id="relatiesTable"
+                               height="200px"
+                               width="100%">
+                            <actions>
+                                <action id="create"/>
+                                <action id="edit"/>
+                                <action id="remove"/>
+                            </actions>
+                            <columns>
+                                <column id="persoonOrigine"
+                                        link="true"
+                                        linkScreen="kinderkankerfonds$Persoon.edit"
+                                        linkScreenOpenType="THIS_TAB"/>
+                                <column id="type"/>
+                                <column id="persoonDoel"
+                                        link="true"
+                                        linkScreen="kinderkankerfonds$Persoon.edit"
+                                        linkScreenOpenType="THIS_TAB"/>
+                            </columns>
+                            <rows datasource="relatiesDs"/>
+                            <buttonsPanel>
+                                <button action="relatiesTable.create"/>
+                                <button action="relatiesTable.edit"/>
+                                <button action="relatiesTable.remove"/>
+                            </buttonsPanel>
+                        </table>
+                    </groupBox>
+                </tab>
+            </tabSheet>
+        </scrollBox>
         <frame id="windowActions"
-               responsive="true"
                screen="editWindowActions"/>
     </layout>
 </window>

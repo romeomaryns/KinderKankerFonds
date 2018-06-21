@@ -1,0 +1,5 @@
+create table KINDERKANKERFONDS_ADRES_CATEGORIE_LINK (
+    ADRES_ID uuid,
+    CATEGORIE_ID uuid,
+    primary key (ADRES_ID, CATEGORIE_ID)
+);

@@ -10,5 +10,9 @@
         <class>eu.maryns.romeo.kinderkankerfonds.entity.Relatie</class>
         <class>eu.maryns.romeo.kinderkankerfonds.entity.RelatieType</class>
         <class>eu.maryns.romeo.kinderkankerfonds.entity.Categorie</class>
+        <class>eu.maryns.romeo.kinderkankerfonds.entity.Ziekenhuis</class>
+        <class>eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo</class>
+        <class>eu.maryns.romeo.kinderkankerfonds.entity.Notitie</class>
+        <class>eu.maryns.romeo.kinderkankerfonds.entity.Land</class>
     </persistence-unit>
 </persistence>

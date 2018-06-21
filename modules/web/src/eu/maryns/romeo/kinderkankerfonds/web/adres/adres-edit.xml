@@ -8,28 +8,84 @@
     <dsContext>
         <datasource id="adresDs"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
-                    view="adres-full-view"/>
+                    view="adres-full-view">
+            <collectionDatasource id="categorieDs"
+                                  property="categorie"/>
+            <collectionDatasource id="notitiesDs"
+                                  property="notities"/>
+        </datasource>
         <collectionDatasource id="typesDs"
                               class="eu.maryns.romeo.kinderkankerfonds.entity.AdresType"
                               view="_minimal"/>
+        <collectionDatasource id="landsDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Land"
+                              view="_minimal"/>
+        <collectionDatasource id="tagsDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie"
+                              view="_local">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Categorie e]]>
+            </query>
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="windowActions"
-            spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="adresDs">
-            <column width="250px">
-                <field property="straatnaam"/>
-                <field property="huisnummer"/>
-                <field property="bus"/>
-                <field property="postcode"/>
-                <field property="stad"/>
-                <field optionsDatasource="typesDs"
-                       property="type"/>
-            </column>
-        </fieldGroup>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
+    <layout spacing="true">
+        <vbox margin="true"
+              spacing="true">
+            <fieldGroup id="fieldGroup"
+                        datasource="adresDs">
+                <column width="250px">
+                    <field property="straatnaam"/>
+                    <field property="huisnummer"/>
+                    <field property="bus"/>
+                    <field optionsDatasource="typesDs"
+                           property="type"/>
+                </column>
+                <column>
+                    <field property="postcode"/>
+                    <field property="stad"/>
+                    <field optionsDatasource="landsDs"
+                           property="land"/>
+                    <field property="actief"/>
+                </column>
+            </fieldGroup>
+            <groupBox id="categorieBox"
+                      caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Adres.categorie">
+                <tokenList caption="Categorie"
+                           datasource="categorieDs"
+                           inline="true"
+                           responsive="true">
+                    <lookup lookup="true"
+                            lookupScreen="kinderkankerfonds$Categorie.browse"
+                            openType="DIALOG"
+                            optionsDatasource="tagsDs"/>
+                </tokenList>
+            </groupBox>
+            <groupBox id="notitiesBox"
+                      caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Adres.notities">
+                <table id="notitiesTable"
+                       height="200px"
+                       width="100%">
+                    <actions>
+                        <action id="remove"
+                                trackSelection="true"/>
+                        <action id="create"
+                                openType="DIALOG"/>
+                    </actions>
+                    <columns>
+                        <column id="omschrijving"/>
+                    </columns>
+                    <rows datasource="notitiesDs"/>
+                    <buttonsPanel>
+                        <button action="notitiesTable.create"/>
+                        <button action="notitiesTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+            <frame id="windowActions"
+                   height="35px"
+                   screen="editWindowActions"/>
+        </vbox>
     </layout>
 </window>

@@ -42,6 +42,8 @@
                 <column id="stad"/>
                 <column id="type"/>
                 <column id="persoon"/>
+                <column id="land"/>
+                <column id="categorie"/>
             </columns>
             <rows datasource="adresesDs"/>
             <rowsCount/>

@@ -10,6 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
+import java.util.List;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import com.haulmont.chile.core.annotations.Composition;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.global.DeletePolicy;
+import javax.persistence.OneToMany;
 
 @NamePattern("%s %s, %s %s|straatnaam,huisnummer,postcode,stad")
 @Table(name = "KINDERKANKERFONDS_ADRES")
@@ -32,6 +39,11 @@ public class Adres extends StandardEntity {
     @Column(name = "STAD")
     protected String stad;
 
+    @Lookup(type = LookupType.DROPDOWN)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LAND_ID")
+    protected Land land;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PERSOON_ID")
     protected Persoon persoon;
@@ -40,6 +52,57 @@ public class Adres extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TYPE_ID")
     protected AdresType type;
+
+    @JoinTable(name = "KINDERKANKERFONDS_ADRES_CATEGORIE_LINK",
+        joinColumns = @JoinColumn(name = "ADRES_ID"),
+        inverseJoinColumns = @JoinColumn(name = "CATEGORIE_ID"))
+    @ManyToMany
+    protected List<Categorie> categorie;
+
+    @JoinTable(name = "KINDERKANKERFONDS_ADRES_NOTITIE_LINK",
+        joinColumns = @JoinColumn(name = "ADRES_ID"),
+        inverseJoinColumns = @JoinColumn(name = "NOTITIE_ID"))
+    @ManyToMany
+    protected List<Notitie> notities;
+
+    @Column(name = "ACTIEF")
+    protected Boolean actief;
+
+    public void setActief(Boolean actief) {
+        this.actief = actief;
+    }
+
+    public Boolean getActief() {
+        return actief;
+    }
+
+
+    public void setNotities(List<Notitie> notities) {
+        this.notities = notities;
+    }
+
+    public List<Notitie> getNotities() {
+        return notities;
+    }
+
+
+    public void setLand(Land land) {
+        this.land = land;
+    }
+
+    public Land getLand() {
+        return land;
+    }
+
+
+    public void setCategorie(List<Categorie> categorie) {
+        this.categorie = categorie;
+    }
+
+    public List<Categorie> getCategorie() {
+        return categorie;
+    }
+
 
     public void setType(AdresType type) {
         this.type = type;

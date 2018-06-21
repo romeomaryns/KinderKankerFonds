@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="eu.maryns.romeo.kinderkankerfonds.web.contactinfo.ContactInfoBrowse"
+        focusComponent="contactInfoesTable"
+        lookupComponent="contactInfoesTable"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.contactinfo">
+    <dsContext>
+        <groupDatasource id="contactInfoesDs"
+                         class="eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo"
+                         view="_local">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$ContactInfo e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="contactInfoesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="contactInfoesTable"
+                datasource="contactInfoesDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="contactInfoesTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="telefoon"/>
+                <column id="gsm"/>
+                <column id="email"/>
+            </columns>
+            <rows datasource="contactInfoesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="contactInfoesTable.create"/>
+                <button id="editBtn"
+                        action="contactInfoesTable.edit"/>
+                <button id="removeBtn"
+                        action="contactInfoesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

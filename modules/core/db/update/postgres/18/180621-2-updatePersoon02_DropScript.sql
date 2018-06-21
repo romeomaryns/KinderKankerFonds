@@ -1,0 +1,1 @@
+alter table KINDERKANKERFONDS_PERSOON drop column OUDERCOMITE__U74943 cascade ;

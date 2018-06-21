@@ -12,7 +12,14 @@ create table KINDERKANKERFONDS_PERSOON (
     VOORNAAM varchar(255),
     FAMILIENAAM varchar(255),
     GEBOORTEDATUM date,
+    OVERLIJDENSDATUM date,
+    FAMILIEDAG boolean,
+    ONTMOETINGSDAG boolean,
+    RAAKPUNT boolean,
+    OUDERCOMITE boolean,
+    ACTIEF boolean,
     GESLACHT_ID uuid,
+    ZIEKENHUIS_ID uuid,
     --
     primary key (ID)
 )^
@@ -33,8 +40,10 @@ create table KINDERKANKERFONDS_ADRES (
     BUS varchar(10),
     POSTCODE varchar(255),
     STAD varchar(255),
+    LAND_ID uuid,
     PERSOON_ID uuid,
     TYPE_ID uuid,
+    ACTIEF boolean,
     --
     primary key (ID)
 )^
@@ -129,3 +138,86 @@ create table KINDERKANKERFONDS_PERSOON_CATEGORIE_LINK (
     primary key (CATEGORIE_ID, PERSOON_ID)
 )^
 -- end KINDERKANKERFONDS_PERSOON_CATEGORIE_LINK
+-- begin KINDERKANKERFONDS_ZIEKENHUIS
+create table KINDERKANKERFONDS_ZIEKENHUIS (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    NAAM varchar(255),
+    ADRES_ID uuid,
+    --
+    primary key (ID)
+)^
+-- end KINDERKANKERFONDS_ZIEKENHUIS
+-- begin KINDERKANKERFONDS_CONTACT_INFO
+create table KINDERKANKERFONDS_CONTACT_INFO (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    TELEFOON varchar(255),
+    GSM varchar(255),
+    EMAIL varchar(255),
+    PERSOON_ID uuid,
+    --
+    primary key (ID)
+)^
+-- end KINDERKANKERFONDS_CONTACT_INFO
+-- begin KINDERKANKERFONDS_NOTITIE
+create table KINDERKANKERFONDS_NOTITIE (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    OMSCHRIJVING text,
+    --
+    primary key (ID)
+)^
+-- end KINDERKANKERFONDS_NOTITIE
+-- begin KINDERKANKERFONDS_LAND
+create table KINDERKANKERFONDS_LAND (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    NAAM varchar(255),
+    LANDCODE varchar(255),
+    --
+    primary key (ID)
+)^
+-- end KINDERKANKERFONDS_LAND
+-- begin KINDERKANKERFONDS_ADRES_CATEGORIE_LINK
+create table KINDERKANKERFONDS_ADRES_CATEGORIE_LINK (
+    ADRES_ID uuid,
+    CATEGORIE_ID uuid,
+    primary key (ADRES_ID, CATEGORIE_ID)
+)^
+-- end KINDERKANKERFONDS_ADRES_CATEGORIE_LINK
+-- begin KINDERKANKERFONDS_ADRES_NOTITIE_LINK
+create table KINDERKANKERFONDS_ADRES_NOTITIE_LINK (
+    NOTITIE_ID uuid,
+    ADRES_ID uuid,
+    primary key (NOTITIE_ID, ADRES_ID)
+)^
+-- end KINDERKANKERFONDS_ADRES_NOTITIE_LINK

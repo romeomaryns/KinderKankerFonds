@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="eu.maryns.romeo.kinderkankerfonds.web.notitie.NotitieBrowse"
+        focusComponent="notitiesTable"
+        lookupComponent="notitiesTable"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.notitie">
+    <dsContext>
+        <groupDatasource id="notitiesDs"
+                         class="eu.maryns.romeo.kinderkankerfonds.entity.Notitie"
+                         view="_minimal">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Notitie e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="notitiesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="notitiesTable"
+                datasource="notitiesDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="notitiesTable"
+                    width="100%">
+            <actions>
+                <action id="create"
+                        openType="DIALOG"/>
+                <action id="edit"
+                        openType="DIALOG"/>
+                <action id="remove"/>
+                <action id="excel"/>
+            </actions>
+            <columns>
+                <column id="omschrijving"/>
+            </columns>
+            <rows datasource="notitiesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="notitiesTable.create"/>
+                <button id="editBtn"
+                        action="notitiesTable.edit"/>
+                <button id="removeBtn"
+                        action="notitiesTable.remove"/>
+                <button id="excelBtn"
+                        action="notitiesTable.excel"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

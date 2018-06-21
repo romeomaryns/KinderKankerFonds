@@ -29,15 +29,19 @@
                 <action id="create"/>
                 <action id="edit"/>
                 <action id="remove"/>
-                <action id="excel"/>
             </actions>
             <columns>
                 <column id="voornaam"/>
                 <column id="familienaam"/>
-                <column id="geboortedatum"/>
+                <column id="familiedag"/>
+                <column id="ontmoetingsdag"/>
+                <column id="raakpunt"/>
+                <column id="oudercomite"/>
                 <column id="geslacht"/>
+                <column id="ziekenhuis"/>
                 <column id="tags"/>
                 <column id="adressen"/>
+                <column id="contactinfo"/>
             </columns>
             <rows datasource="persoonsDs"/>
             <rowsCount/>
@@ -49,8 +53,6 @@
                         action="persoonsTable.edit"/>
                 <button id="removeBtn"
                         action="persoonsTable.remove"/>
-                <button id="excelBtn"
-                        action="persoonsTable.excel"/>
             </buttonsPanel>
         </groupTable>
     </layout>

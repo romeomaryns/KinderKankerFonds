@@ -41,17 +41,44 @@ public class Persoon extends StandardEntity {
     @Column(name = "GEBOORTEDATUM")
     protected Date geboortedatum;
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "OVERLIJDENSDATUM")
+    protected Date overlijdensdatum;
+
+    @Column(name = "FAMILIEDAG")
+    protected Boolean familiedag;
+
+    @Column(name = "ONTMOETINGSDAG")
+    protected Boolean ontmoetingsdag;
+
+    @Column(name = "RAAKPUNT")
+    protected Boolean raakpunt;
+
+    @Column(name = "OUDERCOMITE")
+    protected Boolean oudercomite;
+
+    @Column(name = "ACTIEF")
+    protected Boolean actief;
+
     @Lookup(type = LookupType.DROPDOWN)
     @OnDeleteInverse(DeletePolicy.UNLINK)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GESLACHT_ID")
     protected Geslacht geslacht;
 
+    @Lookup(type = LookupType.DROPDOWN)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ZIEKENHUIS_ID")
+    protected Ziekenhuis ziekenhuis;
+
     @JoinTable(name = "KINDERKANKERFONDS_PERSOON_CATEGORIE_LINK",
         joinColumns = @JoinColumn(name = "PERSOON_ID"),
         inverseJoinColumns = @JoinColumn(name = "CATEGORIE_ID"))
     @ManyToMany
     protected List<Categorie> tags;
+
+    @OneToMany(mappedBy = "persoon")
+    protected List<ContactInfo> contactinfo;
 
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
@@ -61,6 +88,76 @@ public class Persoon extends StandardEntity {
     @OneToMany(mappedBy = "persoonOrigine")
     @OnDelete(DeletePolicy.CASCADE)
     protected List<Relatie> relaties;
+
+    public Boolean getOudercomite() {
+        return oudercomite;
+    }
+
+    public void setOudercomite(Boolean oudercomite) {
+        this.oudercomite = oudercomite;
+    }
+
+
+
+    public void setOntmoetingsdag(Boolean ontmoetingsdag) {
+        this.ontmoetingsdag = ontmoetingsdag;
+    }
+
+    public Boolean getOntmoetingsdag() {
+        return ontmoetingsdag;
+    }
+
+
+    public void setContactinfo(List<ContactInfo> contactinfo) {
+        this.contactinfo = contactinfo;
+    }
+
+    public List<ContactInfo> getContactinfo() {
+        return contactinfo;
+    }
+
+
+    public void setZiekenhuis(Ziekenhuis ziekenhuis) {
+        this.ziekenhuis = ziekenhuis;
+    }
+
+    public Ziekenhuis getZiekenhuis() {
+        return ziekenhuis;
+    }
+
+
+    public void setActief(Boolean actief) {
+        this.actief = actief;
+    }
+
+    public Boolean getActief() {
+        return actief;
+    }
+
+
+    public void setOverlijdensdatum(Date overlijdensdatum) {
+        this.overlijdensdatum = overlijdensdatum;
+    }
+
+    public Date getOverlijdensdatum() {
+        return overlijdensdatum;
+    }
+
+    public void setFamiliedag(Boolean familiedag) {
+        this.familiedag = familiedag;
+    }
+
+    public Boolean getFamiliedag() {
+        return familiedag;
+    }
+
+    public void setRaakpunt(Boolean raakpunt) {
+        this.raakpunt = raakpunt;
+    }
+
+    public Boolean getRaakpunt() {
+        return raakpunt;
+    }
 
 
     public void setTags(List<Categorie> tags) {

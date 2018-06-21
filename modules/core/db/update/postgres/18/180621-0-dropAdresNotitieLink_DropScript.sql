@@ -1,0 +1,1 @@
+drop table if exists KINDERKANKERFONDS_ADRES_NOTITIE_LINK__U82319 cascade ;
