@@ -8,20 +8,66 @@
     <dsContext>
         <datasource id="contactInfoDs"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo"
-                    view="_local"/>
+                    view="contactInfo-view-full">
+            <collectionDatasource id="notitiesDs"
+                                  property="notities"/>
+        </datasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="windowActions"
             spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="contactInfoDs">
-            <column width="250px">
-                <field property="telefoon"/>
-                <field property="gsm"/>
-                <field property="email"/>
-            </column>
-        </fieldGroup>
+        <groupBox caption="Persoon">
+            <textField id="persoonTextField"
+                       datasource="contactInfoDs"
+                       enable="false"
+                       property="persoon"
+                       stylename="borderless"/>
+        </groupBox>
+        <tabSheet tabCaptionsAsHtml="true">
+            <tab id="algemeenTab"
+                 caption="Algemeen"
+                 icon="CHEVRON_RIGHT"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <fieldGroup id="fieldGroup"
+                            datasource="contactInfoDs"
+                            height="100%">
+                    <column width="250px">
+                        <field property="telefoon"/>
+                        <field property="gsm"/>
+                        <field property="email"/>
+                    </column>
+                </fieldGroup>
+            </tab>
+            <tab id="notitiesTab"
+                 caption="Notities"
+                 expand="notitiesTable"
+                 icon="COMMENTS_O"
+                 lazy="true"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <buttonsPanel>
+                    <button id="create"
+                            action="notitiesTable.create"/>
+                    <button id="remove"
+                            action="notitiesTable.remove"/>
+                </buttonsPanel>
+                <table id="notitiesTable"
+                       width="100%">
+                    <actions>
+                        <action id="create"
+                                icon="PLUS"/>
+                        <action id="remove"
+                                icon="TRASH"/>
+                    </actions>
+                    <columns>
+                        <column id="omschrijving"/>
+                    </columns>
+                    <rows datasource="notitiesDs"/>
+                </table>
+            </tab>
+        </tabSheet>
         <frame id="windowActions"
                screen="editWindowActions"/>
     </layout>

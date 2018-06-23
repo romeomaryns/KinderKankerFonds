@@ -14,6 +14,9 @@ import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
 import javax.persistence.ManyToOne;
+import com.haulmont.cuba.core.entity.annotation.CaseConversion;
+import java.util.List;
+import javax.persistence.OneToMany;
 
 @NamePattern("%s|naam")
 @Table(name = "KINDERKANKERFONDS_ZIEKENHUIS")
@@ -24,11 +27,45 @@ public class Ziekenhuis extends StandardEntity {
     @Column(name = "NAAM")
     protected String naam;
 
-    @Lookup(type = LookupType.SCREEN)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @CaseConversion
+    @Column(name = "AFKORTING")
+    protected String afkorting;
+
+    @OneToOne(fetch = FetchType.LAZY)
     @OnDelete(DeletePolicy.CASCADE)
     @JoinColumn(name = "ADRES_ID")
     protected Adres adres;
+
+    @OneToMany(mappedBy = "ziekenhuis")
+    protected List<Persoon> contactpersonen;
+
+    @OneToMany(mappedBy = "ziekenhuis")
+    protected List<Notitie> notities;
+
+    public void setAfkorting(String afkorting) {
+        this.afkorting = afkorting;
+    }
+
+    public String getAfkorting() {
+        return afkorting;
+    }
+
+    public void setContactpersonen(List<Persoon> contactpersonen) {
+        this.contactpersonen = contactpersonen;
+    }
+
+    public List<Persoon> getContactpersonen() {
+        return contactpersonen;
+    }
+
+    public void setNotities(List<Notitie> notities) {
+        this.notities = notities;
+    }
+
+    public List<Notitie> getNotities() {
+        return notities;
+    }
+
 
     public void setNaam(String naam) {
         this.naam = naam;

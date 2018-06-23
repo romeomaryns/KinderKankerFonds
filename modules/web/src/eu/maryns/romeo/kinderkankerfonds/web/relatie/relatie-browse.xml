@@ -32,9 +32,15 @@
                 <action id="excel"/>
             </actions>
             <columns>
-                <column id="persoonOrigine"/>
+                <column id="persoonOrigine"
+                        link="true"
+                        linkScreen="kinderkankerfonds$Persoon.edit"
+                        linkScreenOpenType="THIS_TAB"/>
                 <column id="type"/>
-                <column id="persoonDoel"/>
+                <column id="persoonDoel"
+                        link="true"
+                        linkScreen="kinderkankerfonds$Persoon.edit"
+                        linkScreenOpenType="THIS_TAB"/>
             </columns>
             <rows datasource="relatiesDs"/>
             <rowsCount/>

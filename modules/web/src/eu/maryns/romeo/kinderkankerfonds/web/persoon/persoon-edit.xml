@@ -17,6 +17,8 @@
                                   property="relaties"/>
             <collectionDatasource id="contactinfoDs"
                                   property="contactinfo"/>
+            <collectionDatasource id="notitiesDs"
+                                  property="notities"/>
         </datasource>
         <collectionDatasource id="geslachtsDs"
                               class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht"
@@ -65,6 +67,7 @@
                       tabCaptionsAsHtml="true">
                 <tab id="algemeenTab"
                      caption="Algemene info"
+                     icon="CHEVRON_RIGHT"
                      margin="true,false,false,false"
                      spacing="true">
                     <fieldGroup datasource="persoonDs">
@@ -78,30 +81,38 @@
                     </fieldGroup>
                     <groupBox id="tagsBox"
                               caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.tags">
-                        <tokenList caption="categorie"
-                                   datasource="tagsDs"
+                        <tokenList datasource="tagsDs"
                                    inline="true"
                                    position="TOP"
                                    responsive="true">
+                            <clearButton caption="mainMsg://button.clear"
+                                         icon="PICKERFIELD_CLEAR"/>
                             <lookup optionsDatasource="categoriesDs"/>
                         </tokenList>
                     </groupBox>
                 </tab>
                 <tab id="contactinfoTab"
                      caption="Contact info"
+                     icon="PHONE"
                      lazy="true"
                      margin="true,false,false,false"
                      spacing="true">
                     <groupBox id="contactinfoBox"
-                              caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.relaties"
-                              collapsable="true">
+                              caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.contactinfo"
+                              height="100%">
                         <table id="contactinfoTable"
-                               height="200px"
+                               height="100%"
                                width="100%">
                             <actions>
-                                <action id="create"/>
-                                <action id="edit"/>
-                                <action id="remove"/>
+                                <action id="create"
+                                        caption="mainMsg://button.create"
+                                        icon="ADD_ACTION"/>
+                                <action id="edit"
+                                        caption="msg://button.edit"
+                                        icon="EDIT_ACTION"/>
+                                <action id="remove"
+                                        caption="mainMsg://button.remove"
+                                        icon="REMOVE_ACTION"/>
                             </actions>
                             <columns>
                                 <column id="telefoon"/>
@@ -119,19 +130,26 @@
                 </tab>
                 <tab id="adressenTab"
                      caption="Adres info"
+                     icon="ROAD"
                      lazy="true"
                      margin="true,false,false,false"
                      spacing="true">
                     <groupBox id="adressenBox"
                               caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.adressen"
-                              collapsable="true">
+                              height="100%">
                         <table id="adressenTable"
-                               height="200px"
+                               height="100%"
                                width="100%">
                             <actions>
-                                <action id="create"/>
-                                <action id="edit"/>
-                                <action id="remove"/>
+                                <action id="create"
+                                        caption="mainMsg://button.create"
+                                        icon="ADD_ACTION"/>
+                                <action id="edit"
+                                        caption="mainMsg://button.edit"
+                                        icon="EDIT_ACTION"/>
+                                <action id="remove"
+                                        caption="mainMsg://button.remove"
+                                        icon="REMOVE_ACTION"/>
                             </actions>
                             <columns>
                                 <column id="straatnaam"/>
@@ -156,18 +174,26 @@
                 </tab>
                 <tab id="relatiesTab"
                      caption="Relatie info"
+                     icon="RANDOM"
+                     lazy="true"
                      margin="true,false,false,false"
                      spacing="true">
                     <groupBox id="relatiesBox"
                               caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.relaties"
-                              collapsable="true">
+                              height="100%">
                         <table id="relatiesTable"
-                               height="200px"
+                               height="100%"
                                width="100%">
                             <actions>
-                                <action id="create"/>
-                                <action id="edit"/>
-                                <action id="remove"/>
+                                <action id="create"
+                                        caption="mainMsg://button.create"
+                                        icon="ADD_ACTION"/>
+                                <action id="edit"
+                                        caption="mainMsg://button.edit"
+                                        icon="EDIT_ACTION"/>
+                                <action id="remove"
+                                        caption="mainMsg://button.remove"
+                                        icon="REMOVE_ACTION"/>
                             </actions>
                             <columns>
                                 <column id="persoonOrigine"
@@ -183,6 +209,41 @@
                             <rows datasource="relatiesDs"/>
                             <buttonsPanel>
                                 <button action="relatiesTable.create"/>
+                                <button action="relatiesTable.edit"/>
+                                <button action="relatiesTable.remove"/>
+                            </buttonsPanel>
+                        </table>
+                    </groupBox>
+                </tab>
+                <tab id="notitiesTab"
+                     caption="Notities"
+                     icon="COMMENTS_O"
+                     lazy="true"
+                     margin="true,false,false,false"
+                     spacing="true">
+                    <groupBox id="notitiesBox"
+                              caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.notities"
+                              height="100%">
+                        <table id="notitiesTable"
+                               height="100%"
+                               width="100%">
+                            <actions>
+                                <action id="create"
+                                        caption="mainMsg://button.create"
+                                        icon="ADD_ACTION"/>
+                                <action id="edit"
+                                        caption="mainMsg://button.edit"
+                                        icon="EDIT_ACTION"/>
+                                <action id="remove"
+                                        caption="mainMsg://button.remove"
+                                        icon="REMOVE_ACTION"/>
+                            </actions>
+                            <columns>
+                                <column id="omschrijving"/>
+                            </columns>
+                            <rows datasource="notitiesDs"/>
+                            <buttonsPanel>
+                                <button action="notitiesTable.create"/>
                                 <button action="relatiesTable.edit"/>
                                 <button action="relatiesTable.remove"/>
                             </buttonsPanel>

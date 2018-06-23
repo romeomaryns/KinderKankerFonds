@@ -8,10 +8,12 @@
     <dsContext>
         <groupDatasource id="contactInfoesDs"
                          class="eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo"
-                         view="_local">
+                         view="contactInfo-view-full">
             <query>
                 <![CDATA[select e from kinderkankerfonds$ContactInfo e]]>
             </query>
+            <datasource id="persoonDs"
+                        property="persoon"/>
         </groupDatasource>
     </dsContext>
     <dialogMode height="600"
@@ -26,14 +28,24 @@
         <groupTable id="contactInfoesTable"
                     width="100%">
             <actions>
-                <action id="create"/>
-                <action id="edit"/>
-                <action id="remove"/>
+                <action id="create"
+                        caption="Nieuw"
+                        icon="PLUS"/>
+                <action id="edit"
+                        caption="Aanpassen"
+                        icon="EDIT"/>
+                <action id="remove"
+                        caption="Verwijderen"
+                        icon="TRASH_O"/>
+                <action id="excel"
+                        caption="Excel"
+                        icon="EXCEL_ACTION"/>
             </actions>
             <columns>
                 <column id="telefoon"/>
                 <column id="gsm"/>
                 <column id="email"/>
+                <column id="persoon"/>
             </columns>
             <rows datasource="contactInfoesDs"/>
             <rowsCount/>
@@ -45,6 +57,8 @@
                         action="contactInfoesTable.edit"/>
                 <button id="removeBtn"
                         action="contactInfoesTable.remove"/>
+                <button id="excelButton"
+                        action="contactInfoesTable.excel"/>
             </buttonsPanel>
         </groupTable>
     </layout>

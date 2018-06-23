@@ -89,6 +89,18 @@ public class Persoon extends StandardEntity {
     @OnDelete(DeletePolicy.CASCADE)
     protected List<Relatie> relaties;
 
+    @OneToMany(mappedBy = "persoon")
+    protected List<Notitie> notities;
+
+    public void setNotities(List<Notitie> notities) {
+        this.notities = notities;
+    }
+
+    public List<Notitie> getNotities() {
+        return notities;
+    }
+
+
     public Boolean getOudercomite() {
         return oudercomite;
     }

@@ -8,18 +8,119 @@
     <dsContext>
         <datasource id="ziekenhuisDs"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Ziekenhuis"
-                    view="_local"/>
+                    view="ziekenhuis-view">
+            <collectionDatasource id="notitiesDs"
+                                  property="notities"/>
+            <collectionDatasource id="contactpersonenDs"
+                                  property="contactpersonen"/>
+        </datasource>
+        <collectionDatasource id="adresesDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
+                              view="adres-full-view">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Adres e]]>
+            </query>
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="windowActions"
+            margin="true"
             spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="ziekenhuisDs">
-            <column width="250px">
-                <field property="naam"/>
-            </column>
-        </fieldGroup>
+        <tabSheet>
+            <tab id="algemeenTab"
+                 caption="Algemeen"
+                 expand="fieldGroup"
+                 icon="CHEVRON_RIGHT"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <fieldGroup id="fieldGroup"
+                            datasource="ziekenhuisDs">
+                    <column width="250px">
+                        <field property="naam"/>
+                        <field property="afkorting"/>
+                    </column>
+                </fieldGroup>
+                <groupBox id="adresBox"
+                          caption="Adres"
+                          spacing="true">
+                    <searchPickerField id="adresPickerField"
+                                       datasource="ziekenhuisDs"
+                                       nullOptionVisible="false"
+                                       optionsDatasource="adresesDs"
+                                       property="adres"/>
+                </groupBox>
+            </tab>
+            <tab id="contactPersonenTab"
+                 caption="contactpersonen"
+                 expand="contactpersonenTable"
+                 icon="USERS"
+                 lazy="true"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <buttonsPanel>
+                    <button action="contactpersonenTable.create"/>
+                    <button action="contactpersonenTable.add"
+                            caption="Toevoegen"/>
+                    <button action="contactpersonenTable.edit"/>
+                    <button action="contactpersonenTable.remove"/>
+                </buttonsPanel>
+                <table id="contactpersonenTable"
+                       width="100%">
+                    <actions>
+                        <action id="create"
+                                icon="PLUS"/>
+                        <action id="remove"
+                                icon="TRASH"/>
+                        <action id="edit"
+                                icon="EDIT_ACTION"/>
+                        <action id="add"
+                                icon="LINK"/>
+                    </actions>
+                    <columns>
+                        <column id="voornaam"/>
+                        <column id="familienaam"/>
+                        <column id="contactinfo"
+                                link="true"
+                                linkScreen="kinderkankerfonds$ContactInfo.edit"
+                                linkScreenOpenType="DIALOG"/>
+                        <column id="adressen"
+                                link="true"
+                                linkScreen="kinderkankerfonds$Adres.edit"
+                                linkScreenOpenType="DIALOG"/>
+                    </columns>
+                    <rows datasource="contactpersonenDs"/>
+                </table>
+            </tab>
+            <tab id="notitiesTab"
+                 caption="Notities"
+                 expand="notitiesTable"
+                 icon="COMMENTS_O"
+                 lazy="true"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <buttonsPanel>
+                    <button action="notitiesTable.create"/>
+                    <button action="notitiesTable.edit"/>
+                    <button action="notitiesTable.remove"/>
+                </buttonsPanel>
+                <table id="notitiesTable"
+                       width="100%">
+                    <actions>
+                        <action id="create"
+                                icon="PLUS"/>
+                        <action id="remove"
+                                icon="TRASH"/>
+                        <action id="edit"
+                                icon="EDIT_ACTION"/>
+                    </actions>
+                    <columns>
+                        <column id="omschrijving"/>
+                    </columns>
+                    <rows datasource="notitiesDs"/>
+                </table>
+            </tab>
+        </tabSheet>
         <frame id="windowActions"
                screen="editWindowActions"/>
     </layout>

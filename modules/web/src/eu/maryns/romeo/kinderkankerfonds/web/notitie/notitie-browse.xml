@@ -8,7 +8,7 @@
     <dsContext>
         <groupDatasource id="notitiesDs"
                          class="eu.maryns.romeo.kinderkankerfonds.entity.Notitie"
-                         view="_minimal">
+                         view="notitie-view-full">
             <query>
                 <![CDATA[select e from kinderkankerfonds$Notitie e]]>
             </query>
@@ -26,15 +26,29 @@
         <groupTable id="notitiesTable"
                     width="100%">
             <actions>
-                <action id="create"
-                        openType="DIALOG"/>
-                <action id="edit"
-                        openType="DIALOG"/>
+                <action id="create"/>
+                <action id="edit"/>
                 <action id="remove"/>
                 <action id="excel"/>
             </actions>
             <columns>
                 <column id="omschrijving"/>
+                <column id="contactinfo"
+                        link="true"
+                        linkScreen="kinderkankerfonds$ContactInfo.edit"
+                        linkScreenOpenType="DIALOG"/>
+                <column id="persoon"
+                        link="true"
+                        linkScreen="kinderkankerfonds$Persoon.edit"
+                        linkScreenOpenType="DIALOG"/>
+                <column id="adressen"
+                        link="true"
+                        linkScreen="kinderkankerfonds$Adres.edit"
+                        linkScreenOpenType="DIALOG"/>
+                <column id="ziekenhuis"
+                        link="true"
+                        linkScreen="kinderkankerfonds$Ziekenhuis.edit"
+                        linkScreenOpenType="DIALOG"/>
             </columns>
             <rows datasource="notitiesDs"/>
             <rowsCount/>

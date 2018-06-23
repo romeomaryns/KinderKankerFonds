@@ -17,6 +17,7 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="persoonsTable"
+            margin="true"
             spacing="true">
         <filter id="filter"
                 applyTo="persoonsTable"
@@ -26,9 +27,18 @@
         <groupTable id="persoonsTable"
                     width="100%">
             <actions>
-                <action id="create"/>
-                <action id="edit"/>
-                <action id="remove"/>
+                <action id="create"
+                        caption="mainMsg://button.create"
+                        icon="ADD_ACTION"/>
+                <action id="edit"
+                        caption="mainMsg://button.edit"
+                        icon="EDIT_ACTION"/>
+                <action id="remove"
+                        caption="mainMsg://button.remove"
+                        icon="REMOVE_ACTION"/>
+                <action id="excel"
+                        caption="mainMsg://button.excel"
+                        icon="EXCEL_ACTION"/>
             </actions>
             <columns>
                 <column id="voornaam"/>
@@ -53,6 +63,8 @@
                         action="persoonsTable.edit"/>
                 <button id="removeBtn"
                         action="persoonsTable.remove"/>
+                <button id="excelButton"
+                        action="persoonsTable.excel"/>
             </buttonsPanel>
         </groupTable>
     </layout>

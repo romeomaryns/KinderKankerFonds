@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
+import java.util.List;
+import javax.persistence.OneToMany;
 
 @NamePattern("%s, %s, %s|telefoon,gsm,email")
 @Table(name = "KINDERKANKERFONDS_CONTACT_INFO")
@@ -30,6 +32,18 @@ public class ContactInfo extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PERSOON_ID")
     protected Persoon persoon;
+
+    @OneToMany(mappedBy = "contactinfo")
+    protected List<Notitie> notities;
+
+    public void setNotities(List<Notitie> notities) {
+        this.notities = notities;
+    }
+
+    public List<Notitie> getNotities() {
+        return notities;
+    }
+
 
     public void setTelefoon(String telefoon) {
         this.telefoon = telefoon;

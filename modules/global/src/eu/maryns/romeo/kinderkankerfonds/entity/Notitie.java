@@ -28,19 +28,60 @@ public class Notitie extends StandardEntity {
 
 
 
-    @JoinTable(name = "KINDERKANKERFONDS_ADRES_NOTITIE_LINK",
-        joinColumns = @JoinColumn(name = "NOTITIE_ID"),
-        inverseJoinColumns = @JoinColumn(name = "ADRES_ID"))
-    @ManyToMany
-    protected List<Adres> adressen;
+    @Lookup(type = LookupType.SCREEN)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ADRESSEN_ID")
+    protected Adres adressen;
 
-    public void setAdressen(List<Adres> adressen) {
+    @Lookup(type = LookupType.DROPDOWN)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ZIEKENHUIS_ID")
+    protected Ziekenhuis ziekenhuis;
+
+    @Lookup(type = LookupType.SCREEN)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONTACTINFO_ID")
+    protected ContactInfo contactinfo;
+
+    @Lookup(type = LookupType.SCREEN)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PERSOON_ID")
+    protected Persoon persoon;
+
+    public void setContactinfo(ContactInfo contactinfo) {
+        this.contactinfo = contactinfo;
+    }
+
+    public ContactInfo getContactinfo() {
+        return contactinfo;
+    }
+
+    public void setPersoon(Persoon persoon) {
+        this.persoon = persoon;
+    }
+
+    public Persoon getPersoon() {
+        return persoon;
+    }
+
+
+    public Adres getAdressen() {
+        return adressen;
+    }
+
+    public void setAdressen(Adres adressen) {
         this.adressen = adressen;
     }
 
-    public List<Adres> getAdressen() {
-        return adressen;
+
+    public void setZiekenhuis(Ziekenhuis ziekenhuis) {
+        this.ziekenhuis = ziekenhuis;
     }
+
+    public Ziekenhuis getZiekenhuis() {
+        return ziekenhuis;
+    }
+
 
 
     public void setOmschrijving(String omschrijving) {

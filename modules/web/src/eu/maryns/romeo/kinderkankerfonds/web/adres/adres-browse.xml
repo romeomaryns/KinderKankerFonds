@@ -12,6 +12,8 @@
             <query>
                 <![CDATA[select e from kinderkankerfonds$Adres e]]>
             </query>
+            <collectionDatasource id="notitiesDs"
+                                  property="notities"/>
         </groupDatasource>
     </dsContext>
     <dialogMode height="600"

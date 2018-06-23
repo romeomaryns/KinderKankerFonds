@@ -59,10 +59,7 @@ public class Adres extends StandardEntity {
     @ManyToMany
     protected List<Categorie> categorie;
 
-    @JoinTable(name = "KINDERKANKERFONDS_ADRES_NOTITIE_LINK",
-        joinColumns = @JoinColumn(name = "ADRES_ID"),
-        inverseJoinColumns = @JoinColumn(name = "NOTITIE_ID"))
-    @ManyToMany
+    @OneToMany(mappedBy = "adressen")
     protected List<Notitie> notities;
 
     @Column(name = "ACTIEF")

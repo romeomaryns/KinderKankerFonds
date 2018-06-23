@@ -150,6 +150,7 @@ create table KINDERKANKERFONDS_ZIEKENHUIS (
     DELETED_BY varchar(50),
     --
     NAAM varchar(255),
+    AFKORTING varchar(255),
     ADRES_ID uuid,
     --
     primary key (ID)
@@ -186,6 +187,10 @@ create table KINDERKANKERFONDS_NOTITIE (
     DELETED_BY varchar(50),
     --
     OMSCHRIJVING text,
+    ADRESSEN_ID uuid,
+    ZIEKENHUIS_ID uuid,
+    CONTACTINFO_ID uuid,
+    PERSOON_ID uuid,
     --
     primary key (ID)
 )^
@@ -214,10 +219,3 @@ create table KINDERKANKERFONDS_ADRES_CATEGORIE_LINK (
     primary key (ADRES_ID, CATEGORIE_ID)
 )^
 -- end KINDERKANKERFONDS_ADRES_CATEGORIE_LINK
--- begin KINDERKANKERFONDS_ADRES_NOTITIE_LINK
-create table KINDERKANKERFONDS_ADRES_NOTITIE_LINK (
-    NOTITIE_ID uuid,
-    ADRES_ID uuid,
-    primary key (NOTITIE_ID, ADRES_ID)
-)^
--- end KINDERKANKERFONDS_ADRES_NOTITIE_LINK

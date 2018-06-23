@@ -9,7 +9,7 @@
                 <Set name="driverClassName">org.postgresql.Driver</Set>
                 <Set name="url">jdbc:postgresql://localhost/kinderkankerfonds</Set>
                 <Set name="username">kinderkankerfonds</Set>
-                <Set name="password">kkf</Set>
+                <Set name="password">P0ns0nby</Set>
                 <Set name="maxIdle">2</Set>
                 <Set name="maxTotal">20</Set>
                 <Set name="maxWaitMillis">5000</Set>

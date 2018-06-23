@@ -8,7 +8,7 @@
     <dsContext>
         <groupDatasource id="ziekenhuisesDs"
                          class="eu.maryns.romeo.kinderkankerfonds.entity.Ziekenhuis"
-                         view="_local">
+                         view="ziekenhuis-view">
             <query>
                 <![CDATA[select e from kinderkankerfonds$Ziekenhuis e]]>
             </query>
@@ -32,6 +32,11 @@
             </actions>
             <columns>
                 <column id="naam"/>
+                <column id="afkorting"/>
+                <column id="adres"
+                        link="true"
+                        linkScreen="kinderkankerfonds$Adres.edit"
+                        linkScreenOpenType="DIALOG"/>
             </columns>
             <rows datasource="ziekenhuisesDs"/>
             <rowsCount/>

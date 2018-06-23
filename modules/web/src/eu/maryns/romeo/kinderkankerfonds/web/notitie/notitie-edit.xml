@@ -8,26 +8,27 @@
     <dsContext>
         <datasource id="notitieDs"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Notitie"
-                    view="notitie-view-full">
-            <datasource id="adresDs"
-                        property="adres"/>
-        </datasource>
+                    view="notitie-view-full"/>
     </dsContext>
-    <dialogMode height="600"
+    <dialogMode height="450"
                 width="800"/>
-    <layout expand="windowActions"
-            spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="notitieDs">
-            <column width="250px">
-                <field datasource="adresDs"
-                       editable="false"
-                       property="adres"/>
-                <field property="omschrijving"
-                       rows="15"/>
-            </column>
-        </fieldGroup>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
+    <layout>
+        <vbox margin="true"
+              responsive="true"
+              spacing="true">
+            <fieldGroup id="fieldGroup"
+                        datasource="notitieDs"
+                        responsive="true"
+                        width="100%">
+                <column>
+                    <field property="omschrijving"
+                           rows="15"
+                           width="100%"/>
+                </column>
+            </fieldGroup>
+            <frame id="windowActions"
+                   responsive="true"
+                   screen="editWindowActions"/>
+        </vbox>
     </layout>
 </window>
