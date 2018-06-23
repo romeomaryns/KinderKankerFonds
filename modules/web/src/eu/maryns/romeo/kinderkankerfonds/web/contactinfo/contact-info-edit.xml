@@ -37,6 +37,7 @@
                         <field property="telefoon"/>
                         <field property="gsm"/>
                         <field property="email"/>
+                        <field property="actief"/>
                     </column>
                 </fieldGroup>
             </tab>
@@ -52,7 +53,8 @@
                     <actions>
                         <action id="create"
                                 caption="mainMsg://button.create"
-                                icon="ADD_ACTION"/>
+                                icon="ADD_ACTION"
+                                openType="DIALOG"/>
                         <action id="edit"
                                 caption="mainMsg://button.edit"
                                 icon="EDIT_ACTION"/>

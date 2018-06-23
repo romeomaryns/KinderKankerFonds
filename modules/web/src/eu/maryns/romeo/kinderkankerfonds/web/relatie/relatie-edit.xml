@@ -32,7 +32,6 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="windowActions"
-            margin="true"
             spacing="true">
         <groupBox caption="Persoon origine"
                   enable="false"

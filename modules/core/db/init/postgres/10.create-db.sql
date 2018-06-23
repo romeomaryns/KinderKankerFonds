@@ -171,6 +171,7 @@ create table KINDERKANKERFONDS_CONTACT_INFO (
     GSM varchar(255),
     EMAIL varchar(255),
     PERSOON_ID uuid,
+    ACTIEF boolean,
     --
     primary key (ID)
 )^

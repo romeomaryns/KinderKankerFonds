@@ -30,44 +30,46 @@
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
-    <layout margin="true"
+    <layout expand="windowActions"
             spacing="true">
         <tabSheet tabCaptionsAsHtml="true">
             <tab id="algemeenTab"
                  caption="Algemeen"
-                 expand="fieldGroup"
                  margin="true,false,false,false"
                  spacing="true">
-                <fieldGroup id="fieldGroup"
-                            datasource="adresDs">
-                    <column width="250px">
-                        <field property="straatnaam"/>
-                        <field property="huisnummer"/>
-                        <field property="bus"/>
-                        <field optionsDatasource="typesDs"
-                               property="type"/>
-                    </column>
-                    <column>
-                        <field property="postcode"/>
-                        <field property="stad"/>
-                        <field optionsDatasource="landsDs"
-                               property="land"/>
-                        <field property="actief"/>
-                    </column>
-                </fieldGroup>
-                <groupBox id="categorieBox"
-                          caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Adres.categorie">
-                    <tokenList caption=" "
-                               datasource="categorieDs"
-                               inline="true"
-                               responsive="true">
-                        <clearButton caption="mainMsg://button.clear"
-                                     icon="PICKERFIELD_CLEAR"/>
-                        <lookup lookup="true"
-                                lookupScreen="kinderkankerfonds$Categorie.browse"
-                                openType="DIALOG"
-                                optionsDatasource="tagsDs"/>
-                    </tokenList>
+                <groupBox expand="categorieBox"
+                          spacing="true">
+                    <fieldGroup id="fieldGroup"
+                                datasource="adresDs">
+                        <column width="250px">
+                            <field property="straatnaam"/>
+                            <field property="huisnummer"/>
+                            <field property="bus"/>
+                            <field optionsDatasource="typesDs"
+                                   property="type"/>
+                        </column>
+                        <column>
+                            <field property="postcode"/>
+                            <field property="stad"/>
+                            <field optionsDatasource="landsDs"
+                                   property="land"/>
+                            <field property="actief"/>
+                        </column>
+                    </fieldGroup>
+                    <groupBox id="categorieBox"
+                              caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Adres.categorie">
+                        <tokenList caption=" "
+                                   datasource="categorieDs"
+                                   inline="true"
+                                   responsive="true">
+                            <clearButton caption="mainMsg://button.clear"
+                                         icon="PICKERFIELD_CLEAR"/>
+                            <lookup lookup="true"
+                                    lookupScreen="kinderkankerfonds$Categorie.browse"
+                                    openType="DIALOG"
+                                    optionsDatasource="tagsDs"/>
+                        </tokenList>
+                    </groupBox>
                 </groupBox>
             </tab>
             <tab id="notitiesTab"

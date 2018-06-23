@@ -12,7 +12,7 @@
     </dsContext>
     <dialogMode height="450"
                 width="800"/>
-    <layout>
+    <layout spacing="true">
         <vbox margin="true"
               responsive="true"
               spacing="true">

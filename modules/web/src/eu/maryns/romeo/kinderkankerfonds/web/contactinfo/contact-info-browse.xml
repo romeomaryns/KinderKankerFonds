@@ -19,7 +19,6 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="contactInfoesTable"
-            margin="true"
             spacing="true">
         <filter id="filter"
                 applyTo="contactInfoesTable"
@@ -47,6 +46,7 @@
                 <column id="gsm"/>
                 <column id="email"/>
                 <column id="persoon"/>
+                <column id="actief"/>
             </columns>
             <rows datasource="contactInfoesDs"/>
             <rowsCount/>

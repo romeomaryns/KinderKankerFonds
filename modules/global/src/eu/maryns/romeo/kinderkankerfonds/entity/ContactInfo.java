@@ -36,6 +36,18 @@ public class ContactInfo extends StandardEntity {
     @OneToMany(mappedBy = "contactinfo")
     protected List<Notitie> notities;
 
+    @Column(name = "ACTIEF")
+    protected Boolean actief;
+
+    public void setActief(Boolean actief) {
+        this.actief = actief;
+    }
+
+    public Boolean getActief() {
+        return actief;
+    }
+
+
     public void setNotities(List<Notitie> notities) {
         this.notities = notities;
     }

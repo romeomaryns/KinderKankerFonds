@@ -26,9 +26,15 @@
         <groupTable id="ziekenhuisesTable"
                     width="100%">
             <actions>
-                <action id="create"/>
-                <action id="edit"/>
-                <action id="remove"/>
+                <action id="create"
+                        caption="mainMsg://button.create"
+                        icon="ADD_ACTION"/>
+                <action id="edit"
+                        caption="mainMsg://button.edit"
+                        icon="EDIT_ACTION"/>
+                <action id="remove"
+                        caption="mainMsg://button.remove"
+                        icon="REMOVE_ACTION"/>
             </actions>
             <columns>
                 <column id="naam"/>

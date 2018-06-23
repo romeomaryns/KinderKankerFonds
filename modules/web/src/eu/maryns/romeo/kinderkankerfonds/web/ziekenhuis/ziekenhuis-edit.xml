@@ -25,7 +25,6 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="windowActions"
-            margin="true"
             spacing="true">
         <tabSheet>
             <tab id="algemeenTab"
@@ -53,29 +52,26 @@
             </tab>
             <tab id="contactPersonenTab"
                  caption="contactpersonen"
-                 expand="contactpersonenTable"
                  icon="USERS"
                  lazy="true"
                  margin="true,false,false,false"
                  spacing="true">
-                <buttonsPanel>
-                    <button action="contactpersonenTable.create"/>
-                    <button action="contactpersonenTable.add"
-                            caption="Toevoegen"/>
-                    <button action="contactpersonenTable.edit"/>
-                    <button action="contactpersonenTable.remove"/>
-                </buttonsPanel>
                 <table id="contactpersonenTable"
+                       height="100%"
                        width="100%">
                     <actions>
                         <action id="create"
-                                icon="PLUS"/>
-                        <action id="remove"
-                                icon="TRASH"/>
-                        <action id="edit"
-                                icon="EDIT_ACTION"/>
+                                caption="mainMsg://button.create"
+                                icon="ADD_ACTION"/>
                         <action id="add"
+                                caption="mainMsg://button.add"
                                 icon="LINK"/>
+                        <action id="edit"
+                                caption="mainMsg://button.edit"
+                                icon="EDIT_ACTION"/>
+                        <action id="remove"
+                                caption="mainMsg://button.remove"
+                                icon="REMOVE_ACTION"/>
                     </actions>
                     <columns>
                         <column id="voornaam"/>
@@ -90,34 +86,44 @@
                                 linkScreenOpenType="DIALOG"/>
                     </columns>
                     <rows datasource="contactpersonenDs"/>
+                    <buttonsPanel>
+                        <button action="contactpersonenTable.create"/>
+                        <button action="contactpersonenTable.add"
+                                caption="Toevoegen"/>
+                        <button action="contactpersonenTable.edit"/>
+                        <button action="contactpersonenTable.remove"/>
+                    </buttonsPanel>
                 </table>
             </tab>
             <tab id="notitiesTab"
                  caption="Notities"
-                 expand="notitiesTable"
                  icon="COMMENTS_O"
                  lazy="true"
                  margin="true,false,false,false"
                  spacing="true">
-                <buttonsPanel>
-                    <button action="notitiesTable.create"/>
-                    <button action="notitiesTable.edit"/>
-                    <button action="notitiesTable.remove"/>
-                </buttonsPanel>
                 <table id="notitiesTable"
+                       height="100%"
                        width="100%">
                     <actions>
                         <action id="create"
-                                icon="PLUS"/>
-                        <action id="remove"
-                                icon="TRASH"/>
+                                caption="mainMsg://button.create"
+                                icon="ADD_ACTION"/>
                         <action id="edit"
+                                caption="mainMsg://button.edit"
                                 icon="EDIT_ACTION"/>
+                        <action id="remove"
+                                caption="mainMsg://button.remove"
+                                icon="REMOVE_ACTION"/>
                     </actions>
                     <columns>
                         <column id="omschrijving"/>
                     </columns>
                     <rows datasource="notitiesDs"/>
+                    <buttonsPanel>
+                        <button action="notitiesTable.create"/>
+                        <button action="notitiesTable.edit"/>
+                        <button action="notitiesTable.remove"/>
+                    </buttonsPanel>
                 </table>
             </tab>
         </tabSheet>

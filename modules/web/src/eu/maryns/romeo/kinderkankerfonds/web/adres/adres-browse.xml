@@ -19,7 +19,6 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="adresesTable"
-            margin="true"
             spacing="true">
         <filter id="filter"
                 applyTo="adresesTable"

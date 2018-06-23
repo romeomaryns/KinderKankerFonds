@@ -27,7 +27,9 @@
         <property name="ziekenhuis"
                   view="_minimal"/>
         <property name="contactinfo"
-                  view="_minimal"/>
+                  view="_minimal">
+            <property name="actief"/>
+        </property>
         <property name="notities"
                   view="_minimal"/>
     </view>
