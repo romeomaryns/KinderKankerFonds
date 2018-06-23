@@ -17,6 +17,7 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="categoriesTable"
+            margin="true"
             spacing="true">
         <filter id="filter"
                 applyTo="categoriesTable"
@@ -26,9 +27,15 @@
         <groupTable id="categoriesTable"
                     width="100%">
             <actions>
-                <action id="create"/>
-                <action id="edit"/>
-                <action id="remove"/>
+                <action id="create"
+                        caption="mainMsg://button.create"
+                        icon="ADD_ACTION"/>
+                <action id="edit"
+                        caption="mainMsg://button.edit"
+                        icon="EDIT_ACTION"/>
+                <action id="remove"
+                        caption="mainMsg://button.remove"
+                        icon="REMOVE_ACTION"/>
             </actions>
             <columns>
                 <column id="naam"/>

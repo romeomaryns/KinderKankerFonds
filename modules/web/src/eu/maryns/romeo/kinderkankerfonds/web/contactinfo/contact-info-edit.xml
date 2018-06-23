@@ -42,29 +42,36 @@
             </tab>
             <tab id="notitiesTab"
                  caption="Notities"
-                 expand="notitiesTable"
                  icon="COMMENTS_O"
                  lazy="true"
                  margin="true,false,false,false"
                  spacing="true">
-                <buttonsPanel>
-                    <button id="create"
-                            action="notitiesTable.create"/>
-                    <button id="remove"
-                            action="notitiesTable.remove"/>
-                </buttonsPanel>
                 <table id="notitiesTable"
+                       height="100%"
                        width="100%">
                     <actions>
                         <action id="create"
-                                icon="PLUS"/>
+                                caption="mainMsg://button.create"
+                                icon="ADD_ACTION"/>
+                        <action id="edit"
+                                caption="mainMsg://button.edit"
+                                icon="EDIT_ACTION"/>
                         <action id="remove"
-                                icon="TRASH"/>
+                                caption="mainMsg://button.remove"
+                                icon="REMOVE_ACTION"/>
                     </actions>
                     <columns>
                         <column id="omschrijving"/>
                     </columns>
                     <rows datasource="notitiesDs"/>
+                    <buttonsPanel>
+                        <button id="create"
+                                action="notitiesTable.create"/>
+                        <button id="editButton"
+                                action="notitiesTable.edit"/>
+                        <button id="remove"
+                                action="notitiesTable.remove"/>
+                    </buttonsPanel>
                 </table>
             </tab>
         </tabSheet>

@@ -30,7 +30,8 @@
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
-    <layout spacing="true">
+    <layout margin="true"
+            spacing="true">
         <tabSheet tabCaptionsAsHtml="true">
             <tab id="algemeenTab"
                  caption="Algemeen"
@@ -60,6 +61,8 @@
                                datasource="categorieDs"
                                inline="true"
                                responsive="true">
+                        <clearButton caption="mainMsg://button.clear"
+                                     icon="PICKERFIELD_CLEAR"/>
                         <lookup lookup="true"
                                 lookupScreen="kinderkankerfonds$Categorie.browse"
                                 openType="DIALOG"
@@ -77,13 +80,20 @@
                           caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Adres.notities"
                           height="100%">
                     <table id="notitiesTable"
-                           height="200px"
+                           height="100%"
                            width="100%">
                         <actions>
-                            <action id="remove"
-                                    trackSelection="true"/>
                             <action id="create"
+                                    caption="mainMsg://button.create"
+                                    icon="ADD_ACTION"
                                     openType="DIALOG"/>
+                            <action id="edit"
+                                    caption="mainMsg://button.edit"
+                                    icon="EDIT_ACTION"/>
+                            <action id="remove"
+                                    caption="mainMsg://button.remove"
+                                    icon="REMOVE_ACTION"
+                                    trackSelection="true"/>
                         </actions>
                         <columns>
                             <column id="omschrijving"/>
@@ -91,6 +101,8 @@
                         <rows datasource="notitiesDs"/>
                         <buttonsPanel>
                             <button action="notitiesTable.create"/>
+                            <button id="editButton"
+                                    action="notitiesTable.edit"/>
                             <button action="notitiesTable.remove"/>
                         </buttonsPanel>
                     </table>

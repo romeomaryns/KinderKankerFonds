@@ -19,6 +19,7 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="contactInfoesTable"
+            margin="true"
             spacing="true">
         <filter id="filter"
                 applyTo="contactInfoesTable"
@@ -29,16 +30,16 @@
                     width="100%">
             <actions>
                 <action id="create"
-                        caption="Nieuw"
-                        icon="PLUS"/>
+                        caption="mainMsg://button.create"
+                        icon="ADD_ACTION"/>
                 <action id="edit"
-                        caption="Aanpassen"
-                        icon="EDIT"/>
+                        caption="mainMsg://button.edit"
+                        icon="EDIT_ACTION"/>
                 <action id="remove"
-                        caption="Verwijderen"
-                        icon="TRASH_O"/>
+                        caption="mainMsg://button.remove"
+                        icon="REMOVE_ACTION"/>
                 <action id="excel"
-                        caption="Excel"
+                        caption="mainMsg://button.excel"
                         icon="EXCEL_ACTION"/>
             </actions>
             <columns>

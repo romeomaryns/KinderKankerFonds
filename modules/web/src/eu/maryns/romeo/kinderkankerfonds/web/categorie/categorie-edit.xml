@@ -13,6 +13,7 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="windowActions"
+            margin="true"
             spacing="true">
         <fieldGroup id="fieldGroup"
                     datasource="categorieDs">
