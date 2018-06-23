@@ -70,15 +70,6 @@
                      icon="CHEVRON_RIGHT"
                      margin="true,false,false,false"
                      spacing="true">
-                    <fieldGroup datasource="persoonDs">
-                        <column>
-                            <field property="familiedag"/>
-                            <field property="ontmoetingsdag"/>
-                            <field property="raakpunt"/>
-                            <field property="oudercomite"/>
-                            <field property="actief"/>
-                        </column>
-                    </fieldGroup>
                     <groupBox id="tagsBox"
                               caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.tags">
                         <tokenList datasource="tagsDs"
@@ -90,6 +81,52 @@
                             <lookup optionsDatasource="categoriesDs"/>
                         </tokenList>
                     </groupBox>
+                    <grid margin="true"
+                          spacing="true">
+                        <columns count="2"/>
+                        <rows>
+                            <row>
+                                <label value="Actief"/>
+                                <checkBox id="actiefCheckbox"
+                                          datasource="persoonDs"
+                                          height="100%"
+                                          property="actief"
+                                          stylename="onoffswitch"/>
+                            </row>
+                            <row>
+                                <label value="Oudercomite"/>
+                                <checkBox id="oudercomiteCheckbox"
+                                          datasource="persoonDs"
+                                          height="100%"
+                                          property="oudercomite"
+                                          stylename="onoffswitch"/>
+                            </row>
+                            <row>
+                                <label value="Familiedag"/>
+                                <checkBox id="familieCheckbox"
+                                          datasource="persoonDs"
+                                          height="100%"
+                                          property="familiedag"
+                                          stylename="onoffswitch"/>
+                            </row>
+                            <row>
+                                <label value="Ontmoetingsdag"/>
+                                <checkBox id="ontmoetingsdagCheckbox"
+                                          datasource="persoonDs"
+                                          height="100%"
+                                          property="ontmoetingsdag"
+                                          stylename="onoffswitch"/>
+                            </row>
+                            <row>
+                                <label value="raakpunt"/>
+                                <checkBox id="raakpuntCheckbox"
+                                          datasource="persoonDs"
+                                          height="100%"
+                                          property="raakpunt"
+                                          stylename="onoffswitch"/>
+                            </row>
+                        </rows>
+                    </grid>
                 </tab>
                 <tab id="contactinfoTab"
                      caption="Contact info"

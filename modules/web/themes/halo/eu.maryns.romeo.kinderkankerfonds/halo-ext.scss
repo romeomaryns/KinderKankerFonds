@@ -1,4 +1,90 @@
 /* Define your theme modifications inside next mixin */
 @mixin eu_maryns_romeo_kinderkankerfonds-halo-ext {
+.onoffswitch {
+     padding-left: 0 !important;
+     position: relative;
+     width: 60px !important;
+     -webkit-user-select:none;
+     -moz-user-select:none;
+     -ms-user-select: none;
 
+     input[type=checkbox] {
+        display: none;
+
+        &:checked ~ label:after {
+          color: transparent !important;
+        }
+
+        & ~ label:before {
+          content: none;
+        }
+     }
+
+     label {
+        display: block;
+        overflow: hidden;
+        cursor: pointer;
+        width: 60px;
+        border: 2px solid $v-font-color;
+        border-radius: 20px;
+     }
+
+     .onoffswitch-inner {
+        display: block; width: 200%;
+        margin-left: -100%;
+        transition: margin 0.3s ease-in 0s;
+     }
+
+     .onoffswitch-inner:before, .onoffswitch-inner:after {
+        display: block;
+        float: left;
+        width: 50%;
+        height: 20px;
+        padding: 0;
+        line-height: 20px;
+        font-size: 14px;
+        color: white;
+        font-weight: bold;
+
+        @include box-defaults;
+     }
+
+     .onoffswitch-inner:before {
+        content: "ON";
+        padding-left: 10px;
+        background-color: $v-app-background-color;
+        color: $v-font-color;
+     }
+
+     .onoffswitch-inner:after {
+        content: "OFF";
+        padding-right: 5px;
+        background-color: $v-app-background-color;
+        color: $v-font-color;
+        text-align: right;
+     }
+
+     .onoffswitch-switch {
+        display: block;
+        width: 12px; height: 12px;
+        margin: 4px;
+        background: $v-font-color;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 33px;
+        border: 2px solid $v-font-color;
+        border-radius: 20px;
+        transition: all 0.3s ease-in 0s;
+     }
+
+     input[type=checkbox]:checked + label .onoffswitch-inner {
+        margin-left: 0;
+     }
+
+     input[type=checkbox]:checked + label .onoffswitch-switch {
+        right: 0;
+        background-color: $v-focus-color;
+     }
+  }
 }
