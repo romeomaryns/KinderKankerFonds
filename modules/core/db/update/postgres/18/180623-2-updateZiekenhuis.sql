@@ -1,1 +1,0 @@
-alter table KINDERKANKERFONDS_ZIEKENHUIS add column AFKORTING varchar(255) ;

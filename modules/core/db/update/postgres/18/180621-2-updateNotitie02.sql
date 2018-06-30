@@ -1,3 +1,0 @@
-alter table KINDERKANKERFONDS_NOTITIE rename column adres_id to adres_id__u85195 ;
-drop index IDX_KINDERKANKERFONDS_NOTITIE_ON_ADRES ;
-alter table KINDERKANKERFONDS_NOTITIE drop constraint FK_KINDERKANKERFONDS_NOTITIE_ON_ADRES ;

@@ -1,4 +1,0 @@
-alter table KINDERKANKERFONDS_NOTITIE add column ADRESSEN_ID uuid ;
-alter table KINDERKANKERFONDS_NOTITIE add column ZIEKENHUIS_ID uuid ;
-alter table KINDERKANKERFONDS_NOTITIE add column CONTACTINFO_ID uuid ;
-alter table KINDERKANKERFONDS_NOTITIE add column PERSOON_ID uuid ;

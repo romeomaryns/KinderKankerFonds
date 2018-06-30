@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://caption"
+        class="eu.maryns.romeo.kinderkankerfonds.web.screens.Import"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.screens">
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <hbox spacing="true"
+              width="100%">
+            <upload id="uploadField"
+                    caption="CSV_KKF"/>
+            <upload id="uploadAdres"
+                    caption="CSV_ADRES"/>
+        </hbox>
+    </layout>
+</window>

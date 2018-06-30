@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="eu.maryns.romeo.kinderkankerfonds.web.relatie.RelatieBrowse"
+        focusComponent="relatiesTable"
+        lookupComponent="relatiesTable"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.relatie">
+    <dsContext>
+        <groupDatasource id="relatiesDs"
+                         class="eu.maryns.romeo.kinderkankerfonds.entity.Relatie"
+                         view="relatie-browse-view">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Relatie e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="relatiesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="relatiesTable"
+                datasource="relatiesDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="relatiesTable"
+                    width="100%">
+            <actions>
+                <action id="create"
+                        caption="mainMsg://button.create"
+                        enable="false"
+                        icon="ADD_ACTION"/>
+                <action id="edit"
+                        caption="mainMsg://button.edit"
+                        icon="EDIT_ACTION"/>
+                <action id="remove"
+                        caption="mainMsg://button.remove"
+                        icon="REMOVE_ACTION"/>
+                <action id="excel"
+                        caption="mainMsg://button.excel"
+                        icon="EXCEL_ACTION"/>
+            </actions>
+            <columns>
+                <column id="persoonOrigine"
+                        link="true"
+                        linkScreen="kinderkankerfonds$Persoon.edit"
+                        linkScreenOpenType="THIS_TAB"/>
+                <column id="type"/>
+                <column id="persoonDoel"
+                        link="true"
+                        linkScreen="kinderkankerfonds$Persoon.edit"
+                        linkScreenOpenType="THIS_TAB"/>
+            </columns>
+            <rows datasource="relatiesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="relatiesTable.create"/>
+                <button id="editBtn"
+                        action="relatiesTable.edit"/>
+                <button id="removeBtn"
+                        action="relatiesTable.remove"/>
+                <button id="excelBtn"
+                        action="relatiesTable.excel"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

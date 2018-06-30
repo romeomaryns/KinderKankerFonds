@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="eu.maryns.romeo.kinderkankerfonds.web.relatie.RelatieEdit"
+        datasource="relatieDs"
+        focusComponent="fieldGroup"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.relatie">
+    <dsContext>
+        <datasource id="relatieDs"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Relatie"
+                    view="relatie-browse-view">
+            <datasource id="persoonOrigineDs"
+                        property="persoonOrigine"/>
+            <datasource id="persoonDoelDs"
+                        property="persoonDoel"/>
+        </datasource>
+        <collectionDatasource id="typesDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.RelatieType"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$RelatieType e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="persoonDoelsDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Persoon e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <groupBox caption="Persoon origine"
+                  enable="false"
+                  spacing="true">
+            <textField id="persoonOrigineTextField"
+                       datasource="relatieDs"
+                       property="persoonOrigine"/>
+        </groupBox>
+        <fieldGroup id="fieldGroup"
+                    datasource="relatieDs">
+            <column width="250px">
+                <field optionsDatasource="typesDs"
+                       property="type"/>
+                <field optionsDatasource="persoonDoelsDs"
+                       property="persoonDoel"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

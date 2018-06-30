@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <menu id="application-kinderkankerfonds"
+          insertBefore="administration">
+        <item icon="USERS"
+              screen="kinderkankerfonds$Persoon.browse"/>
+        <item icon="MAP"
+              screen="kinderkankerfonds$Adres.browse"/>
+        <item icon="PHONE"
+              screen="kinderkankerfonds$ContactInfo.browse"/>
+        <item icon="RANDOM"
+              screen="kinderkankerfonds$Relatie.browse"/>
+        <item icon="COMMENTS"
+              screen="kinderkankerfonds$Notitie.browse"/>
+        <separator/>
+        <item icon="HOSPITAL_O"
+              screen="kinderkankerfonds$Ziekenhuis.browse"/>
+        <item icon="LINK"
+              screen="kinderkankerfonds$RelatieType.browse"/>
+        <item icon="USER"
+              screen="kinderkankerfonds$Geslacht.browse"/>
+        <item icon="HOME"
+              screen="kinderkankerfonds$AdresType.browse"/>
+        <item icon="WRENCH"
+              openType="NEW_TAB"
+              screen="kinderkankerfonds$Categorie.browse"/>
+        <item icon="FLAG"
+              screen="kinderkankerfonds$Land.browse"/>
+    </menu>
+</menu-config>

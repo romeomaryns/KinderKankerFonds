@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="eu.maryns.romeo.kinderkankerfonds.web.adres.AdresEdit"
+        datasource="adresDs"
+        focusComponent="fieldGroup"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.adres">
+    <dsContext>
+        <datasource id="adresDs"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
+                    view="adres-full-view">
+            <collectionDatasource id="categorieDs"
+                                  property="categorie"/>
+            <collectionDatasource id="notitiesDs"
+                                  property="notities"/>
+        </datasource>
+        <collectionDatasource id="typesDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.AdresType"
+                              view="_minimal"/>
+        <collectionDatasource id="landsDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Land"
+                              view="_minimal"/>
+        <collectionDatasource id="tagsDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie"
+                              view="_local">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Categorie e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <tabSheet tabCaptionsAsHtml="true">
+            <tab id="algemeenTab"
+                 caption="Algemeen"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <groupBox expand="categorieBox"
+                          spacing="true">
+                    <fieldGroup id="fieldGroup"
+                                datasource="adresDs">
+                        <column width="250px">
+                            <field property="straatnaam"/>
+                            <field property="huisnummer"/>
+                            <field property="bus"/>
+                            <field optionsDatasource="typesDs"
+                                   property="type"/>
+                        </column>
+                        <column>
+                            <field property="postcode"/>
+                            <field property="stad"/>
+                            <field optionsDatasource="landsDs"
+                                   property="land"/>
+                            <field property="actief"/>
+                        </column>
+                    </fieldGroup>
+                    <groupBox id="categorieBox"
+                              caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Adres.categorie">
+                        <tokenList caption=" "
+                                   datasource="categorieDs"
+                                   inline="true"
+                                   responsive="true">
+                            <clearButton caption="mainMsg://button.clear"
+                                         icon="PICKERFIELD_CLEAR"/>
+                            <lookup lookup="true"
+                                    lookupScreen="kinderkankerfonds$Categorie.browse"
+                                    openType="DIALOG"
+                                    optionsDatasource="tagsDs"/>
+                        </tokenList>
+                    </groupBox>
+                </groupBox>
+            </tab>
+            <tab id="notitiesTab"
+                 caption="Notities"
+                 icon="COMMENTS_O"
+                 lazy="true"
+                 margin="true,false,false,false"
+                 spacing="true">
+                <groupBox id="notitiesBox"
+                          caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Adres.notities"
+                          height="100%">
+                    <table id="notitiesTable"
+                           height="100%"
+                           width="100%">
+                        <actions>
+                            <action id="create"
+                                    caption="mainMsg://button.create"
+                                    icon="ADD_ACTION"
+                                    openType="DIALOG"/>
+                            <action id="edit"
+                                    caption="mainMsg://button.edit"
+                                    icon="EDIT_ACTION"/>
+                            <action id="remove"
+                                    caption="mainMsg://button.remove"
+                                    icon="REMOVE_ACTION"
+                                    trackSelection="true"/>
+                        </actions>
+                        <columns>
+                            <column id="omschrijving"/>
+                        </columns>
+                        <rows datasource="notitiesDs"/>
+                        <buttonsPanel>
+                            <button action="notitiesTable.create"/>
+                            <button id="editButton"
+                                    action="notitiesTable.edit"/>
+                            <button action="notitiesTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+            </tab>
+        </tabSheet>
+        <frame id="windowActions"
+               height="35px"
+               screen="editWindowActions"/>
+    </layout>
+</window>

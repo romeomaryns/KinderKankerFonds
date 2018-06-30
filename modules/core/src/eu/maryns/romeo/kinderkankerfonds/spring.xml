@@ -7,5 +7,14 @@
 
     <!-- Annotation-based beans -->
     <context:component-scan base-package="eu.maryns.romeo.kinderkankerfonds"/>
-
+    <!-- JMX beans registration -->
+   <bean id="sample_MBeanExporter" lazy-init="false"
+          class="com.haulmont.cuba.core.sys.jmx.MBeanExporter">
+        <property name="beans">
+            <map>
+                <entry key="${cuba.webContextName}.kinderkankerfonds:type=Imports"
+                       value-ref="kinderkankerfonds_ImportsMBean"/>
+            </map>
+        </property>
+    </bean>
 </beans>

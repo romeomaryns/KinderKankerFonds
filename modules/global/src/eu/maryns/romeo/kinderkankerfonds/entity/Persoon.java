@@ -208,7 +208,7 @@ public class Persoon extends StandardEntity {
     }
 
 
-    public void setAdressen(List<Adres> adressen) {
+    public void setAdressen(List<Adres> adressen, Persoon persoon) {
         this.adressen = adressen;
     }
 

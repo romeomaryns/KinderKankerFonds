@@ -26,5 +26,7 @@
               screen="kinderkankerfonds$Categorie.browse"/>
         <item icon="FLAG"
               screen="kinderkankerfonds$Land.browse"/>
+        <item icon="UPLOAD"
+              screen="import"/>
     </menu>
 </menu-config>

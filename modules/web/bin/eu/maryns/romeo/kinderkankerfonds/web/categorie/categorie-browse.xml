@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="eu.maryns.romeo.kinderkankerfonds.web.categorie.CategorieBrowse"
+        focusComponent="categoriesTable"
+        lookupComponent="categoriesTable"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.categorie">
+    <dsContext>
+        <groupDatasource id="categoriesDs"
+                         class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie"
+                         view="_minimal">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Categorie e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="categoriesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="categoriesTable"
+                datasource="categoriesDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="categoriesTable"
+                    width="100%">
+            <actions>
+                <action id="create"
+                        caption="mainMsg://button.create"
+                        icon="ADD_ACTION"/>
+                <action id="edit"
+                        caption="mainMsg://button.edit"
+                        icon="EDIT_ACTION"/>
+                <action id="remove"
+                        caption="mainMsg://button.remove"
+                        icon="REMOVE_ACTION"/>
+            </actions>
+            <columns>
+                <column id="naam"/>
+            </columns>
+            <rows datasource="categoriesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="categoriesTable.create"/>
+                <button id="editBtn"
+                        action="categoriesTable.edit"/>
+                <button id="removeBtn"
+                        action="categoriesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

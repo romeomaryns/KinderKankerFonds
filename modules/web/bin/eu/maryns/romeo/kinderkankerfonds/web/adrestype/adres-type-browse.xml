@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="eu.maryns.romeo.kinderkankerfonds.web.adrestype.AdresTypeBrowse"
+        focusComponent="adresTypesTable"
+        lookupComponent="adresTypesTable"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.adrestype">
+    <dsContext>
+        <groupDatasource id="adresTypesDs"
+                         class="eu.maryns.romeo.kinderkankerfonds.entity.AdresType"
+                         view="_local">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$AdresType e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="adresTypesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="adresTypesTable"
+                datasource="adresTypesDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="adresTypesTable"
+                    width="100%">
+            <actions>
+                <action id="create"
+                        caption="mainMsg://button.create"
+                        icon="ADD_ACTION"/>
+                <action id="edit"
+                        caption="mainMsg://button.edit"
+                        icon="EDIT_ACTION"/>
+                <action id="remove"
+                        caption="mainMsg://button.remove"
+                        icon="REMOVE_ACTION"/>
+            </actions>
+            <columns>
+                <column id="naam"/>
+            </columns>
+            <rows datasource="adresTypesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="adresTypesTable.create"/>
+                <button id="editBtn"
+                        action="adresTypesTable.edit"/>
+                <button id="removeBtn"
+                        action="adresTypesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>
