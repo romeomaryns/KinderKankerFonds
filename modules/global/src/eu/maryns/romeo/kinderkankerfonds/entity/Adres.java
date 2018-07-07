@@ -65,6 +65,18 @@ public class Adres extends StandardEntity {
     @Column(name = "ACTIEF")
     protected Boolean actief;
 
+    @Column(name = "UNIEKEID")
+    protected String uniekeid;
+
+    public void setUniekeid(String uniekeid) {
+        this.uniekeid = uniekeid;
+    }
+
+    public String getUniekeid() {
+        return uniekeid;
+    }
+
+
     public void setActief(Boolean actief) {
         this.actief = actief;
     }

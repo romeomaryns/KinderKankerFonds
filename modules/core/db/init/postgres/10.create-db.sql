@@ -20,6 +20,7 @@ create table KINDERKANKERFONDS_PERSOON (
     ACTIEF boolean,
     GESLACHT_ID uuid,
     ZIEKENHUIS_ID uuid,
+    UNIEKEID varchar(255),
     --
     primary key (ID)
 )^
@@ -44,6 +45,7 @@ create table KINDERKANKERFONDS_ADRES (
     PERSOON_ID uuid,
     TYPE_ID uuid,
     ACTIEF boolean,
+    UNIEKEID varchar(255),
     --
     primary key (ID)
 )^

@@ -92,6 +92,18 @@ public class Persoon extends StandardEntity {
     @OneToMany(mappedBy = "persoon")
     protected List<Notitie> notities;
 
+    @Column(name = "UNIEKEID")
+    protected String uniekeid;
+
+    public void setUniekeid(String uniekeid) {
+        this.uniekeid = uniekeid;
+    }
+
+    public String getUniekeid() {
+        return uniekeid;
+    }
+
+
     public void setNotities(List<Notitie> notities) {
         this.notities = notities;
     }

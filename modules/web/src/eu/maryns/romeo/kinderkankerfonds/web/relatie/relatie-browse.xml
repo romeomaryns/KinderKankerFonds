@@ -24,6 +24,7 @@
             <properties include=".*"/>
         </filter>
         <groupTable id="relatiesTable"
+                    multiselect="true"
                     width="100%">
             <actions>
                 <action id="create"

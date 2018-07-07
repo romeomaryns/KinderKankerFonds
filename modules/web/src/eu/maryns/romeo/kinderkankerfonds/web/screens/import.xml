@@ -5,13 +5,25 @@
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.screens">
     <dialogMode height="600"
                 width="800"/>
-    <layout spacing="true">
-        <hbox spacing="true"
+    <layout expand="box2"
+            spacing="true">
+        <hbox id="box1"
+              spacing="true"
               width="100%">
             <upload id="uploadField"
-                    caption="CSV_KKF"/>
+                    caption="CSV_KKF - Firma&apos;s"/>
+            <upload id="tmppatField"
+                    caption="TMPPAT - Personen"/>
             <upload id="uploadAdres"
-                    caption="CSV_ADRES"/>
+                    caption="CSV_ADRES - Adressen"/>
+        </hbox>
+        <hbox id="box2"
+              spacing="true"
+              width="100%">
+            <upload id="kkfmail"
+                    caption="KKFMAIL - Categorieën"/>
+            <upload id="adresELField"
+                    caption="ADRESEL - Persoon - Adres link"/>
         </hbox>
     </layout>
 </window>

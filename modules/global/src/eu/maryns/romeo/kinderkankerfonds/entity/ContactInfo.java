@@ -13,7 +13,7 @@ import com.haulmont.chile.core.annotations.NamePattern;
 import java.util.List;
 import javax.persistence.OneToMany;
 
-@NamePattern("%s, %s, %s|telefoon,gsm,email")
+@NamePattern("%s %s %s|telefoon,gsm,email")
 @Table(name = "KINDERKANKERFONDS_CONTACT_INFO")
 @Entity(name = "kinderkankerfonds$ContactInfo")
 public class ContactInfo extends StandardEntity {

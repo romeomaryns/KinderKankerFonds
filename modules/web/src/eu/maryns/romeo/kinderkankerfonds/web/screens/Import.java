@@ -23,6 +23,15 @@ public class Import extends AbstractWindow {
     private FileUploadField uploadAdres;
 
     @Inject
+    private FileUploadField kkfmail;
+
+    @Inject
+    private FileUploadField adresELField;
+
+    @Inject
+    private FileUploadField tmppatField;
+
+    @Inject
     private FileUploadingAPI fileUploadingAPI;
 
     @Inject
@@ -55,6 +64,43 @@ public class Import extends AbstractWindow {
                 throw new RuntimeException(ex);
             }
         });
+
+        kkfmail.addFileUploadSucceedListener(e -> {
+            UUID fileId = kkfmail.getFileId();
+            File file = fileUploadingAPI.getFile(fileId);
+
+            processKkfMail(file);
+
+            try {
+                fileUploadingAPI.deleteFile(fileId);
+            } catch (FileStorageException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        adresELField.addFileUploadSucceedListener(e -> {
+            UUID fileId = adresELField.getFileId();
+            File file = fileUploadingAPI.getFile(fileId);
+
+            processAdresELField(file);
+
+            try {
+                fileUploadingAPI.deleteFile(fileId);
+            } catch (FileStorageException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        tmppatField.addFileUploadSucceedListener(e -> {
+            UUID fileId = tmppatField.getFileId();
+            File file = fileUploadingAPI.getFile(fileId);
+
+            processTmpPat(file);
+
+            try {
+                fileUploadingAPI.deleteFile(fileId);
+            } catch (FileStorageException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
     private void processFile(File file) {
@@ -73,6 +119,36 @@ public class Import extends AbstractWindow {
             @Override
             public Void run(TaskLifeCycle<Void> taskLifeCycle) throws Exception {
                 importService.importAdres(file);
+                return null;
+            }
+        }, "windowTitle", "windowMessage", true);
+    }
+
+    private void processKkfMail(File file) {
+        BackgroundWorkWindow.show(new BackgroundTask<Void, Void>(1200, this) {
+            @Override
+            public Void run(TaskLifeCycle<Void> taskLifeCycle) throws Exception {
+                importService.importKkfMail(file);
+                return null;
+            }
+        }, "windowTitle", "windowMessage", true);
+    }
+
+    private void processAdresELField(File file) {
+        BackgroundWorkWindow.show(new BackgroundTask<Void, Void>(1200, this) {
+            @Override
+            public Void run(TaskLifeCycle<Void> taskLifeCycle) throws Exception {
+                importService.importAdresEL(file);
+                return null;
+            }
+        }, "windowTitle", "windowMessage", true);
+    }
+
+    private void processTmpPat(File file) {
+        BackgroundWorkWindow.show(new BackgroundTask<Void, Void>(1200, this) {
+            @Override
+            public Void run(TaskLifeCycle<Void> taskLifeCycle) throws Exception {
+                importService.importTmpPat(file);
                 return null;
             }
         }, "windowTitle", "windowMessage", true);

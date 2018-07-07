@@ -55,6 +55,10 @@
                                    property="land"/>
                             <field property="actief"/>
                         </column>
+                        <column>
+                            <field editable="false"
+                                   property="persoon"/>
+                        </column>
                     </fieldGroup>
                     <groupBox id="categorieBox"
                               caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Adres.categorie">

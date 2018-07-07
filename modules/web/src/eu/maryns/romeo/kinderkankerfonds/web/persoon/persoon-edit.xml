@@ -62,6 +62,10 @@
                     <field optionsDatasource="ziekenhuisesDs"
                            property="ziekenhuis"/>
                 </column>
+                <column>
+                    <field editable="false"
+                           property="uniekeid"/>
+                </column>
             </fieldGroup>
             <tabSheet responsive="true"
                       tabCaptionsAsHtml="true">
