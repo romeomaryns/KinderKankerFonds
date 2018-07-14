@@ -18,4 +18,6 @@ public interface ImportService {
     void importAdresEL(File file) throws IOException;
 
     void importTmpPat(File file) throws IOException;
+
+    void importKKFrela(File file) throws IOException;
 }

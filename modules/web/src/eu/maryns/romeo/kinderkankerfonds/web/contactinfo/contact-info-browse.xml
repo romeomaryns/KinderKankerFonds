@@ -46,7 +46,10 @@
                 <column id="telefoon"/>
                 <column id="gsm"/>
                 <column id="email"/>
-                <column id="persoon"/>
+                <column id="persoon"
+                        link="true"
+                        linkScreen="kinderkankerfonds$Persoon.edit"
+                        linkScreenOpenType="THIS_TAB"/>
                 <column id="actief"/>
             </columns>
             <rows datasource="contactInfoesDs"/>

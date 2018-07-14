@@ -285,8 +285,8 @@
                             <rows datasource="notitiesDs"/>
                             <buttonsPanel>
                                 <button action="notitiesTable.create"/>
-                                <button action="relatiesTable.edit"/>
-                                <button action="relatiesTable.remove"/>
+                                <button action="notitiesTable.edit"/>
+                                <button action="notitiesTable.remove"/>
                             </buttonsPanel>
                         </table>
                     </groupBox>

@@ -92,7 +92,7 @@ public class Persoon extends StandardEntity {
     @OneToMany(mappedBy = "persoon")
     protected List<Notitie> notities;
 
-    @Column(name = "UNIEKEID")
+    @Column(name = "UNIEKEID", unique = true)
     protected String uniekeid;
 
     public void setUniekeid(String uniekeid) {

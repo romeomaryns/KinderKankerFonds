@@ -22,8 +22,8 @@
               width="100%">
             <upload id="kkfmail"
                     caption="KKFMAIL - Categorieën"/>
-            <upload id="adresELField"
-                    caption="ADRESEL - Persoon - Adres link"/>
+            <upload id="KKFrelaField"
+                    caption="KKFRELA- relaties"/>
         </hbox>
     </layout>
 </window>

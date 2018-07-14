@@ -26,7 +26,7 @@ public class Import extends AbstractWindow {
     private FileUploadField kkfmail;
 
     @Inject
-    private FileUploadField adresELField;
+    private FileUploadField KKFrelaField;
 
     @Inject
     private FileUploadField tmppatField;
@@ -77,11 +77,11 @@ public class Import extends AbstractWindow {
                 throw new RuntimeException(ex);
             }
         });
-        adresELField.addFileUploadSucceedListener(e -> {
-            UUID fileId = adresELField.getFileId();
+        KKFrelaField.addFileUploadSucceedListener(e -> {
+            UUID fileId = KKFrelaField.getFileId();
             File file = fileUploadingAPI.getFile(fileId);
 
-            processAdresELField(file);
+            processKKFrelaField(file);
 
             try {
                 fileUploadingAPI.deleteFile(fileId);
@@ -110,7 +110,7 @@ public class Import extends AbstractWindow {
                 importService.importCSV(file);
                 return null;
             }
-        }, "windowTitle", "windowMessage", true);
+        }, "Importeren van KKF_CSV..", "Import bezig .", true);
     }
 
 
@@ -121,7 +121,7 @@ public class Import extends AbstractWindow {
                 importService.importAdres(file);
                 return null;
             }
-        }, "windowTitle", "windowMessage", true);
+        }, "Importeren van CSV_ADRES..", "Import bezig .", true);
     }
 
     private void processKkfMail(File file) {
@@ -131,17 +131,17 @@ public class Import extends AbstractWindow {
                 importService.importKkfMail(file);
                 return null;
             }
-        }, "windowTitle", "windowMessage", true);
+        }, "Importeren van KKFMAIL..", "Import bezig .", true);
     }
 
-    private void processAdresELField(File file) {
+    private void processKKFrelaField(File file) {
         BackgroundWorkWindow.show(new BackgroundTask<Void, Void>(1200, this) {
             @Override
             public Void run(TaskLifeCycle<Void> taskLifeCycle) throws Exception {
-                importService.importAdresEL(file);
+                importService.importKKFrela(file);
                 return null;
             }
-        }, "windowTitle", "windowMessage", true);
+        }, "Importeren van KKFRELA..", "Import bezig .", true);
     }
 
     private void processTmpPat(File file) {
@@ -151,6 +151,6 @@ public class Import extends AbstractWindow {
                 importService.importTmpPat(file);
                 return null;
             }
-        }, "windowTitle", "windowMessage", true);
+        }, "Importeren van TMPPAT..", "Import bezig .", true);
     }
 }
