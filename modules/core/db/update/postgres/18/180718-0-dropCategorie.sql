@@ -1,0 +1,3 @@
+alter table kinderkankerfonds_categorie rename to KINDERKANKERFONDS_CATEGORIE__U82652 ;
+alter table kinderkankerfonds_adres_categorie_link drop constraint FK_ADRCAT_CATEGORIE ;
+alter table kinderkankerfonds_persoon_categorie_link drop constraint FK_PERCAT_CATEGORIE ;

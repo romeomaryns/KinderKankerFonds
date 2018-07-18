@@ -2,11 +2,13 @@ package eu.maryns.romeo.kinderkankerfonds.web.persoon;
 
 import com.haulmont.cuba.gui.components.AbstractEditor;
 import com.haulmont.cuba.gui.components.CheckBox;
+import de.diedavids.cuba.taggable.web.WithTags;
 import eu.maryns.romeo.kinderkankerfonds.entity.Persoon;
 
 import javax.inject.Inject;
 import java.util.Map;
 
+@WithTags
 public class PersoonEdit extends AbstractEditor<Persoon> {
 
     @Inject

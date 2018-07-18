@@ -64,7 +64,8 @@
                 </column>
                 <column>
                     <field editable="false"
-                           property="uniekeid"/>
+                           property="uniekeid"
+                           visible="false"/>
                 </column>
             </fieldGroup>
             <tabSheet responsive="true"

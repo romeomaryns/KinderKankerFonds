@@ -9,26 +9,43 @@
         <datasource id="notitieDs"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Notitie"
                     view="notitie-view-full"/>
+        <collectionDatasource id="persoonsDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Persoon e]]>
+            </query>
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="450"
                 width="800"/>
-    <layout spacing="true">
-        <vbox margin="true"
-              responsive="true"
-              spacing="true">
-            <fieldGroup id="fieldGroup"
-                        datasource="notitieDs"
-                        responsive="true"
-                        width="100%">
-                <column>
-                    <field property="omschrijving"
-                           rows="15"
-                           width="100%"/>
-                </column>
-            </fieldGroup>
-            <frame id="windowActions"
-                   responsive="true"
-                   screen="editWindowActions"/>
-        </vbox>
+    <layout expand="fieldGroup"
+            spacing="true">
+        <groupBox id="persoonGroupBox"
+                  caption="Persoon"
+                  outerMargin="true"
+                  spacing="true">
+            <lookupPickerField id="persoonLookupPickerField"
+                               datasource="notitieDs"
+                               height="100%"
+                               nullOptionVisible="false"
+                               optionsDatasource="persoonsDs"
+                               property="persoon"
+                               stylename="borderless"
+                               width="100%"/>
+        </groupBox>
+        <fieldGroup id="fieldGroup"
+                    datasource="notitieDs"
+                    responsive="true"
+                    width="100%">
+            <column>
+                <field property="omschrijving"
+                       rows="15"
+                       width="100%"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               responsive="true"
+               screen="editWindowActions"/>
     </layout>
 </window>

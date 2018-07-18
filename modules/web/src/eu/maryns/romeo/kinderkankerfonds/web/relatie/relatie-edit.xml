@@ -33,16 +33,11 @@
                 width="800"/>
     <layout expand="windowActions"
             spacing="true">
-        <groupBox caption="Persoon origine"
-                  enable="false"
-                  spacing="true">
-            <textField id="persoonOrigineTextField"
-                       datasource="relatieDs"
-                       property="persoonOrigine"/>
-        </groupBox>
         <fieldGroup id="fieldGroup"
                     datasource="relatieDs">
             <column width="250px">
+                <field optionsDatasource="persoonDoelsDs"
+                       property="persoonOrigine"/>
                 <field optionsDatasource="typesDs"
                        property="type"/>
                 <field optionsDatasource="persoonDoelsDs"

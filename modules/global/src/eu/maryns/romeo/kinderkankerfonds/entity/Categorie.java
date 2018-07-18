@@ -9,9 +9,10 @@ import java.util.List;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import de.diedavids.cuba.taggable.entity.Tagging;
 
-@NamePattern("%s|naam")
 @Table(name = "KINDERKANKERFONDS_CATEGORIE")
+@NamePattern("%s|naam")
 @Entity(name = "kinderkankerfonds$Categorie")
 public class Categorie extends StandardEntity {
     private static final long serialVersionUID = 2291352221909398491L;

@@ -12,17 +12,26 @@
             <collectionDatasource id="notitiesDs"
                                   property="notities"/>
         </datasource>
+        <collectionDatasource id="persoonsDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Persoon e]]>
+            </query>
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="windowActions"
             spacing="true">
         <groupBox caption="Persoon">
-            <textField id="persoonTextField"
-                       datasource="contactInfoDs"
-                       enable="false"
-                       property="persoon"
-                       stylename="borderless"/>
+            <lookupPickerField id="persoonLookupPickerField"
+                               datasource="contactInfoDs"
+                               nullOptionVisible="false"
+                               optionsDatasource="persoonsDs"
+                               property="persoon"
+                               stylename="borderless"
+                               width="100%"/>
         </groupBox>
         <tabSheet tabCaptionsAsHtml="true">
             <tab id="algemeenTab"

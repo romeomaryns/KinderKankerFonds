@@ -34,5 +34,8 @@
         <entity class="eu.maryns.romeo.kinderkankerfonds.entity.Land">
             <include re=".*"/>
         </entity>
+        <entity class="eu.maryns.romeo.kinderkankerfonds.entity.PersoonTagging">
+            <include re=".*"/>
+        </entity>
     </entities>
 </fts-config>

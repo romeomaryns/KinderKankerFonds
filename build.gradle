@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.9.2'
+    ext.cubaVersion = '6.9.3'
     repositories {
         
         maven {
@@ -53,6 +53,7 @@ cuba {
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
     appComponent("com.haulmont.fts:fts-global:$cubaVersion")
+    appComponent("de.diedavids.cuba.taggable:taggable-global:0.2.0")
 
 }
 
