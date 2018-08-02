@@ -1,8 +1,6 @@
 package eu.maryns.romeo.kinderkankerfonds.web.persoon;
 
-import de.balvi.cuba.declarativecontrollers.web.browse.AnnotatableAbstractLookup;
-import de.diedavids.cuba.taggable.web.WithTags;
+import com.haulmont.cuba.gui.components.AbstractLookup;
 
-@WithTags(listComponent = "persoonsTable", showTagsInList = true, showTagsAsLink = true, tagLinkOpenType = "NEW_TAB")
-public class PersoonBrowse extends AnnotatableAbstractLookup {
+public class PersoonBrowse extends AbstractLookup {
 }

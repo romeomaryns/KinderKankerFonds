@@ -274,16 +274,16 @@ public class ImportServiceBean implements ImportService {
                                         catego.getPersonen().add(persoon);
                                     }
                                 }catch(Exception e){System.out.println("geen categorie gevonden");}
-                                List<Categorie> categorie = persoon.getTags();
+                                List<Categorie> categorie = persoon.getCategorieen();
                                 if(null == categorie){
                                     System.out.println("Categorie is null");
                                     categorie = new ArrayList<Categorie>();
                                     categorie.add(catego);
-                                    persoon.setTags(categorie);
+                                    persoon.setCategorieen(categorie);
                                 }
                                 else{
                                     if(categorie.contains(catego)){
-                                        persoon.getTags().add(catego);
+                                        persoon.getCategorieen().add(catego);
                                     }
                                 }
                                 break;
@@ -457,16 +457,16 @@ public class ImportServiceBean implements ImportService {
                                 catego.getPersonen().add(persoon);
                             }
                         }catch(Exception e){System.out.println("geen categorie gevonden");}
-                        List<Categorie> categorie = persoon.getTags();
+                        List<Categorie> categorie = persoon.getCategorieen();
                         if(null == categorie){
                             System.out.println("Categorie is null");
                             categorie = new ArrayList<Categorie>();
                             categorie.add(catego);
-                            persoon.setTags(categorie);
+                            persoon.setCategorieen(categorie);
                         }
                         else{
                             if(categorie.contains(catego)){
-                                persoon.getTags().add(catego);
+                                persoon.getCategorieen().add(catego);
                             }
                         }
                         Date vanaf = null, tot = null;

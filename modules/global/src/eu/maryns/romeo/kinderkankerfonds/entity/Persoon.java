@@ -75,7 +75,7 @@ public class Persoon extends StandardEntity {
         joinColumns = @JoinColumn(name = "PERSOON_ID"),
         inverseJoinColumns = @JoinColumn(name = "CATEGORIE_ID"))
     @ManyToMany
-    protected List<Categorie> tags;
+    protected List<Categorie> categorieen;
 
     @OneToMany(mappedBy = "persoon")
     protected List<ContactInfo> contactinfo;
@@ -94,6 +94,15 @@ public class Persoon extends StandardEntity {
 
     @Column(name = "UNIEKEID", unique = true)
     protected String uniekeid;
+
+    public void setCategorieen(List<Categorie> categorieen) {
+        this.categorieen = categorieen;
+    }
+
+    public List<Categorie> getCategorieen() {
+        return categorieen;
+    }
+
 
     public void setUniekeid(String uniekeid) {
         this.uniekeid = uniekeid;
@@ -183,14 +192,6 @@ public class Persoon extends StandardEntity {
         return raakpunt;
     }
 
-
-    public void setTags(List<Categorie> tags) {
-        this.tags = tags;
-    }
-
-    public List<Categorie> getTags() {
-        return tags;
-    }
 
 
     public List<Relatie> getRelaties() {

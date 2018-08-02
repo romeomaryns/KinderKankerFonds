@@ -10,7 +10,7 @@
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
                     view="persoon-browse-view">
             <collectionDatasource id="tagsDs"
-                                  property="tags"/>
+                                  property="categorieen"/>
             <collectionDatasource id="adressenDs"
                                   property="adressen"/>
             <collectionDatasource id="relatiesDs"
@@ -76,7 +76,7 @@
                      margin="true,false,false,false"
                      spacing="true">
                     <groupBox id="tagsBox"
-                              caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.tags">
+                              caption="Categorieën">
                         <tokenList datasource="tagsDs"
                                    inline="true"
                                    position="TOP"

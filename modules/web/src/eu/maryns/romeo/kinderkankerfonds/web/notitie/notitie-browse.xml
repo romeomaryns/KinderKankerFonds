@@ -29,7 +29,6 @@
             <actions>
                 <action id="create"
                         caption="mainMsg://button.create"
-                        enable="false"
                         icon="ADD_ACTION"/>
                 <action id="edit"
                         caption="mainMsg://button.edit"
@@ -42,7 +41,8 @@
                         icon="EXCEL_ACTION"/>
             </actions>
             <columns>
-                <column id="omschrijving"/>
+                <column id="omschrijving"
+                        maxTextLength="100"/>
                 <column id="contactinfo"
                         link="true"
                         linkScreen="kinderkankerfonds$ContactInfo.edit"

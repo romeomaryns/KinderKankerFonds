@@ -9,7 +9,6 @@ import java.util.List;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import de.diedavids.cuba.taggable.entity.Tagging;
 
 @Table(name = "KINDERKANKERFONDS_CATEGORIE")
 @NamePattern("%s|naam")

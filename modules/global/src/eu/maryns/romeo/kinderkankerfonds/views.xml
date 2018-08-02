@@ -22,11 +22,6 @@
             <property name="persoonOrigine"
                       view="_minimal"/>
         </property>
-        <property name="tags"
-                  view="_minimal">
-            <property name="personen"
-                      view="_minimal"/>
-        </property>
         <property name="ziekenhuis"
                   view="_minimal"/>
         <property name="contactinfo"
@@ -35,6 +30,11 @@
         </property>
         <property name="notities"
                   view="_minimal"/>
+        <property name="categorieen"
+                  view="_minimal">
+            <property name="personen"
+                      view="_minimal"/>
+        </property>
     </view>
     <view class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
           extends="_local"
@@ -43,8 +43,6 @@
                   view="_minimal">
             <property name="geboortedatum"/>
             <property name="geslacht"
-                      view="_minimal"/>
-            <property name="tags"
                       view="_minimal"/>
             <property name="overlijdensdatum"/>
             <property name="familiedag"/>
@@ -62,6 +60,8 @@
                 <property name="persoonOrigine"
                           view="_minimal"/>
             </property>
+            <property name="categorieen"
+                      view="_minimal"/>
         </property>
         <property name="type"
                   view="_minimal"/>
@@ -138,8 +138,6 @@
                       view="_minimal"/>
             <property name="ziekenhuis"
                       view="_minimal"/>
-            <property name="tags"
-                      view="_minimal"/>
             <property name="contactinfo"
                       view="_minimal"/>
             <property name="adressen"
@@ -149,6 +147,8 @@
             <property name="notities"
                       view="_minimal"/>
             <property name="uniekeid"/>
+            <property name="categorieen"
+                      view="_minimal"/>
         </property>
     </view>
 </views>

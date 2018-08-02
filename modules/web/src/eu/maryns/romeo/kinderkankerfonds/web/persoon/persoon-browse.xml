@@ -48,7 +48,7 @@
                 <column id="raakpunt"/>
                 <column id="oudercomite"/>
                 <column id="geslacht"/>
-                <column id="tags"
+                <column id="categorieen"
                         caption="Categorie"/>
                 <column id="ziekenhuis"/>
                 <column id="adressen"/>

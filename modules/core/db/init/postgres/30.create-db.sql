@@ -65,3 +65,25 @@ INSERT INTO public.kinderkankerfonds_adres(
 INSERT INTO public.kinderkankerfonds_adres(
 	id, version, create_ts, created_by, update_ts, updated_by, delete_ts, deleted_by, straatnaam, huisnummer, bus, postcode, stad, persoon_id, type_id)
 	VALUES ('d43393a2-eb54-fca3-7198-726c344cfd63', 1, current_date, 'admin', current_date, null, null, null, 'Martelaarslaan', '393', 'null', '9000', 'Gent', 'ced561a9-37a1-0246-f9fc-31c299d3513f',  '9fbba1a1-eb25-3c86-d554-5d363dc7b86e');
+
+
+insert into KINDERKANKERFONDS_ZIEKENHUIS 
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAAM, AFKORTING, ADRES_ID) 
+values ('3cab7815-cc99-7f7d-7e00-3c2a0b8629e1', 1, '2018-08-02 17:28:49', 'admin', '2018-08-02 17:28:49', null, null, null, 'Universitair Ziekenhuis Gent', 'UZG', null);
+insert into KINDERKANKERFONDS_ZIEKENHUIS 
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAAM, AFKORTING, ADRES_ID) 
+values ('8efc98a0-eb6a-157d-a537-6b4d71ca61ca', 1, '2018-08-02 17:29:02', 'admin', '2018-08-02 17:29:02', null, null, null, 'Universitair Ziekenhuis Antwerpen', 'UZA', null);
+insert into KINDERKANKERFONDS_ZIEKENHUIS 
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAAM, AFKORTING, ADRES_ID) 
+values ('e07a9f27-6024-b6a5-13d6-f05ec96726df', 1, '2018-08-02 17:29:19', 'admin', '2018-08-02 17:29:19', null, null, null, 'Universitair Ziekenhuis Brussel', 'UZB', null);
+
+
+insert into KINDERKANKERFONDS_LAND 
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAAM, LANDCODE) 
+values ('6428fcf2-ab51-ec23-bfb1-642d34dd032d', 1, '2018-08-02 17:31:46', 'admin', '2018-08-02 17:31:46', null, null, null, 'Frankrijk', 'FR');
+insert into KINDERKANKERFONDS_LAND 
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAAM, LANDCODE) 
+values ('f792cc4e-e9a6-9ef9-b97b-52e7cb722cf5', 1, '2018-08-02 17:31:41', 'admin', '2018-08-02 17:31:41', null, null, null, 'Nederland', 'NL');
+insert into KINDERKANKERFONDS_LAND 
+(ID, VERSION, CREATE_TS, CREATED_BY, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, NAAM, LANDCODE) 
+values ('9736d156-2f04-fdac-3feb-63a6d0a3da04', 1, '2018-08-02 17:31:27', 'admin', '2018-08-02 17:31:27', null, null, null, 'België', 'BE');

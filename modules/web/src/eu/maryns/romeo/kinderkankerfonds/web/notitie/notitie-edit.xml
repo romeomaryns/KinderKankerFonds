@@ -16,6 +16,27 @@
                 <![CDATA[select e from kinderkankerfonds$Persoon e]]>
             </query>
         </collectionDatasource>
+        <collectionDatasource id="adresesDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
+                              view="adres-full-view">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Adres e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="contactInfoesDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo"
+                              view="contactInfo-view-full">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$ContactInfo e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="ziekenhuisesDs"
+                              class="eu.maryns.romeo.kinderkankerfonds.entity.Ziekenhuis"
+                              view="ziekenhuis-view">
+            <query>
+                <![CDATA[select e from kinderkankerfonds$Ziekenhuis e]]>
+            </query>
+        </collectionDatasource>
     </dsContext>
     <dialogMode height="450"
                 width="800"/>
@@ -28,9 +49,44 @@
             <lookupPickerField id="persoonLookupPickerField"
                                datasource="notitieDs"
                                height="100%"
-                               nullOptionVisible="false"
                                optionsDatasource="persoonsDs"
                                property="persoon"
+                               stylename="borderless"
+                               width="100%"/>
+        </groupBox>
+        <groupBox id="AdresGroupBox"
+                  caption="Adres"
+                  outerMargin="true"
+                  spacing="true">
+            <lookupPickerField id="adresLookupPickerField"
+                               datasource="notitieDs"
+                               height="100%"
+                               optionsDatasource="adresesDs"
+                               property="adressen"
+                               stylename="borderless"
+                               width="100%"/>
+        </groupBox>
+        <groupBox id="contactInfoBox"
+                  caption="ContactInfo"
+                  outerMargin="true"
+                  spacing="true">
+            <lookupPickerField id="contactInfoLookupPickerField"
+                               datasource="notitieDs"
+                               height="100%"
+                               optionsDatasource="contactInfoesDs"
+                               property="contactinfo"
+                               stylename="borderless"
+                               width="100%"/>
+        </groupBox>
+        <groupBox id="ZiekenhuisGroupBox"
+                  caption="Ziekenhuis"
+                  outerMargin="true"
+                  spacing="true">
+            <lookupPickerField id="ziekenhuisLookupPickerField"
+                               datasource="notitieDs"
+                               height="100%"
+                               optionsDatasource="ziekenhuisesDs"
+                               property="ziekenhuis"
                                stylename="borderless"
                                width="100%"/>
         </groupBox>
