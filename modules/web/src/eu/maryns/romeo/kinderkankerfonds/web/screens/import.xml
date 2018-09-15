@@ -11,19 +11,24 @@
               spacing="true"
               width="100%">
             <upload id="uploadField"
-                    caption="CSV_KKF - Firma&apos;s"/>
+                    caption="CSV_KKF - Firma&apos;s"
+                    showFileName="true"/>
             <upload id="tmppatField"
-                    caption="TMPPAT - Personen"/>
+                    caption="TMPPAT - Personen"
+                    showFileName="true"/>
             <upload id="uploadAdres"
-                    caption="CSV_ADRES - Adressen"/>
+                    caption="CSV_ADRES - Adressen"
+                    showFileName="true"/>
         </hbox>
         <hbox id="box2"
               spacing="true"
               width="100%">
             <upload id="kkfmail"
-                    caption="KKFMAIL - Categorieën"/>
+                    caption="KKFMAIL - Categorieën"
+                    showFileName="true"/>
             <upload id="KKFrelaField"
-                    caption="KKFRELA- relaties"/>
+                    caption="KKFRELA- relaties"
+                    showFileName="true"/>
         </hbox>
     </layout>
 </window>

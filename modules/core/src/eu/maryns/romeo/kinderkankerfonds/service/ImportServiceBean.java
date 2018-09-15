@@ -129,7 +129,7 @@ public class ImportServiceBean implements ImportService {
                             persoon.setAdressen(adressen,persoon);
                         }
                         else{
-                            adressen.add(adres);
+                            persoon.getAdressen().add(adres);
                         }
                        persoon.setActief(true);
                         StringBuilder sb = new StringBuilder("Geïmporteerde Data:\n=====================\n")
@@ -334,12 +334,12 @@ public class ImportServiceBean implements ImportService {
                         }
                         Adres adres =maakAdres(straat,postnummer,stad,uniekeid);
                         try{
-                        if(!adres.getPersoon().equals(persoon)){
                             adres.setPersoon(persoon);
                         }
-                        }
                         catch(Exception e)
-                            {System.out.println("Geen adressen gevonden");}
+                            {System.out.println("Geen adressen gevonden");
+                            e.printStackTrace();
+                            }
                         List<Adres> adressen = persoon.getAdressen();
                         if(adressen == null)
                         {
@@ -348,7 +348,7 @@ public class ImportServiceBean implements ImportService {
                             persoon.setAdressen(adressen,persoon);
                         }
                         else{
-                            adressen.add(adres);
+                            persoon.getAdressen().add(adres);
                         }
                         persoon.setActief(true);
                         StringBuilder sb = new StringBuilder("Geïmporteerde Data:\n=====================\n")
@@ -453,10 +453,14 @@ public class ImportServiceBean implements ImportService {
                 if(null != persoon ) {
                         Categorie catego = getCategorie(mailcode);
                         try {
-                            if (!catego.getPersonen().contains(persoon)) {
+                        //    if (!catego.getPersonen().contains(persoon)) {
                                 catego.getPersonen().add(persoon);
-                            }
-                        }catch(Exception e){System.out.println("geen categorie gevonden");}
+                      //      }
+                        }catch(Exception e){System.out.println("geen categorie gevonden");
+                        List<Persoon> personen = new ArrayList<>();
+                        personen.add(persoon);
+                        catego.setPersonen(personen);
+                        }
                         List<Categorie> categorie = persoon.getCategorieen();
                         if(null == categorie){
                             System.out.println("Categorie is null");
@@ -465,9 +469,9 @@ public class ImportServiceBean implements ImportService {
                             persoon.setCategorieen(categorie);
                         }
                         else{
-                            if(categorie.contains(catego)){
+  //                          if(!categorie.contains(catego)){
                                 persoon.getCategorieen().add(catego);
-                            }
+//                            }
                         }
                         Date vanaf = null, tot = null;
                         switch (mailcode) {
@@ -552,7 +556,7 @@ public class ImportServiceBean implements ImportService {
                         }
                         else
                         {
-                            notities.add(notitie1);
+                            persoon.getNotities().add(notitie1);
                         }
                         System.out.println(counter + "   Records verwerkt !" + sb.toString());
                         persistence.getEntityManager().merge(persoon);

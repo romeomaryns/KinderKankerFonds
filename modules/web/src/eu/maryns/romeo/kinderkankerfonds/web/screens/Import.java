@@ -1,5 +1,6 @@
 package eu.maryns.romeo.kinderkankerfonds.web.screens;
 
+import com.haulmont.cuba.core.entity.FileDescriptor;
 import com.haulmont.cuba.core.global.FileStorageException;
 import com.haulmont.cuba.gui.backgroundwork.BackgroundWorkWindow;
 import com.haulmont.cuba.gui.components.AbstractWindow;
@@ -42,64 +43,29 @@ public class Import extends AbstractWindow {
         uploadField.addFileUploadSucceedListener(e -> {
             UUID fileId = uploadField.getFileId();
             File file = fileUploadingAPI.getFile(fileId);
-
             processFile(file);
-
-            try {
-                fileUploadingAPI.deleteFile(fileId);
-            } catch (FileStorageException ex) {
-                throw new RuntimeException(ex);
-            }
         });
 
         uploadAdres.addFileUploadSucceedListener(e -> {
             UUID fileId = uploadAdres.getFileId();
             File file = fileUploadingAPI.getFile(fileId);
-
             processAdres(file);
-
-            try {
-                fileUploadingAPI.deleteFile(fileId);
-            } catch (FileStorageException ex) {
-                throw new RuntimeException(ex);
-            }
         });
 
         kkfmail.addFileUploadSucceedListener(e -> {
             UUID fileId = kkfmail.getFileId();
             File file = fileUploadingAPI.getFile(fileId);
-
             processKkfMail(file);
-
-            try {
-                fileUploadingAPI.deleteFile(fileId);
-            } catch (FileStorageException ex) {
-                throw new RuntimeException(ex);
-            }
         });
         KKFrelaField.addFileUploadSucceedListener(e -> {
             UUID fileId = KKFrelaField.getFileId();
             File file = fileUploadingAPI.getFile(fileId);
-
             processKKFrelaField(file);
-
-            try {
-                fileUploadingAPI.deleteFile(fileId);
-            } catch (FileStorageException ex) {
-                throw new RuntimeException(ex);
-            }
         });
         tmppatField.addFileUploadSucceedListener(e -> {
             UUID fileId = tmppatField.getFileId();
             File file = fileUploadingAPI.getFile(fileId);
-
             processTmpPat(file);
-
-            try {
-                fileUploadingAPI.deleteFile(fileId);
-            } catch (FileStorageException ex) {
-                throw new RuntimeException(ex);
-            }
         });
     }
 

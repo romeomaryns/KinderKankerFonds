@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.9.3'
+    ext.cubaVersion = '6.9.5'
     repositories {
         
         maven {
@@ -232,6 +232,7 @@ task wrapper(type: Wrapper) {
 }
 
 task buildUberJar(type: CubaUberJarBuilding) {
+    webPort = 8080
     singleJar = true
     logbackConfigurationFile = 'etc/uber-jar-logback.xml'
     coreJettyEnvPath = 'modules/core/web/META-INF/jetty-env.xml'

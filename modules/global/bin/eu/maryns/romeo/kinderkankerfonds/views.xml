@@ -22,8 +22,6 @@
             <property name="persoonOrigine"
                       view="_minimal"/>
         </property>
-        <property name="tags"
-                  view="_minimal"/>
         <property name="ziekenhuis"
                   view="_minimal"/>
         <property name="contactinfo"
@@ -32,6 +30,11 @@
         </property>
         <property name="notities"
                   view="_minimal"/>
+        <property name="categorieen"
+                  view="_minimal">
+            <property name="personen"
+                      view="_minimal"/>
+        </property>
     </view>
     <view class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
           extends="_local"
@@ -40,8 +43,6 @@
                   view="_minimal">
             <property name="geboortedatum"/>
             <property name="geslacht"
-                      view="_minimal"/>
-            <property name="tags"
                       view="_minimal"/>
             <property name="overlijdensdatum"/>
             <property name="familiedag"/>
@@ -59,6 +60,8 @@
                 <property name="persoonOrigine"
                           view="_minimal"/>
             </property>
+            <property name="categorieen"
+                      view="_minimal"/>
         </property>
         <property name="type"
                   view="_minimal"/>
@@ -118,5 +121,34 @@
         </property>
         <property name="notities"
                   view="_minimal"/>
+    </view>
+    <view class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie"
+          extends="_local"
+          name="categorie-view">
+        <property name="personen"
+                  view="_minimal">
+            <property name="geboortedatum"/>
+            <property name="overlijdensdatum"/>
+            <property name="familiedag"/>
+            <property name="ontmoetingsdag"/>
+            <property name="raakpunt"/>
+            <property name="oudercomite"/>
+            <property name="actief"/>
+            <property name="geslacht"
+                      view="_minimal"/>
+            <property name="ziekenhuis"
+                      view="_minimal"/>
+            <property name="contactinfo"
+                      view="_minimal"/>
+            <property name="adressen"
+                      view="_minimal"/>
+            <property name="relaties"
+                      view="_minimal"/>
+            <property name="notities"
+                      view="_minimal"/>
+            <property name="uniekeid"/>
+            <property name="categorieen"
+                      view="_minimal"/>
+        </property>
     </view>
 </views>

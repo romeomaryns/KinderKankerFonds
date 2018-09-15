@@ -8,7 +8,10 @@
     <dsContext>
         <datasource id="categorieDs"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie"
-                    view="_local"/>
+                    view="categorie-view">
+            <collectionDatasource id="personenDs"
+                                  property="personen"/>
+        </datasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
@@ -20,6 +23,25 @@
                 <field property="naam"/>
             </column>
         </fieldGroup>
+        <scrollBox>
+            <table id="personenTable"
+                   height="500px"
+                   width="100%">
+                <columns>
+                    <column id="voornaam"/>
+                    <column id="familienaam"/>
+                    <column id="geboortedatum"/>
+                    <column id="overlijdensdatum"/>
+                    <column id="familiedag"/>
+                    <column id="ontmoetingsdag"/>
+                    <column id="raakpunt"/>
+                    <column id="oudercomite"/>
+                    <column id="actief"/>
+                    <column id="uniekeid"/>
+                </columns>
+                <rows datasource="personenDs"/>
+            </table>
+        </scrollBox>
         <frame id="windowActions"
                screen="editWindowActions"/>
     </layout>

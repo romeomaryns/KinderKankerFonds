@@ -222,8 +222,3 @@ create table KINDERKANKERFONDS_ADRES_CATEGORIE_LINK (
     primary key (ADRES_ID, CATEGORIE_ID)
 )^
 -- end KINDERKANKERFONDS_ADRES_CATEGORIE_LINK
--- begin DDCT_TAGGING
-alter table DDCT_TAGGING add column PERSOON_ID uuid ^
-alter table DDCT_TAGGING add column DTYPE varchar(100) ^
-update DDCT_TAGGING set DTYPE = 'ddct$Tagging' where DTYPE is null ^
--- end DDCT_TAGGING
