@@ -39,8 +39,8 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'eu.maryns.romeo.kinderkankerfonds'
-        version = "1.1"
-        isSnapshot = true
+        version = "1.2"
+        isSnapshot = false
     }
     tomcat {
         dir = "$project.rootDir/deploy/tomcat"
