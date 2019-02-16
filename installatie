@@ -37,3 +37,14 @@ sudo tcpdump -ani enp0s3 port 5432 -vv
 
 
 backup => https://www.digitalocean.com/community/tutorials/how-to-backup-postgresql-databases-on-an-ubuntu-vps
+
+
+ ssh -L 8080:vkkfadresp:8080 kkfadres_SUP_prd@vkkfadresp.internal.uzgent.be
+ 
+
+production build :   gradlew buildUberJar
+
+java -jar app.jar
+
+
+kinderkankerfonds

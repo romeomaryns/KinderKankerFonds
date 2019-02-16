@@ -25,9 +25,8 @@ import java.util.List;
 @Service(ImportService.NAME)
 public class ImportServiceBean implements ImportService {
 
-
-    private SimpleDateFormat parser=new SimpleDateFormat("DD/MM/YYYY");
-    private SimpleDateFormat longParser=new SimpleDateFormat("YYYYMMDDHHmm");
+    private SimpleDateFormat parser=new SimpleDateFormat("dd/MM/yy");
+    private SimpleDateFormat longParser=new SimpleDateFormat("yyyyMMddHHmm");
     private final String user = "Import";
 
     @Inject
@@ -61,6 +60,7 @@ public class ImportServiceBean implements ImportService {
                     String defpsy = nextRecord[18];
                     String tutor = nextRecord[21];
                     String geboorteDatum = nextRecord[26];
+                    System.out.println("GeboorteDatum  : " + geboorteDatum);
                     String plover = nextRecord[27];
                     String patient = nextRecord[29] ;
                     String uzgent = nextRecord[30] ;
@@ -77,8 +77,15 @@ public class ImportServiceBean implements ImportService {
                         persoon = findPersoonByUniekeId(uniekeid);
                         if(null == persoon ){ persoon = findPersoonByFamilienaam(naam);}
                         if(null == persoon ){persoon = maakPersoon(uniekeid);}
-                        persoon.setFamilienaam(naam);
-                        persoon.setVoornaam(naamAlias);
+                        if(naamAlias==null || naamAlias.length() <=1)
+                        {
+                            persoon.setFamilienaam(naam.substring(0,naam.lastIndexOf(" ")));
+                            persoon.setVoornaam(naam.substring(naam.lastIndexOf(" ")));
+                        }
+                        else{
+                            persoon.setVoornaam(naamAlias);
+                            persoon.setFamilienaam(naam);
+                        }
                         try {
                             if (sex.equals("1")) {
                                 persoon.setGeslacht(getGeslacht("Man"));
@@ -94,7 +101,7 @@ public class ImportServiceBean implements ImportService {
                             persoon.setOverlijdensdatum(parser.parse(overlijden));
                         }catch(Exception e)
                         {
-                         //   System.out.println("Error in parsen overlijdensdatum : " + overlijden);
+                          //  System.out.println("Error in parsen overlijdensdatum : " + overlijden);
                         }
                         try
                         {
@@ -109,15 +116,16 @@ public class ImportServiceBean implements ImportService {
                            // persoon.setDeleteTs(longParser.parse(deleteTijd));
                         }catch(Exception e)
                         {
-                        //    System.out.println("Error in parsen deleteTijd : " + deleteTijd);
+                           // System.out.println("Error in parsen deleteTijd : " + deleteTijd);
                         }
                         persoon.setDeletedBy(user);
                         try
                         {
-                            persoon.setGeboortedatum(parser.parse(geboorteDatum));
+                            Date date = parser.parse(geboorteDatum);
+                            persoon.setGeboortedatum(date);
                         }catch(Exception e)
                         {
-                       //     System.out.println("Error in parsen geboortedatum : " + geboorteDatum);
+                           // System.out.println("Error in parsen geboortedatum : " + geboorteDatum);
                         }
                         Adres adres =maakAdres(straat,postnummer,stad,uniekeid);
                         adres.setPersoon(persoon);
@@ -204,7 +212,8 @@ public class ImportServiceBean implements ImportService {
                             }
                         }
                         counter++;
-                        System.out.println(counter + "   Records verwerkt ! inhoud : " + sb.toString());
+                        //System.out.println(counter + "   Records verwerkt ! inhoud : " + sb.toString());
+                        System.out.println(counter + "   Records verwerkt ! ");
                         persistence.getEntityManager().merge(persoon);
                         tx.commit();
                     }
@@ -413,7 +422,7 @@ public class ImportServiceBean implements ImportService {
                         }
                         persoon = persistence.getEntityManager().merge(persoon);
                         counter++;
-                        System.out.println(counter + "   Records verwerkt ! " + persoon.getInstanceName());
+                        System.out.println(counter + "   Records verwerkt ! ");
                 trans.commit();
                 }
             }
@@ -558,7 +567,7 @@ public class ImportServiceBean implements ImportService {
                         {
                             persoon.getNotities().add(notitie1);
                         }
-                        System.out.println(counter + "   Records verwerkt !" + sb.toString());
+                        System.out.println(counter + "   Records verwerkt !");
                         persistence.getEntityManager().merge(persoon);
                     } else {
                         System.out.println("Persoon niet gevonden dus skipping ... " + adresid);

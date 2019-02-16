@@ -49,10 +49,13 @@
                 <column id="postcode"/>
                 <column id="stad"/>
                 <column id="type"/>
+                <column id="persoon.voornaam"/>
+                <column id="persoon.familienaam"/>
                 <column id="persoon"
                         link="true"
                         linkScreen="kinderkankerfonds$Persoon.edit"
                         linkScreenOpenType="THIS_TAB"/>
+                <column id="actief"/>
                 <column id="land"/>
                 <column id="categorie"/>
             </columns>

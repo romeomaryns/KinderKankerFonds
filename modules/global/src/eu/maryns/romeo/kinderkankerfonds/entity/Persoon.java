@@ -193,7 +193,6 @@ public class Persoon extends StandardEntity {
     }
 
 
-
     public List<Relatie> getRelaties() {
         return relaties;
     }
@@ -201,15 +200,6 @@ public class Persoon extends StandardEntity {
     public void setRelaties(List<Relatie> relaties) {
         this.relaties = relaties;
     }
-
-
-
-
-
-
-
-
-
 
 
     public void setGeslacht(Geslacht geslacht) {

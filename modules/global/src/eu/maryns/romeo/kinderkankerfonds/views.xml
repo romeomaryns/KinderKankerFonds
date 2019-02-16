@@ -39,7 +39,8 @@
     <view class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
           extends="_local"
           name="adres-full-view">
-        <property name="persoon"
+        <property fetch="AUTO"
+                  name="persoon"
                   view="_minimal">
             <property name="geboortedatum"/>
             <property name="geslacht"
