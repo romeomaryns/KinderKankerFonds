@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.10.7'
+    ext.cubaVersion = '7.1.1'
     repositories {
         
         maven {
@@ -28,12 +28,10 @@ def modulePrefix = 'kkf'
 def globalModule = project(":${modulePrefix}-global")
 def coreModule = project(":${modulePrefix}-core")
 def webModule = project(":${modulePrefix}-web")
-def webThemesModule = project(":${modulePrefix}-web-themes")
 
 def servletApi = 'javax.servlet:javax.servlet-api:3.1.0'
 
 
-apply(plugin: 'idea')
 apply(plugin: 'cuba')
 
 cuba {
@@ -56,12 +54,11 @@ dependencies {
 
 }
 
-def postgres = 'org.postgresql:postgresql:9.4.1212'
+def postgres = 'org.postgresql:postgresql:42.2.5'
 
 configure([globalModule, coreModule, webModule]) {
     apply(plugin: 'java')
     apply(plugin: 'maven')
-    apply(plugin: 'idea')
     apply(plugin: 'cuba')
 
     dependencies {
@@ -78,7 +75,26 @@ configure([globalModule, coreModule, webModule]) {
     }
 }
 
+configure([globalModule, coreModule, webModule]) {
+    apply(plugin: 'groovy')
+
+    sourceSets {
+        main { groovy { srcDirs = ["src"] } }
+        test { groovy { srcDirs = ["test"] } }
+    }
+
+    sourceSets.main.output.classesDir = new File(project.buildDir, "classes/main")
+    sourceSets.test.output.classesDir = new File(project.buildDir, "classes/test")
+
+}
+
 configure(globalModule) {
+    dependencies {
+        if (!JavaVersion.current().isJava8()) {
+            runtime('javax.xml.bind:jaxb-api:2.3.1')
+            runtime('org.glassfish.jaxb:jaxb-runtime:2.3.1')
+        }
+    }
     entitiesEnhancing {
         main { enabled = true }
     }
@@ -95,7 +111,7 @@ configure(coreModule) {
 
     dependencies {
         compile(globalModule)
-        provided(servletApi)
+        compileOnly(servletApi)
         jdbc(postgres)
         testRuntime(postgres)
         compile('com.opencsv:opencsv:4.2')
@@ -141,7 +157,7 @@ configure(webModule) {
     }
 
     dependencies {
-        provided(servletApi)
+        compileOnly(servletApi)
         compile(globalModule)
 
     }
@@ -185,31 +201,16 @@ configure(webModule) {
     task buildScssThemes(type: CubaWebScssThemeCreation)
     task deployThemes(type: CubaDeployThemeTask, dependsOn: buildScssThemes)
     assemble.dependsOn buildScssThemes
-}
 
-configure(webThemesModule) {
-    apply(plugin: 'java')
-    apply(plugin: 'maven')
-    apply(plugin: 'cuba')
+    task themesJar(type: Jar) {
+        from file('themes')
+        classifier = 'themes'
+    }
 
-    appModuleType = 'web-themes'
-
-    buildDir = file('../build/scss-themes')
-
-    sourceSets {
-        main {
-            java {
-                srcDir '.'
-            }
-            resources {
-                srcDir '.'
-            }
-        }
+    artifacts {
+        archives themesJar
     }
 }
-
-
-
 
 
 task undeploy(type: Delete, dependsOn: ":${modulePrefix}-web:cleanConf") {
@@ -229,9 +230,6 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.3.1'
-}
 
 task buildUberJar(type: CubaUberJarBuilding) {
     webPort = 8080

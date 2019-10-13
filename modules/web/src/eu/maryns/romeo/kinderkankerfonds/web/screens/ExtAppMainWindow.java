@@ -25,7 +25,7 @@ public class ExtAppMainWindow extends AbstractMainWindow {
         sideMenu.requestFocus();
 
         initLayoutAnalyzerContextMenu(logoImage);
-        initLogoImage(logoImage);
+       // initLogoImage(logoImage);
         initFtsField(ftsField);
     }
 }

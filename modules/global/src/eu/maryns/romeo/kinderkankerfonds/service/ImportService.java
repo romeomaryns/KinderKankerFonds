@@ -1,8 +1,6 @@
 package eu.maryns.romeo.kinderkankerfonds.service;
 
 
-import groovy.json.internal.IO;
-
 import java.io.File;
 import java.io.IOException;
 
