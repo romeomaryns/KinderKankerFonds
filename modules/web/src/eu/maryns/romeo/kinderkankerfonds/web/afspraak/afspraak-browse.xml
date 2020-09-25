@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://browseCaption"
+        focusComponent="afspraaksTable"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.afspraak">
+    <data readOnly="true">
+        <collection id="afsprakenDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Afspraak"
+                    view="afspraak-full-view">
+            <loader id="afspraaksDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds_Afspraak e where @dateAfter(e.startDate,:startDate) and @dateBefore(e.startDate, :endDate) ]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="alleAfsprakenDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Afspraak"
+                    view="afspraak-full-view">
+            <loader id="alleAfsprakenDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds_Afspraak e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="afsprakenTabsheet"
+            spacing="true">
+
+        <tabSheet id="afsprakenTabsheet">
+            <tab id="agendaTab" caption="Agenda" expand="afsprakenCalendar">
+                <buttonsPanel id="agendaButtonsPanel"
+                              alwaysVisible="true" margin="true,false,false,false">
+                    <button id="dagBtn" invoke="switchNaarDag" caption="Dag"/>
+                    <button id="weekBtn" invoke="switchNaarWeek" caption="Week"/>
+                    <button id="maandBtn" invoke="switchNaarMaand" caption="Maand"/>
+                </buttonsPanel>
+                <calendar id="afsprakenCalendar"
+                          dataContainer="alleAfsprakenDc"
+                          captionProperty="topic"
+                          descriptionProperty="description"
+                          endDateProperty="endDate"
+                          startDateProperty="startDate"
+                          firstVisibleHourOfDay="8"
+                          lastVisibleHourOfDay="22"
+                          navigationButtonsVisible="true"
+                          descriptionAsHtml="true"
+                          timeFormat="24H"
+                          stylenameProperty="kleur"
+                          width="100%"
+                          height="100%"
+                />
+            </tab>
+            <tab id="tableTab" caption="Overzicht" expand="afspraaksTable">
+                <filter id="filter"
+                        applyTo="afspraaksTable"
+                        dataLoader="alleAfsprakenDl"
+                        height="AUTO" >
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="afspraaksTable"
+                            width="100%"
+                            dataContainer="alleAfsprakenDc" >
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="topic" caption="Titel"/>
+                        <column id="startDate" sort="DESCENDING" caption="Start" />
+                        <column id="endDate" caption="Einde"/>
+                        <column id="duration" caption="Duur"/>
+                        <column id="afdeling" caption="Afdeling"/>
+                        <column id="description" caption="Omschrijving"/>
+                    </columns>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true" margin="true,false,false,false">
+                        <button id="createBtn" action="afspraaksTable.create"/>
+                        <button id="editBtn" action="afspraaksTable.edit"/>
+                        <button id="removeBtn" action="afspraaksTable.remove"/>
+                    </buttonsPanel>
+                </groupTable>
+                <hbox id="lookupActions" spacing="true" visible="false">
+                    <button action="lookupSelectAction"/>
+                    <button action="lookupCancelAction"/>
+                </hbox>
+            </tab>
+            <tab id="logboekTab" caption="Logboek" expand="logboekDataGrid">
+                <hbox spacing="true" margin="true">
+                    <dateField id="dateField"
+
+                               resolution="DAY"
+                               caption="Datum"/>
+                    <button id="clearButton" caption="Toon Alles" invoke="toonAlles" />
+                </hbox>
+
+                <dataGrid id="logboekDataGrid"
+                          dataContainer="afsprakenDc"
+                          settingsEnabled="false"
+                          width="100%"
+                >
+                    <columns>
+                        <column property="startDate" caption="startDatum" />
+                        <column property="endDate" caption="eindDatum" />
+                        <column property="topic" caption="Onderwerp"/>
+                        <column property="persoon" caption="Persoon" />
+                        <column property="description" caption="Omschrijving"/>
+                        <column property="createdBy" caption="Aangemaakt door"/>
+                        <column property="createTs" caption="Aangemaakt op" />
+                    </columns>
+                </dataGrid>
+            </tab>
+        </tabSheet>
+    </layout>
+</window>

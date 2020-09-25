@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.afspraak">
+    <data>
+        <instance id="afsprakenDc"
+                  class="eu.maryns.romeo.kinderkankerfonds.entity.Afspraak"
+                  view="afspraak-full-view">
+            <loader id="alleAfsprakenDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds_Afspraak e]]>
+                </query>
+            </loader>
+        </instance>
+        <collection id="personenDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
+                    view="_local">
+            <loader id="personenDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Persoon e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="afdelingDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Afdeling"
+                    view="_local">
+            <loader id="afdelingDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds_Afdeling e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="kleurenDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.KalenderKleur"
+                    view="_local">
+            <loader id="kleurenDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds_KalenderKleur e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="notitiesDs"
+                             class="eu.maryns.romeo.kinderkankerfonds.entity.Notitie"
+                             view="notitie-view-full">
+            <loader id="geselecteerdeAfspraakNotitiesDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Notitie e where e.afspraak =:afspraak]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="auto"
+                width="auto"/>
+    <layout expand="editActions" spacing="true">
+        <tabSheet id="afsprakenTabsheet">
+            <tab id="eventTab" caption="Kalender-event" expand="form" spacing="true" margin="true,false,false,false" >
+                <form id="form" dataContainer="afsprakenDc" >
+                    <column width="600px">
+                        <lookupPickerField id="persoonPickerField" property="persoon" caption="Bezoeker" optionsContainer="personenDc" />
+                        <lookupPickerField id="afdelingPickerField" property="afdeling" caption="Afdeling" optionsContainer="afdelingDc"/>
+                        <lookupPickerField id="kleurPickerField" property="kalenderKleur" caption="Kleur" optionsContainer="kleurenDc"/>
+                        <textField id="topicField" property="topic" caption="Titel"/>
+                        <dateField id="plannedStartDateField" property="plannedStartDate" caption="Geplande Start"/>
+                        <dateField id="plannedEndDateField" property="plannedEndDate" caption="Gepland Einde"/>
+                        <dateField id="startDateField" property="startDate" caption="Effectieve Start"/>
+                        <dateField id="endDateField" property="endDate" caption="Effectief Einde"/>
+                        <richTextArea id="descriptionField" property="description" caption="Omschrijving"/>
+                    </column>
+                    <column width="300px">
+                        <textField id="plannedDurationField" property="plannedDuration" editable="false" caption="Geplande Duur"/>
+                        <textField id="durationField" property="duration" editable="false" caption="Effectieve Duur"/>
+                        <textField id="createTsField" property="createTs" editable="false" caption="Aangemaakt op"/>
+                        <textField id="createdByField" property="createdBy" editable="false" caption="Aangemaakt door"/>
+                        <textField id="updateTsField" property="updateTs" editable="false" caption="Gewijzigd op"/>
+                        <textField id="updatedByField" property="createdBy" editable="false" caption="Gewijzigd door"/>
+                    </column>
+                </form>
+            </tab>
+            <tab id="tableTab" caption="Notities" expand="notitiesTable" spacing="true" margin="true,false,false,false">
+                <groupTable id="notitiesTable"
+                            width="auto"
+                            dataContainer="notitiesDs" >
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="createTs" caption="Aangemaakt op"/>
+                        <column id="createdBy" caption="Aangemaakt door"/>
+                        <column id="omschrijving"
+                                maxTextLength="200"/>
+                    </columns>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true" margin="true,false,false,false">
+                        <button id="createBtn" caption="Toevoegen"/>
+                        <button id="editBtn" caption="Aanpassen"/>
+                        <button id="removeBtn" action="notitiesTable.remove" caption="Verwijderen"/>
+                    </buttonsPanel>
+                </groupTable>
+            </tab>
+        </tabSheet>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

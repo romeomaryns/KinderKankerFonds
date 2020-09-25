@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://kalenderKleurBrowse.caption"
+        focusComponent="kalenderKleursTable"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.kalenderkleur">
+    <data readOnly="true">
+        <collection id="kalenderKleursDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.KalenderKleur">
+            <view extends="_local"/>
+            <loader id="kalenderKleursDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds_KalenderKleur e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="kalenderKleursTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="kalenderKleursTable"
+                dataLoader="kalenderKleursDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="kalenderKleursTable"
+                    width="100%"
+                    dataContainer="kalenderKleursDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="naam" caption="Naam"/>
+                <column id="cssStyleName" caption="CssStyleName"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="kalenderKleursTable.create"/>
+                <button id="editBtn" action="kalenderKleursTable.edit"/>
+                <button id="removeBtn" action="kalenderKleursTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

@@ -1,0 +1,11 @@
+@import "hover-defaults";
+@import "eu.maryns.romeo.kinderkankerfonds/hover-ext-defaults";
+@import "app-components";
+@import "eu.maryns.romeo.kinderkankerfonds/hover-ext";
+
+.hover {
+  // include auto-generated app components SCSS
+  @include app_components;
+
+  @include eu_maryns_romeo_kinderkankerfonds-hover-ext;
+}
