@@ -1,22 +1,16 @@
 package eu.maryns.romeo.kinderkankerfonds.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.chile.core.annotations.NamePattern;
+
+import javax.persistence.*;
 import java.util.List;
-import javax.persistence.OneToMany;
 
 @NamePattern("%s %s %s|telefoon,gsm,email")
 @Table(name = "KINDERKANKERFONDS_CONTACT_INFO")
 @Entity(name = "kinderkankerfonds$ContactInfo")
-public class ContactInfo extends StandardEntity {
+public class ContactInfo extends StandardClientEntity {
     private static final long serialVersionUID = 666116618164946212L;
 
     @Column(name = "TELEFOON")

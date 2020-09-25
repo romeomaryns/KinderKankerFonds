@@ -1,6 +1,5 @@
 package eu.maryns.romeo.kinderkankerfonds.service;
 
-
 import java.io.File;
 import java.io.IOException;
 
@@ -18,4 +17,7 @@ public interface ImportService {
     void importTmpPat(File file) throws IOException;
 
     void importKKFrela(File file) throws IOException;
+
+    void importRaakpunt(File file) throws IOException;
+
 }

@@ -2,6 +2,7 @@ package eu.maryns.romeo.kinderkankerfonds.web.screens;
 
 import com.haulmont.cuba.gui.components.AbstractMainWindow;
 import com.haulmont.cuba.gui.components.Embedded;
+import com.haulmont.cuba.gui.components.Image;
 import com.haulmont.cuba.gui.components.mainwindow.FtsField;
 import com.haulmont.cuba.gui.components.mainwindow.SideMenu;
 
@@ -13,7 +14,7 @@ public class ExtAppMainWindow extends AbstractMainWindow {
     private FtsField ftsField;
 
     @Inject
-    private Embedded logoImage;
+    private Image logoImage;
 
     @Inject
     private SideMenu sideMenu;
@@ -25,7 +26,7 @@ public class ExtAppMainWindow extends AbstractMainWindow {
         sideMenu.requestFocus();
 
         initLayoutAnalyzerContextMenu(logoImage);
-       // initLogoImage(logoImage);
+        initLogoImage(logoImage);
         initFtsField(ftsField);
     }
 }

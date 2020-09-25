@@ -10,7 +10,7 @@ import com.haulmont.chile.core.annotations.NamePattern;
 @NamePattern("%s|naam")
 @Table(name = "KINDERKANKERFONDS_ADRES_TYPE")
 @Entity(name = "kinderkankerfonds$AdresType")
-public class AdresType extends StandardEntity {
+public class AdresType extends StandardClientEntity {
     private static final long serialVersionUID = -78811367229851292L;
 
     @NotNull(message = "Naam van het adrestype mag niet leeg zijn")

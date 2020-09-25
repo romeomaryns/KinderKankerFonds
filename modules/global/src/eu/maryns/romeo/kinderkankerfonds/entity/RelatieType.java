@@ -4,13 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
-import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
 
 @NamePattern(" %s %s|naam,tussenvoegsel")
 @Table(name = "KINDERKANKERFONDS_RELATIE_TYPE")
 @Entity(name = "kinderkankerfonds$RelatieType")
-public class RelatieType extends StandardEntity {
+public class RelatieType extends StandardClientEntity {
     private static final long serialVersionUID = -78811367229851292L;
 
     @NotNull(message = "Naam van het adrestype mag niet leeg zijn")

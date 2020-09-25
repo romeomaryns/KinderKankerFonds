@@ -24,6 +24,14 @@ public class PersoonEdit extends AbstractEditor<Persoon> {
     @Inject
     private CheckBox raakpuntCheckbox;
 
+    @Inject
+    private CheckBox comfortforfaitCheckbox;
+
+    @Inject
+    private CheckBox palliatiefforfaitCheckbox;
+
+    @Inject
+    private CheckBox personeelCheckbox;
 
     @Override
     protected void initNewItem(Persoon item) {
@@ -52,6 +60,16 @@ public class PersoonEdit extends AbstractEditor<Persoon> {
         vaadin5CheckBox.setCaptionAsHtml(true);
         vaadin5CheckBox.setCaption("<span class=\"onoffswitch-inner\"></span><span class=\"onoffswitch-switch\"></span>");
 
+        com.vaadin.ui.CheckBox vaadin6CheckBox = comfortforfaitCheckbox.unwrap(com.vaadin.ui.CheckBox.class);
+        vaadin6CheckBox.setCaptionAsHtml(true);
+        vaadin6CheckBox.setCaption("<span class=\"onoffswitch-inner\"></span><span class=\"onoffswitch-switch\"></span>");
 
+        com.vaadin.ui.CheckBox vaadin7CheckBox = palliatiefforfaitCheckbox.unwrap(com.vaadin.ui.CheckBox.class);
+        vaadin7CheckBox.setCaptionAsHtml(true);
+        vaadin7CheckBox.setCaption("<span class=\"onoffswitch-inner\"></span><span class=\"onoffswitch-switch\"></span>");
+
+        com.vaadin.ui.CheckBox vaadin8CheckBox = personeelCheckbox.unwrap(com.vaadin.ui.CheckBox.class);
+        vaadin8CheckBox.setCaptionAsHtml(true);
+        vaadin8CheckBox.setCaption("<span class=\"onoffswitch-inner\"></span><span class=\"onoffswitch-switch\"></span>");
     }
 }

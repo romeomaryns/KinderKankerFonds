@@ -3,31 +3,39 @@
         caption="msg://editorCaption"
         class="eu.maryns.romeo.kinderkankerfonds.web.categorie.CategorieEdit"
         datasource="categorieDs"
-        focusComponent="fieldGroup"
+        focusComponent="personenTable"
+        lookupComponent="personenTable"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.categorie">
     <dsContext>
         <datasource id="categorieDs"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie"
                     view="categorie-view">
             <collectionDatasource id="personenDs"
-                                  property="personen"/>
+                                  property="personen"
+            >
+            </collectionDatasource>
         </datasource>
     </dsContext>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="windowActions"
             spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="categorieDs">
-            <column width="250px">
-                <field property="naam"/>
-            </column>
-        </fieldGroup>
         <scrollBox>
+            <filter id="personenFilter"
+                    applyTo="personenTable"
+                    datasource="personenDs">
+                <properties include=".*"/>
+            </filter>
             <table id="personenTable"
                    height="500px"
                    width="100%">
+                <actions>
+                    <action id="excel"
+                            caption="mainMsg://button.excel"
+                            icon="EXCEL_ACTION"/>
+                </actions>
                 <columns>
+                    <column id="adressen" caption="Adres"/>
                     <column id="voornaam"/>
                     <column id="familienaam"/>
                     <column id="geboortedatum"/>
@@ -40,8 +48,21 @@
                     <column id="uniekeid"/>
                 </columns>
                 <rows datasource="personenDs"/>
+                <rowsCount/>
+                <buttonsPanel>
+                    <button id="excellBtn"
+                            action="personenTable.excel"
+                            caption="Excel"/>
+                </buttonsPanel>
             </table>
         </scrollBox>
+        <fieldGroup id="fieldGroup"
+                    datasource="categorieDs"
+                    editable="false">
+            <column width="250px">
+                <field property="naam"/>
+            </column>
+        </fieldGroup>
         <frame id="windowActions"
                screen="editWindowActions"/>
     </layout>

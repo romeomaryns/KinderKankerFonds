@@ -1,55 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://browseCaption"
-        class="eu.maryns.romeo.kinderkankerfonds.web.geslacht.GeslachtBrowse"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://geslachtBrowse.caption"
         focusComponent="geslachtsTable"
-        lookupComponent="geslachtsTable"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.geslacht">
-    <dsContext>
-        <groupDatasource id="geslachtsDs"
-                         class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht"
-                         view="_local">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$Geslacht e]]>
-            </query>
-        </groupDatasource>
-    </dsContext>
+    <data readOnly="true">
+        <collection id="geslachtsDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht">
+            <view extends="_local"/>
+            <loader id="geslachtsDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Geslacht e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="geslachtsTable"
             spacing="true">
         <filter id="filter"
                 applyTo="geslachtsTable"
-                datasource="geslachtsDs">
+                dataLoader="geslachtsDl">
             <properties include=".*"/>
         </filter>
         <groupTable id="geslachtsTable"
-                    width="100%">
+                    width="100%"
+                    dataContainer="geslachtsDc">
             <actions>
-                <action id="create"
-                        caption="mainMsg://button.create"
-                        icon="ADD_ACTION"/>
-                <action id="edit"
-                        caption="mainMsg://button.edit"
-                        icon="EDIT_ACTION"/>
-                <action id="remove"
-                        caption="mainMsg://button.remove"
-                        icon="REMOVE_ACTION"/>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="excel" type="excel"/>
             </actions>
             <columns>
                 <column id="naam"/>
             </columns>
-            <rows datasource="geslachtsDs"/>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn"
-                        action="geslachtsTable.create"/>
-                <button id="editBtn"
-                        action="geslachtsTable.edit"/>
-                <button id="removeBtn"
-                        action="geslachtsTable.remove"/>
+                <button id="createBtn" action="geslachtsTable.create"/>
+                <button id="editBtn" action="geslachtsTable.edit"/>
+                <button id="removeBtn" action="geslachtsTable.remove"/>
+                <button id="excelBtn" action="geslachtsTable.excel"/>
             </buttonsPanel>
         </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
     </layout>
 </window>

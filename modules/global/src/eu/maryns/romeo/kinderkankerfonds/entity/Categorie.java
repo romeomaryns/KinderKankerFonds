@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 @Table(name = "KINDERKANKERFONDS_CATEGORIE")
 @NamePattern("%s|naam")
 @Entity(name = "kinderkankerfonds$Categorie")
-public class Categorie extends StandardEntity {
+public class Categorie extends StandardClientEntity {
     private static final long serialVersionUID = 2291352221909398491L;
 
     @Column(name = "NAAM")

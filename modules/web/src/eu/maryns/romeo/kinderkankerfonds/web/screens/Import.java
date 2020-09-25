@@ -33,6 +33,9 @@ public class Import extends AbstractWindow {
     private FileUploadField tmppatField;
 
     @Inject
+    private FileUploadField raakpuntField;
+
+    @Inject
     private FileUploadingAPI fileUploadingAPI;
 
     @Inject
@@ -66,6 +69,11 @@ public class Import extends AbstractWindow {
             UUID fileId = tmppatField.getFileId();
             File file = fileUploadingAPI.getFile(fileId);
             processTmpPat(file);
+        });
+        raakpuntField.addFileUploadSucceedListener(e -> {
+            UUID fileId = raakpuntField.getFileId();
+            File file = fileUploadingAPI.getFile(fileId);
+            processRaakpunt(file);
         });
     }
 
@@ -118,5 +126,15 @@ public class Import extends AbstractWindow {
                 return null;
             }
         }, "Importeren van TMPPAT..", "Import bezig .", true);
+    }
+
+    private void processRaakpunt(File file) {
+        BackgroundWorkWindow.show(new BackgroundTask<Void, Void>(1200, this) {
+            @Override
+            public Void run(TaskLifeCycle<Void> taskLifeCycle) throws Exception {
+                importService.importRaakpunt(file);
+                return null;
+            }
+        }, "Importeren van Raakpunt..", "Import bezig .", true);
     }
 }

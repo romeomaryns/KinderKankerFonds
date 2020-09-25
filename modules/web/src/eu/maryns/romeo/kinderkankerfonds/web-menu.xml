@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
-    <menu id="application-kinderkankerfonds"
-          insertBefore="administration">
+    <menu id="application-kinderkankerfonds" insertBefore="administration">
         <item icon="USERS"
-              screen="kinderkankerfonds$Persoon.browse"/>
+              screen="kinderkankerfonds$Persoon.browse" openType="NEW_TAB"/>
         <item icon="MAP"
               screen="kinderkankerfonds$Adres.browse"/>
         <item icon="PHONE"
@@ -17,8 +16,9 @@
               screen="kinderkankerfonds$Ziekenhuis.browse"/>
         <item icon="LINK"
               screen="kinderkankerfonds$RelatieType.browse"/>
-        <item icon="USER"
-              screen="kinderkankerfonds$Geslacht.browse"/>
+        <item icon="MALE"
+                screen="kinderkankerfonds$Geslacht.browse"
+              caption="mainMsg://menu_config.kinderkankerfonds$Geslacht.browse"/>
         <item icon="HOME"
               screen="kinderkankerfonds$AdresType.browse"/>
         <item icon="WRENCH"
@@ -26,7 +26,19 @@
               screen="kinderkankerfonds$Categorie.browse"/>
         <item icon="FLAG"
               screen="kinderkankerfonds$Land.browse"/>
+        <item screen="kinderkankerfonds$Alles.browse" openType="NEW_TAB" icon="HOME"/>
         <item icon="UPLOAD"
               screen="import"/>
+
+    </menu>
+    <menu id="application-delieving" insertBefore="application-kinderkankerfonds">
+        <item icon="BRIEFCASE"
+              screen="kinderkankerfonds_Afdeling.browse"
+              caption="mainMsg://menu_config.kinderkankerfonds_Afdeling.browse"/>
+        <item icon="PAINT_BRUSH"
+                screen="kinderkankerfonds_KalenderKleur.browse"
+              caption="mainMsg://menu_config.kinderkankerfonds_KalenderKleur.browse"/>
+        <item icon="CALENDAR"
+              screen="kinderkankerfonds_Afspraak.browse"/>
     </menu>
 </menu-config>

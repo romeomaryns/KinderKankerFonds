@@ -71,6 +71,8 @@
                         action="adresesTable.remove"/>
                 <button id="excelBtn"
                         action="adresesTable.excel"/>
+                <button id="printList"
+                        caption="Export"/>
             </buttonsPanel>
         </groupTable>
     </layout>

@@ -43,10 +43,15 @@
             <columns>
                 <column id="voornaam"/>
                 <column id="familienaam"/>
+                <column id="aanspreking1" caption="Aanspreking1"/>
+                <column id="aanspreking2" caption="Aanspreking2"/>
                 <column id="familiedag"/>
                 <column id="ontmoetingsdag"/>
                 <column id="raakpunt"/>
                 <column id="oudercomite"/>
+                <column id="comfortforfait" caption="Comfort Forfait"/>
+                <column id="palliatiefforfait" caption="Palliatief Forfait"/>
+                <column id="personeel" caption="Personeel"/>
                 <column id="geslacht"/>
                 <column id="categorieen"
                         caption="Categorie"/>

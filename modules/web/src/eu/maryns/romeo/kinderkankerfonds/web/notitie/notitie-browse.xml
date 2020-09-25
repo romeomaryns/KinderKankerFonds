@@ -1,78 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://browseCaption"
-        class="eu.maryns.romeo.kinderkankerfonds.web.notitie.NotitieBrowse"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://notitieBrowse.caption"
         focusComponent="notitiesTable"
-        lookupComponent="notitiesTable"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.notitie">
-    <dsContext>
-        <groupDatasource id="notitiesDs"
-                         class="eu.maryns.romeo.kinderkankerfonds.entity.Notitie"
-                         view="notitie-view-full">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$Notitie e]]>
-            </query>
-        </groupDatasource>
-    </dsContext>
+    <data readOnly="true">
+        <collection id="notitiesDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Notitie"
+                    view="notitie-view-full">
+            <loader id="notitiesDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Notitie e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="notitiesTable"
             spacing="true">
         <filter id="filter"
                 applyTo="notitiesTable"
-                datasource="notitiesDs">
+                dataLoader="notitiesDl">
             <properties include=".*"/>
         </filter>
         <groupTable id="notitiesTable"
-                    multiselect="true"
-                    width="100%">
+                    width="100%"
+                    dataContainer="notitiesDc">
             <actions>
-                <action id="create"
-                        caption="mainMsg://button.create"
-                        icon="ADD_ACTION"/>
-                <action id="edit"
-                        caption="mainMsg://button.edit"
-                        icon="EDIT_ACTION"/>
-                <action id="remove"
-                        caption="mainMsg://button.remove"
-                        icon="REMOVE_ACTION"/>
-                <action id="excel"
-                        caption="mainMsg://button.excel"
-                        icon="EXCEL_ACTION"/>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="excel" type="excel"/>
             </actions>
             <columns>
-                <column id="omschrijving"
-                        maxTextLength="100"/>
-                <column id="contactinfo"
-                        link="true"
-                        linkScreen="kinderkankerfonds$ContactInfo.edit"
-                        linkScreenOpenType="DIALOG"/>
-                <column id="persoon"
-                        link="true"
-                        linkScreen="kinderkankerfonds$Persoon.edit"
-                        linkScreenOpenType="DIALOG"/>
-                <column id="adressen"
-                        link="true"
-                        linkScreen="kinderkankerfonds$Adres.edit"
-                        linkScreenOpenType="DIALOG"/>
-                <column id="ziekenhuis"
-                        link="true"
-                        linkScreen="kinderkankerfonds$Ziekenhuis.edit"
-                        linkScreenOpenType="DIALOG"/>
+                <column id="client" visible="false"/>
+                <column id="omschrijving" maxTextLength="100" caption="Omschrijving"/>
+                <column id="adressen" caption="Adres" link="true" linkScreen="kinderkankerfonds$Adres.edit" linkScreenOpenType="DIALOG"/>
+                <column id="ziekenhuis" caption="Ziekenhuis" link="true" linkScreen="kinderkankerfonds$Ziekenhuis.edit" linkScreenOpenType="DIALOG"/>
+                <column id="contactinfo" caption="Contactinfo" link="true" linkScreen="kinderkankerfonds$ContactInfo.edit" linkScreenOpenType="DIALOG"/>
+                <column id="persoon" caption="Persoon" link="true" linkScreen="kinderkankerfonds$Persoon.edit" linkScreenOpenType="DIALOG"/>
+                <column id="afspraak" caption="Afspraak" link="true" linkScreen="kinderkankerfonds_Afspraak.edit" linkScreenOpenType="DIALOG"/>
             </columns>
-            <rows datasource="notitiesDs"/>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn"
-                        action="notitiesTable.create"/>
-                <button id="editBtn"
-                        action="notitiesTable.edit"/>
-                <button id="removeBtn"
-                        action="notitiesTable.remove"/>
-                <button id="excelBtn"
-                        action="notitiesTable.excel"/>
+                <button id="createBtn" action="notitiesTable.create"/>
+                <button id="editBtn" action="notitiesTable.edit"/>
+                <button id="removeBtn" action="notitiesTable.remove"/>
+                <button id="excelBtn" action="notitiesTable.excel"/>
             </buttonsPanel>
         </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
     </layout>
 </window>

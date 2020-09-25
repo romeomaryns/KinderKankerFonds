@@ -1,107 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://editorCaption"
-        class="eu.maryns.romeo.kinderkankerfonds.web.notitie.NotitieEdit"
-        datasource="notitieDs"
-        focusComponent="fieldGroup"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://notitieEdit.caption"
+        focusComponent="form"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.notitie">
-    <dsContext>
-        <datasource id="notitieDs"
-                    class="eu.maryns.romeo.kinderkankerfonds.entity.Notitie"
-                    view="notitie-view-full"/>
-        <collectionDatasource id="persoonsDs"
-                              class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
-                              view="_minimal">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$Persoon e]]>
-            </query>
-        </collectionDatasource>
-        <collectionDatasource id="adresesDs"
-                              class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
-                              view="adres-full-view">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$Adres e]]>
-            </query>
-        </collectionDatasource>
-        <collectionDatasource id="contactInfoesDs"
-                              class="eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo"
-                              view="contactInfo-view-full">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$ContactInfo e]]>
-            </query>
-        </collectionDatasource>
-        <collectionDatasource id="ziekenhuisesDs"
-                              class="eu.maryns.romeo.kinderkankerfonds.entity.Ziekenhuis"
-                              view="ziekenhuis-view">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$Ziekenhuis e]]>
-            </query>
-        </collectionDatasource>
-    </dsContext>
-    <dialogMode height="450"
-                width="800"/>
-    <layout expand="fieldGroup"
-            spacing="true">
-        <groupBox id="persoonGroupBox"
-                  caption="Persoon"
-                  outerMargin="true"
-                  spacing="true">
-            <lookupPickerField id="persoonLookupPickerField"
-                               datasource="notitieDs"
-                               height="100%"
-                               optionsDatasource="persoonsDs"
-                               property="persoon"
-                               stylename="borderless"
-                               width="100%"/>
-        </groupBox>
-        <groupBox id="AdresGroupBox"
-                  caption="Adres"
-                  outerMargin="true"
-                  spacing="true">
-            <lookupPickerField id="adresLookupPickerField"
-                               datasource="notitieDs"
-                               height="100%"
-                               optionsDatasource="adresesDs"
-                               property="adressen"
-                               stylename="borderless"
-                               width="100%"/>
-        </groupBox>
-        <groupBox id="contactInfoBox"
-                  caption="ContactInfo"
-                  outerMargin="true"
-                  spacing="true">
-            <lookupPickerField id="contactInfoLookupPickerField"
-                               datasource="notitieDs"
-                               height="100%"
-                               optionsDatasource="contactInfoesDs"
-                               property="contactinfo"
-                               stylename="borderless"
-                               width="100%"/>
-        </groupBox>
-        <groupBox id="ZiekenhuisGroupBox"
-                  caption="Ziekenhuis"
-                  outerMargin="true"
-                  spacing="true">
-            <lookupPickerField id="ziekenhuisLookupPickerField"
-                               datasource="notitieDs"
-                               height="100%"
-                               optionsDatasource="ziekenhuisesDs"
-                               property="ziekenhuis"
-                               stylename="borderless"
-                               width="100%"/>
-        </groupBox>
-        <fieldGroup id="fieldGroup"
-                    datasource="notitieDs"
-                    responsive="true"
-                    width="100%">
-            <column>
-                <field property="omschrijving"
-                       rows="15"
-                       width="100%"/>
+    <data>
+        <instance id="notitieDc"
+                  class="eu.maryns.romeo.kinderkankerfonds.entity.Notitie">
+            <view extends="_local">
+                <property name="adressen" view="_minimal">
+                    <property name="categorie" view="_minimal"/>
+                </property>
+                <property name="ziekenhuis" view="_minimal"/>
+                <property name="contactinfo" view="_minimal"/>
+                <property name="persoon" view="_minimal"/>
+                <property name="afspraak" view="_minimal"/>
+            </view>
+            <loader/>
+        </instance>
+        <collection id="ziekenhuisesDc" class="eu.maryns.romeo.kinderkankerfonds.entity.Ziekenhuis" view="_minimal">
+            <loader id="ziekenhuisesDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Ziekenhuis e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="notitieDc">
+            <column width="100%">
+
             </column>
-        </fieldGroup>
-        <frame id="windowActions"
-               responsive="true"
-               screen="editWindowActions"/>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
     </layout>
 </window>

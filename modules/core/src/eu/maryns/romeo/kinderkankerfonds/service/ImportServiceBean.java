@@ -242,7 +242,7 @@ public class ImportServiceBean implements ImportService {
                 String recType = nextRecord[0];
                 String dateOpen = nextRecord[1];
                 String uniekeid = nextRecord[4];
-           //     System.out.println("Unieke id = " + uniekeid);
+                //     System.out.println("Unieke id = " + uniekeid);
                 String geboorteDatum = nextRecord[5];
                 String aanspreking = nextRecord[6];
                 String naam = nextRecord[7];
@@ -268,103 +268,75 @@ public class ImportServiceBean implements ImportService {
                 String deleteTijd = nextRecord[28];
                 Persoon persoon = null;
 
-                try (Transaction trans = persistence.createTransaction()) {
-                  //  persoon = findPersoonByUniekeId(uniekeid);
-                 //   if(null == persoon ){
-                        persoon = findPersoonByVoorEnFamilienaam(voornaam,naam);
-                    //}
-                    if(null == persoon ){persoon = maakPersoon();}
-                        switch (recType){
-                            case "0" :
-                                nulRecords++;
-                                Categorie catego = getCategorie("Firma");
-                                try {
-                                    if (!catego.getPersonen().contains(persoon)) {
-                                        catego.getPersonen().add(persoon);
-                                    }
-                                }catch(Exception e){System.out.println("geen categorie gevonden");}
-                                List<Categorie> categorie = persoon.getCategorieen();
-                                if(null == categorie){
-                                    System.out.println("Categorie is null");
-                                    categorie = new ArrayList<Categorie>();
-                                    categorie.add(catego);
-                                    persoon.setCategorieen(categorie);
-                                }
-                                else{
-                                    if(categorie.contains(catego)){
-                                        persoon.getCategorieen().add(catego);
-                                    }
-                                }
-                                break;
-                            case "1" :
-                                eenRecords++;
-                                try
-                                {
-                                    if(sex.equals("1"))
-                                    {
-                                        persoon.setGeslacht(getGeslacht("Man"));
-                                    }
-                                    else
-                                    {
-                                        persoon.setGeslacht(getGeslacht("Vrouw"));
-                                    }
-                                }
-                                catch (Exception e)
-                                {
-                                    e.printStackTrace();
-                                }
-                                break;
-                            default:    anderREcords++;break;
+                if (recType.equalsIgnoreCase("0")) {
+                    try (Transaction trans = persistence.createTransaction()) {
+                        //  persoon = findPersoonByUniekeId(uniekeid);
+                        //   if(null == persoon ){
+                        persoon = findPersoonByVoorEnFamilienaam(voornaam, naam);
+                        //}
+                        if (null == persoon) {
+                            persoon = maakPersoon();
+                        }
+                        nulRecords++;
+                        Categorie catego = getCategorie("Firma");
+                        try {
+                            if (!catego.getPersonen().contains(persoon)) {
+                                catego.getPersonen().add(persoon);
+                            }
+                        } catch (Exception e) {
+                            System.out.println("geen categorie gevonden");
+                        }
+                        List<Categorie> categorie = persoon.getCategorieen();
+                        if (null == categorie) {
+                            System.out.println("Categorie is null");
+                            categorie = new ArrayList<Categorie>();
+                            categorie.add(catego);
+                            persoon.setCategorieen(categorie);
+                        } else {
+                            if (categorie.contains(catego)) {
+                                persoon.getCategorieen().add(catego);
+                            }
                         }
                         persoon.setFamilienaam(naam);
                         persoon.setVoornaam(voornaam);
-                        try
-                        {
+                        try {
                             persoon.setUpdateTs(longParser.parse(updateTijd));
-                        }catch(Exception e)
-                        {
+                        } catch (Exception e) {
                             //  System.out.println("Error in parsen updateTijd : " + updateTijd);
                         }
                         persoon.setUpdatedBy(user);
-                        try
-                        {
-                           // persoon.setDeleteTs(longParser.parse(deleteTijd));
-                        }catch(Exception e)
-                        {
+                        try {
+                            // persoon.setDeleteTs(longParser.parse(deleteTijd));
+                        } catch (Exception e) {
                             //    System.out.println("Error in parsen deleteTijd : " + deleteTijd);
                         }
                         persoon.setDeletedBy(user);
-                        try
-                        {
+                        try {
                             persoon.setGeboortedatum(parser.parse(geboorteDatum));
-                        }catch(Exception e)
-                        {
+                        } catch (Exception e) {
                             //     System.out.println("Error in parsen geboortedatum : " + geboorteDatum);
                         }
-                        Adres adres =maakAdres(straat,postnummer,stad,uniekeid);
-                        try{
+                        Adres adres = maakAdres(straat, postnummer, stad, uniekeid);
+                        try {
                             adres.setPersoon(persoon);
-                        }
-                        catch(Exception e)
-                            {System.out.println("Geen adressen gevonden");
+                        } catch (Exception e) {
+                            System.out.println("Geen adressen gevonden");
                             e.printStackTrace();
-                            }
+                        }
                         List<Adres> adressen = persoon.getAdressen();
-                        if(adressen == null)
-                        {
+                        if (adressen == null) {
                             adressen = new ArrayList<Adres>();
                             adressen.add(adres);
-                            persoon.setAdressen(adressen,persoon);
-                        }
-                        else{
+                            persoon.setAdressen(adressen, persoon);
+                        } else {
                             persoon.getAdressen().add(adres);
                         }
                         persoon.setActief(true);
                         StringBuilder sb = new StringBuilder("Geïmporteerde Data:\n=====================\n")
-                                .append("RECTYPE : " ).append(recType).append("\n")
-                                .append("DATOPN : " ).append( dateOpen).append("\n")
-                                .append("DATAFSLUIT : " ).append( nextRecord[2]).append("\n")
-                                .append("GEOZONE : " ).append( nextRecord[3]).append("\n")
+                                .append("RECTYPE : ").append(recType).append("\n")
+                                .append("DATOPN : ").append(dateOpen).append("\n")
+                                .append("DATAFSLUIT : ").append(nextRecord[2]).append("\n")
+                                .append("GEOZONE : ").append(nextRecord[3]).append("\n")
                                 .append("UNIEKID : ").append(uniekeid).append("\n")
                                 .append("GEBDAT : ").append(geboorteDatum).append("\n")
                                 .append("AANSPR : ").append(aanspreking).append("\n")
@@ -391,49 +363,134 @@ public class ImportServiceBean implements ImportService {
                                 .append("UPDTIJD : ").append(updateTijd).append("\n")
                                 .append("SUPDTIJD : ").append(deleteTijd).append("\n")
                                 .append("==========================");
-                        Notitie notitie1 =maakNotitie(sb.toString());
+                        Notitie notitie1 = maakNotitie(sb.toString());
                         notitie1.setPersoon(persoon);
                         List<Notitie> notities = persoon.getNotities();
-                        if(null == notities){
+                        if (null == notities) {
                             notities = new ArrayList<Notitie>();
                             notities.add(notitie1);
                             persoon.setNotities(notities);
-                        }
-                        else
-                        {
+                        } else {
                             notities.add(notitie1);
                         }
                         ContactInfo contactInfo1 = null;
-                        if(null != telMob || null != telVast || null != email) {
-                            contactInfo1 = maakContactInfo(telVast,telMob,email);
+                        if (null != telMob || null != telVast || null != email) {
+                            contactInfo1 = maakContactInfo(telVast, telMob, email);
                             contactInfo1.setPersoon(persoon);
                         }
                         List<ContactInfo> contactInfo = persoon.getContactinfo();
-                        if(null != contactInfo1)
-                        {
-                            if(null == contactInfo) {
+                        if (null != contactInfo1) {
+                            if (null == contactInfo) {
                                 contactInfo = new ArrayList<ContactInfo>();
                                 contactInfo.add(contactInfo1);
                                 persoon.setContactinfo(contactInfo);
-                            }
-                            else{
+                            } else {
                                 contactInfo.add(contactInfo1);
                             }
                         }
                         persoon = persistence.getEntityManager().merge(persoon);
                         counter++;
                         System.out.println(counter + "   Records verwerkt ! ");
-                trans.commit();
+                        trans.commit();
+                    }
                 }
-            }
-            catch(Exception e)
-            {
-                System.out.println("fout tijdens record");
-                e.printStackTrace();
-            }
+                else{
+                    System.out.println("niet te importeren record, skipping... ");
+                }
+                }
+                catch(Exception e)
+                {
+                    System.out.println("fout tijdens record");
+                    e.printStackTrace();
+                }
         }
         System.out.println("Aantal records : " + counter + " waarvan :\n"+nulRecords + " nulRecords\n"+eenRecords+" eenRecords\n" +anderREcords + " andere records\nEn skipped records : " + skipped);
 
+    }
+
+    @Override
+    public void importRaakpunt(File file) throws IOException {
+        System.out.println("inside service file = "  + file.getAbsolutePath());
+        System.out.println("inside service size = "  + file.getAbsoluteFile().length());
+        Reader reader = Files.newBufferedReader(file.toPath(),Charset.forName("cp1252"));
+        CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
+        String[] nextRecord;
+        int counter = 0;
+        while ((nextRecord = csvReader.readNext()) != null) {
+            try{
+                String aanspreking = nextRecord[0];
+                String naam = nextRecord[1];
+                String voorNaam = nextRecord[2];
+                String aanLijn3 = nextRecord[3];
+                String aanLijn4 = nextRecord[4];
+                String adresString = nextRecord[5];
+                String postCode = nextRecord[6];
+                String woonplaats = nextRecord[7];
+                String landString = nextRecord[8];
+
+                Persoon persoon = null;
+                try (Transaction tx = persistence.createTransaction()) {
+                    persoon = new Persoon();
+                    persoon.setAanspreking1(aanspreking);
+                    persoon.setFamilienaam(naam);
+                    persoon.setVoornaam(voorNaam);
+                    persoon.setAanspreking2(aanLijn3+" "+aanLijn4);
+                    Land land = null;
+                    if(landString != null && landString.length() > 0)
+                        land = zoekLand(landString);
+                    Adres adres =maakAdres(adresString,postCode,woonplaats,land);
+                    adres.setPersoon(persoon);
+                    List<Adres> adressen = persoon.getAdressen();
+                    if(adressen == null)
+                    {
+                        adressen = new ArrayList<Adres>();
+                        adressen.add(adres);
+                        persoon.setAdressen(adressen,persoon);
+                    }
+                    else{
+                        persoon.getAdressen().add(adres);
+                    }
+                    persoon.setActief(true);
+                    persoon.setRaakpunt(true);
+
+
+                    StringBuilder sb = new StringBuilder("Geïmporteerde Data:\n=====================\n")
+                            .append("aanspreking : " ).append(aanspreking).append("\n")
+                            .append("naam : " ).append( naam).append("\n")
+                            .append("voorNaam : " ).append( voorNaam).append("\n")
+                            .append("aanLijn3 : " ).append( aanLijn3).append("\n")
+                            .append("aanLijn4 : ").append(aanLijn4).append("\n")
+                            .append("adresString : ").append(adresString).append("\n")
+                            .append("postCode : ").append(postCode).append("\n")
+                            .append("woonplaats : ").append(woonplaats).append("\n")
+                            .append("land : ").append(landString).append("\n")
+                            .append("==========================");
+                    Notitie notitie =maakNotitie(sb.toString());
+                    notitie.setPersoon(persoon);
+                    List<Notitie> notities = persoon.getNotities();
+                    if(null == notities){
+                        notities = new ArrayList<Notitie>();
+                        notities.add(notitie);
+                        persoon.setNotities(notities);
+                    }
+                    else
+                    {
+                        notities.add(notitie);
+                    }
+
+                    counter++;
+                    //System.out.println(counter + "   Records verwerkt ! inhoud : " + sb.toString());
+                    System.out.println(counter + "   Records verwerkt ! ");
+                    persistence.getEntityManager().merge(persoon);
+                    tx.commit();
+                }
+                catch(Exception e)
+                {
+                    System.out.println("fout tijdens record");
+                    e.printStackTrace();
+                }
+            }catch(Exception e){e.printStackTrace();}
+        }
     }
 
     @Override
@@ -856,6 +913,32 @@ public class ImportServiceBean implements ImportService {
     }
 
 
+
+    private Land zoekLand(String landString) {
+        Land land = null;
+        try (Transaction tx = persistence.getTransaction()) {
+
+            TypedQuery<Land> query = persistence.getEntityManager().createQuery(
+                    "select e from kinderkankerfonds$Land e where e.naam = :landString", Land.class);
+            query.setParameter("landString", landString.trim());
+            try {
+                land = query.getSingleResult();
+            } catch (NoResultException nre) {
+                System.out.println("Land niet gevonden , skipping nieuwe ..");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Er is iets foutgelopen tijdens maken van categorie : " + e.getMessage());
+            e.printStackTrace();
+        }
+        return land;
+    }
+
+
     private Persoon maakPersoon(String uniekeid) {
             Persoon result = null;
         try (Transaction tx = persistence.createTransaction() )
@@ -1121,6 +1204,41 @@ public class ImportServiceBean implements ImportService {
                 adres.setStad(stad);
                 adres = persistence.getEntityManager().merge(adres);
             }
+            tx.commit();
+
+            adres = persistence.getEntityManager().reload(adres,"adres-full-view");
+        }
+        catch(Exception e)
+        {
+            System.out.println("Er is iets foutgelopen tijdens maken van Adres : " + e.getMessage());
+            e.printStackTrace();
+        }
+        return adres;
+    }
+
+    private Adres maakAdres(String adresString,String postCode, String woonPlaats, Land land) {
+        Adres adres = null;
+        try (Transaction tx = persistence.createTransaction()) {
+                adres = metadata.create(Adres.class);
+                try {
+                    adres.setStraatnaam(adresString.substring(0,adresString.lastIndexOf(" ")));
+                }
+                catch(Exception e )
+                {
+                    adres.setStraatnaam(adresString);
+                }
+                adres.setActief(true);
+                adres.setPostcode(postCode);
+                adres.setStad(woonPlaats);
+                adres.setLand(land);
+                try {
+                    adres.setHuisnummer(Integer.parseInt(adresString.substring(adresString.lastIndexOf(" ")+1)));
+                }
+                catch(Exception e )
+                {
+                    adres.setStraatnaam(adresString);
+                }
+                persistence.getEntityManager().persist(adres);
             tx.commit();
 
             adres = persistence.getEntityManager().reload(adres,"adres-full-view");

@@ -17,14 +17,37 @@ sudo -u postgres psql
 createdb kinderkankerfonds
 sudo nano /etc/sysconfig/selinux
    disabled
+systemctl start firewalld
 sudo firewall-cmd --permanent --add-port=5432/tcp
 sudo firewall-cmd --permanent --add-service=http
 sudo firewall-cmd --reload
+systemctl enable firewalld
 
 sudo nano /var/lib/pgsql/data/postgresql.conf
   => listen address en port uncomment
 
  sudo systemctl restart postgresql
+
+firewall-cmd --permanent --add-service=ssh
+firewall-cmd --permanent --add-port=22/tcp
+firewall-cmd --reload
+
+firewall-cmd --permanent --add-port=8080/tcp
+firewall-cmd --reload
+
+firewall-cmd --permanent --remove-port=8443/tcp
+firewall-cmd --reload
+firewall-cmd --permanent --add-port=443/tcp
+firewall-cmd --reload
+
+@reboot /usr/bin/java -jar /home/kinderkankerfonds/kkf.jar -port 443 & >/dev/null
+
+
+firewall-cmd --permanent --add-port=5432/tcp
+firewall-cmd --permanent --remove-port=5432/tcp
+firewall-cmd --reload
+
+
 
 .\gradlew clean buildUberJar
 => sftp kkf.jar naar home folder
@@ -48,10 +71,18 @@ production build :   gradlew buildUberJar
 java -jar .\build\distributions\uberJar\kkf.jar
 
 
+su kkf
+P0ns0nby
+
+java -jar /home/kkf/kkf.jar -port 8080 & >/dev/null
+
 kinderkankerfonds
 
 account: kkfadres_SUP_prd
 pass: c4Q2jnu5UFMA
+
+
+
 
 
 
@@ -103,3 +134,116 @@ else
 pg_dump $1 | gzip - > $BACKUP_DIRECTORY/$1_$CURRENT_DATE.sql.gz
 
 fi
+
+
+
+
+Query voor samengevoegde records
+SELECT  kkf_adres.id AS kkf_adres_id
+		,kkf_adres.straatnaam AS kkf_adres_straatnaam
+		,kkf_adres.huisnummer AS kkf_adres_huisnummer
+		,kkf_adres.bus AS kks_adres_bus
+		,kkf_adres.postcode AS kkf_adres_postcode
+		,kkf_adres.stad AS kkf_adres_stad
+		,kkf_adres.actief AS kkf_adres_actief
+		,kkf_adres.uniekeid AS kkf_adres_uniekeid
+		--,kkf_adres_type.id AS kkf_adres_type_id
+		,kkf_adres_type.naam AS kkf_adres_type_naam
+		,kkf_persoon.id AS kkf_persoon_id
+		,kkf_persoon.voornaam AS kkf_persoon_voornaam
+		,kkf_persoon.familienaam AS kkf_persoon_familienaam
+		,kkf_persoon.geboortedatum AS kkf_persoon_geboortedatum
+		,kkf_persoon.overlijdensdatum AS kkf_persoon_overlijdensdatum
+		,kkf_persoon.familiedag AS kkf_persoon_familiedag
+		,kkf_persoon.ontmoetingsdag AS kkf_persoon_ontmoetingsdag
+		,kkf_persoon.raakpunt AS kkf_persoon_raakpunt
+		,kkf_persoon.oudercomite AS kkf_persoon_oudercomite
+		,kkf_persoon.actief AS kkf_persoon_actief
+	--	,kkf_persoon.uniekeid AS kkf_persoon_uniekeid
+		--,kkf_cat.id AS kkf_cat_id
+		,string_agg(kkf_cat.naam,'/') AS kkf_cat_naam_list
+		,kkf_contact.id AS kkf_contact_id
+		,kkf_contact.telefoon AS kkf_contact_telefoon
+		,kkf_contact.gsm AS kkf_contact_gsm
+		,kkf_contact.email AS kkf_contact_email
+		,kkf_contact.actief AS kkf_contact_actief
+		,kkf_geslacht.naam AS kkf_geslacht_naam
+		,kkf_land.naam AS kkf_land_naam
+		,kkf_land.landcode AS kkf_land_code
+--		,kkf_notitie_adres.id AS kkf_notitie__adres_id
+--		,kkf_notitie_adres.omschrijving AS kkf_notitie_adres_omschrijving
+--		,kkf_notitie_persoon.id AS kkf_notitie_persoon_id
+--		,kkf_notitie_persoon.omschrijving AS kkf_notitie_persoon_omschrijving
+--		,kkf_notitie_contactinfo.id AS kkf_notitie_contactinfo_id
+--		,kkf_notitie_contactinfo.omschrijving AS kkf_notitie_contactinfo_omschrijving
+		,kkf_ziekenhuis.id AS kkf_ziekenhuis_id
+		,kkf_ziekenhuis.naam AS kkf_ziekenhuis_naam
+		,kkf_ziekenhuis.afkorting AS kkf_ziekenhuis_afkorting
+		,kkf_ziekenhuis_adres.id AS kkf_ziekenhuis_adres_id
+		,kkf_ziekenhuis_adres.straatnaam AS kkf_ziekenhuis_adres_adres_straatnaam
+		,kkf_ziekenhuis_adres.huisnummer AS kkf_ziekenhuis_adres_huisnummer
+		,kkf_ziekenhuis_adres.bus AS kkf_ziekenhuis_adres_bus
+		,kkf_ziekenhuis_adres.postcode AS kkf_ziekenhuis_adres_postcode
+		,kkf_ziekenhuis_adres.stad AS kkf_ziekenhuis_adres_stad
+		,kkf_ziekenhuis_adres.actief AS kkf_ziekenhuis_adres_actief
+	--	,kkf_ziekenhuis_adres.uniekeid AS kkf_ziekenhuis_adres_uniekeid
+from kinderkankerfonds_adres kkf_adres
+ LEFT JOIN kinderkankerfonds_adres_type kkf_adres_type ON kkf_adres_type.id = kkf_adres.type_id
+ LEFT JOIN kinderkankerfonds_persoon kkf_persoon ON kkf_persoon.id = kkf_adres.persoon_id
+ LEFT JOIN kinderkankerfonds_persoon_categorie_link kkf_prs_cat_link ON kkf_prs_cat_link.persoon_id = kkf_persoon.id
+ LEFT JOIN kinderkankerfonds_categorie kkf_cat ON kkf_cat.id = kkf_prs_cat_link.categorie_id
+ LEFT JOIN kinderkankerfonds_contact_info kkf_contact ON kkf_contact.persoon_id = kkf_persoon.id
+ LEFT JOIN kinderkankerfonds_geslacht kkf_geslacht ON kkf_geslacht.id = kkf_persoon.geslacht_id
+ LEFT JOIN kinderkankerfonds_land kkf_land ON kkf_land.id = kkf_adres.land_id
+ LEFT JOIN kinderkankerfonds_notitie kkf_notitie_adres ON kkf_notitie_adres.adressen_id = kkf_adres.id
+ LEFT JOIN kinderkankerfonds_notitie kkf_notitie_persoon ON kkf_notitie_persoon.persoon_id = kkf_persoon.id
+ LEFT JOIN kinderkankerfonds_notitie kkf_notitie_contactinfo ON kkf_notitie_contactinfo.contactinfo_id = kkf_contact.id
+ LEFT JOIN kinderkankerfonds_ziekenhuis kkf_ziekenhuis ON kkf_ziekenhuis.id = kkf_persoon.ziekenhuis_id
+ LEFT JOIN kinderkankerfonds_adres kkf_ziekenhuis_adres ON kkf_ziekenhuis_adres.id = kkf_ziekenhuis.adres_id
+WHERE
+	kkf_adres.delete_ts IS NULL
+	AND kkf_persoon.delete_ts IS NULL
+ 	AND kkf_ziekenhuis_adres.delete_ts IS NULL
+	AND kkf_contact.delete_ts IS NULL
+	AND kkf_notitie_adres.delete_ts IS NULL
+	AND kkf_notitie_persoon.delete_ts IS NULL
+	AND kkf_notitie_contactinfo.delete_ts IS NULL
+GROUP BY
+  kkf_adres.id
+ ,kkf_adres.straatnaam
+ ,kkf_adres.huisnummer
+,kkf_adres.bus
+,kkf_adres.postcode
+,kkf_adres.stad
+,kkf_adres.actief
+,kkf_adres.uniekeid
+,kkf_adres_type.naam
+,kkf_persoon.id
+,kkf_persoon.voornaam
+,kkf_persoon.familienaam
+,kkf_persoon.geboortedatum
+,kkf_persoon.overlijdensdatum
+,kkf_persoon.familiedag
+,kkf_persoon.ontmoetingsdag
+,kkf_persoon.raakpunt
+,kkf_persoon.oudercomite
+,kkf_persoon.actief
+,kkf_contact.id
+,kkf_contact.telefoon
+,kkf_contact.gsm
+,kkf_contact.email
+,kkf_contact.actief
+,kkf_geslacht.naam
+,kkf_land.naam
+,kkf_land.landcode
+,kkf_ziekenhuis.id
+,kkf_ziekenhuis.naam
+,kkf_ziekenhuis.afkorting
+,kkf_ziekenhuis_adres.id
+,kkf_ziekenhuis_adres.straatnaam
+,kkf_ziekenhuis_adres.huisnummer
+,kkf_ziekenhuis_adres.bus
+,kkf_ziekenhuis_adres.postcode
+,kkf_ziekenhuis_adres.stad
+,kkf_ziekenhuis_adres.actief
+ORDER BY kkf_adres.uniekeid DESC;

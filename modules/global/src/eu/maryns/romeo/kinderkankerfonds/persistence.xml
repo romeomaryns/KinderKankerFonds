@@ -14,5 +14,9 @@
         <class>eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo</class>
         <class>eu.maryns.romeo.kinderkankerfonds.entity.Notitie</class>
         <class>eu.maryns.romeo.kinderkankerfonds.entity.Land</class>
+        <class>eu.maryns.romeo.kinderkankerfonds.entity.Afspraak</class>
+        <class>eu.maryns.romeo.kinderkankerfonds.entity.Afdeling</class>
+        <class>eu.maryns.romeo.kinderkankerfonds.entity.StandardClientEntity</class>
+        <class>eu.maryns.romeo.kinderkankerfonds.entity.KalenderKleur</class>
     </persistence-unit>
 </persistence>

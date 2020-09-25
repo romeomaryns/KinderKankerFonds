@@ -8,15 +8,21 @@ create table KINDERKANKERFONDS_PERSOON (
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
+    CLIENT integer not null,
     --
     VOORNAAM varchar(255),
     FAMILIENAAM varchar(255),
+    AANSPREKING1 varchar(255),
+    AANSPREKING2 varchar(255),
     GEBOORTEDATUM date,
     OVERLIJDENSDATUM date,
     FAMILIEDAG boolean,
     ONTMOETINGSDAG boolean,
     RAAKPUNT boolean,
     OUDERCOMITE boolean,
+    COMFORTFORFAIT boolean,
+    PALLIATIEFFORFAIT boolean,
+    PERSONEEL boolean,
     ACTIEF boolean,
     GESLACHT_ID uuid,
     ZIEKENHUIS_ID uuid,
@@ -35,6 +41,7 @@ create table KINDERKANKERFONDS_ADRES (
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
+    CLIENT integer not null,
     --
     STRAATNAAM varchar(255),
     HUISNUMMER integer,
@@ -60,6 +67,7 @@ create table KINDERKANKERFONDS_ADRES_TYPE (
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
+    CLIENT integer not null,
     --
     NAAM varchar(255),
     --
@@ -76,6 +84,7 @@ create table KINDERKANKERFONDS_GESLACHT (
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
+    CLIENT integer not null,
     --
     NAAM varchar(255) not null,
     --
@@ -92,6 +101,7 @@ create table KINDERKANKERFONDS_RELATIE (
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
+    CLIENT integer not null,
     --
     TYPE_ID uuid,
     PERSOON_ORIGINE_ID uuid,
@@ -110,6 +120,7 @@ create table KINDERKANKERFONDS_RELATIE_TYPE (
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
+    CLIENT integer not null,
     --
     NAAM varchar(255),
     TUSSENVOEGSEL varchar(255),
@@ -127,6 +138,7 @@ create table KINDERKANKERFONDS_CATEGORIE (
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
+    CLIENT integer not null,
     --
     NAAM varchar(255),
     --
@@ -143,6 +155,7 @@ create table KINDERKANKERFONDS_ZIEKENHUIS (
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
+    CLIENT integer not null,
     --
     NAAM varchar(255),
     AFKORTING varchar(255),
@@ -161,6 +174,7 @@ create table KINDERKANKERFONDS_CONTACT_INFO (
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
+    CLIENT integer not null,
     --
     TELEFOON varchar(255),
     GSM varchar(255),
@@ -181,12 +195,14 @@ create table KINDERKANKERFONDS_NOTITIE (
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
+    CLIENT integer not null,
     --
     OMSCHRIJVING text,
     ADRESSEN_ID uuid,
     ZIEKENHUIS_ID uuid,
     CONTACTINFO_ID uuid,
     PERSOON_ID uuid,
+    AFSPRAAK_ID uuid,
     --
     primary key (ID)
 )^
@@ -201,6 +217,7 @@ create table KINDERKANKERFONDS_LAND (
     UPDATED_BY varchar(50),
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
+    CLIENT integer not null,
     --
     NAAM varchar(255),
     LANDCODE varchar(255),
@@ -222,3 +239,64 @@ create table KINDERKANKERFONDS_ADRES_CATEGORIE_LINK (
     primary key (ADRES_ID, CATEGORIE_ID)
 )^
 -- end KINDERKANKERFONDS_ADRES_CATEGORIE_LINK
+-- begin KINDERKANKERFONDS_AFSPRAAK
+create table KINDERKANKERFONDS_AFSPRAAK (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    CLIENT integer not null,
+    --
+    TOPIC varchar(255),
+    START_DATE timestamp,
+    END_DATE timestamp,
+    PLANNED_START_DATE timestamp,
+    PLANNED_END_DATE timestamp,
+    PERSOON_ID uuid,
+    AFDELING_ID uuid,
+    DESCRIPTION varchar(255),
+    KALENDER_KLEUR_ID uuid,
+    --
+    primary key (ID)
+)^
+-- end KINDERKANKERFONDS_AFSPRAAK
+-- begin KINDERKANKERFONDS_AFDELING
+create table KINDERKANKERFONDS_AFDELING (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    CLIENT integer not null,
+    --
+    NAAM varchar(255),
+    ACTIEF boolean,
+    --
+    primary key (ID)
+)^
+-- end KINDERKANKERFONDS_AFDELING
+-- begin KINDERKANKERFONDS_KALENDER_KLEUR
+create table KINDERKANKERFONDS_KALENDER_KLEUR (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    CLIENT integer not null,
+    --
+    NAAM varchar(255) not null,
+    CSS_STYLE_NAME varchar(255) not null,
+    --
+    primary key (ID)
+)^
+-- end KINDERKANKERFONDS_KALENDER_KLEUR

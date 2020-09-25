@@ -63,6 +63,10 @@
                            property="ziekenhuis"/>
                 </column>
                 <column>
+                    <field property="aanspreking1" caption="Aanspreking1"/>
+                    <field property="aanspreking2" caption="Aanspreking2"/>
+                </column>
+                <column>
                     <field editable="false"
                            property="uniekeid"
                            visible="false"/>
@@ -123,11 +127,35 @@
                                           stylename="onoffswitch"/>
                             </row>
                             <row>
-                                <label value="raakpunt"/>
+                                <label value="Raakpunt"/>
                                 <checkBox id="raakpuntCheckbox"
                                           datasource="persoonDs"
                                           height="100%"
                                           property="raakpunt"
+                                          stylename="onoffswitch"/>
+                            </row>
+                            <row>
+                                <label value="Comfort Forfait"/>
+                                <checkBox id="comfortforfaitCheckbox"
+                                          datasource="persoonDs"
+                                          height="100%"
+                                          property="comfortforfait"
+                                          stylename="onoffswitch"/>
+                            </row>
+                            <row>
+                                <label value="Palliatief Forfait"/>
+                                <checkBox id="palliatiefforfaitCheckbox"
+                                          datasource="persoonDs"
+                                          height="100%"
+                                          property="palliatiefforfait"
+                                          stylename="onoffswitch"/>
+                            </row>
+                            <row>
+                                <label value="Personeel"/>
+                                <checkBox id="personeelCheckbox"
+                                          datasource="persoonDs"
+                                          height="100%"
+                                          property="personeel"
                                           stylename="onoffswitch"/>
                             </row>
                         </rows>

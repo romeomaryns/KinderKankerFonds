@@ -1,33 +1,22 @@
 package eu.maryns.romeo.kinderkankerfonds.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Past;
-import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.chile.core.annotations.Composition;
-import com.haulmont.cuba.core.entity.annotation.OnDelete;
-import com.haulmont.cuba.core.global.DeletePolicy;
-import java.util.List;
-import javax.persistence.OneToMany;
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import java.util.Collection;
+import com.haulmont.cuba.core.global.DeletePolicy;
+
+import javax.persistence.*;
+import javax.validation.constraints.Past;
+import java.util.Date;
+import java.util.List;
 
 @NamePattern("%s %s|voornaam,familienaam")
 @Table(name = "KINDERKANKERFONDS_PERSOON")
 @Entity(name = "kinderkankerfonds$Persoon")
-public class Persoon extends StandardEntity {
+public class Persoon extends StandardClientEntity {
     private static final long serialVersionUID = 5417610545967716680L;
 
     @Column(name = "VOORNAAM")
@@ -35,6 +24,12 @@ public class Persoon extends StandardEntity {
 
     @Column(name = "FAMILIENAAM")
     protected String familienaam;
+
+    @Column(name = "AANSPREKING1")
+    protected String aanspreking1;
+
+    @Column(name = "AANSPREKING2")
+    protected String aanspreking2;
 
     @Temporal(TemporalType.DATE)
     @Past(message = "geboortedatum moet in het verleden liggen")
@@ -56,6 +51,15 @@ public class Persoon extends StandardEntity {
 
     @Column(name = "OUDERCOMITE")
     protected Boolean oudercomite;
+
+    @Column(name = "COMFORTFORFAIT")
+    protected Boolean comfortforfait;
+
+    @Column(name = "PALLIATIEFFORFAIT")
+    protected Boolean palliatiefforfait;
+
+    @Column(name = "PERSONEEL")
+    protected Boolean personeel;
 
     @Column(name = "ACTIEF")
     protected Boolean actief;
@@ -192,6 +196,22 @@ public class Persoon extends StandardEntity {
         return raakpunt;
     }
 
+    public void setComfortforfait(Boolean comfortforfait) {
+        this.comfortforfait = comfortforfait;
+    }
+
+    public Boolean getComfortforfait() {
+        return comfortforfait;
+    }
+
+    public void setPalliatiefforfait(Boolean palliatiefforfait) {
+        this.palliatiefforfait = palliatiefforfait;
+    }
+
+    public Boolean getPalliatiefforfait() {
+        return palliatiefforfait;
+    }
+
 
     public List<Relatie> getRelaties() {
         return relaties;
@@ -236,6 +256,22 @@ public class Persoon extends StandardEntity {
         return familienaam;
     }
 
+    public void setAanspreking1(String aanspreking1) {
+        this.aanspreking1 = aanspreking1;
+    }
+
+    public String getAanspreking1() {
+        return aanspreking1;
+    }
+
+    public void setAanspreking2(String aanspreking2) {
+        this.aanspreking2 = aanspreking2;
+    }
+
+    public String getAanspreking2() {
+        return aanspreking2;
+    }
+
     public void setGeboortedatum(Date geboortedatum) {
         this.geboortedatum = geboortedatum;
     }
@@ -244,5 +280,15 @@ public class Persoon extends StandardEntity {
         return geboortedatum;
     }
 
+    public void setAdressen(List<Adres> adressen) {
+        this.adressen = adressen;
+    }
 
+    public Boolean getPersoneel() {
+        return personeel;
+    }
+
+    public void setPersoneel(Boolean personeel) {
+        this.personeel = personeel;
+    }
 }

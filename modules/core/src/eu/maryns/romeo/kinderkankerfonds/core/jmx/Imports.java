@@ -4,7 +4,7 @@ import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Transaction;
 import com.haulmont.cuba.security.app.Authenticated;
 import eu.maryns.romeo.kinderkankerfonds.entity.Persoon;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -36,7 +36,7 @@ public class Imports implements ImportsMBean{
             return "Updated records for " + personen.size() + " personen";
         } catch (Throwable e) {
             log.error("Error importing personen", e);
-            return ExceptionUtils.getFullStackTrace(e);
+            return ExceptionUtils.getStackTrace(e);
         }
     }
 
@@ -59,7 +59,7 @@ public class Imports implements ImportsMBean{
             return "Updated record " + personId;
         } catch (Throwable e) {
             log.error("Error importing addressen", e);
-            return ExceptionUtils.getFullStackTrace(e);
+            return ExceptionUtils.getStackTrace(e);
 
         }
     }

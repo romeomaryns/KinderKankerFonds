@@ -99,6 +99,11 @@
         </property>
         <property name="ziekenhuis"
                   view="_minimal"/>
+        <property name="afspraak"
+                  view="_minimal">
+        </property>
+        <property name="createdBy" />
+        <property name="createTs"/>
     </view>
     <view class="eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo"
           extends="_local"
@@ -126,30 +131,27 @@
     <view class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie"
           extends="_local"
           name="categorie-view">
-        <property name="personen"
-                  view="_minimal">
-            <property name="geboortedatum"/>
-            <property name="overlijdensdatum"/>
-            <property name="familiedag"/>
-            <property name="ontmoetingsdag"/>
-            <property name="raakpunt"/>
-            <property name="oudercomite"/>
-            <property name="actief"/>
-            <property name="geslacht"
-                      view="_minimal"/>
-            <property name="ziekenhuis"
-                      view="_minimal"/>
-            <property name="contactinfo"
-                      view="_minimal"/>
-            <property name="adressen"
-                      view="_minimal"/>
-            <property name="relaties"
-                      view="_minimal"/>
-            <property name="notities"
-                      view="_minimal"/>
-            <property name="uniekeid"/>
-            <property name="categorieen"
-                      view="_minimal"/>
-        </property>
+        <property name="personen" fetch="JOIN" view="persoon-browse-view"/>
+    </view>
+    <view entity="kinderkankerfonds_Afspraak"
+          extends="_local"
+          name="afspraak-full-view">
+        <property name="persoon" fetch="JOIN" view="_local"/>
+        <property name="notities" fetch="JOIN" view="_local"/>
+        <property name="afdeling" fetch="JOIN" view="_local"/>
+        <property name="createdBy" />
+        <property name="createTs"/>
+        <property name="updatedBy" />
+        <property name="updateTs"/>
+        <property name="topic"/>
+        <property name="description"/>
+        <property name="startDate"/>
+        <property name ="endDate"/>
+        <property name="plannedStartDate"/>
+        <property name="plannedEndDate"/>
+        <property name="duration"/>
+        <property name="plannedDuration"/>
+        <property name="kleur"/>
+        <property name="kalenderKleur"/>
     </view>
 </views>

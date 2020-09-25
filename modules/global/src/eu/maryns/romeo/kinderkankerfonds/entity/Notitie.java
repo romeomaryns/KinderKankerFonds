@@ -1,31 +1,20 @@
 package eu.maryns.romeo.kinderkankerfonds.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Lob;
-import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.util.List;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+
+import javax.persistence.*;
 
 @NamePattern("%s|omschrijving")
 @Table(name = "KINDERKANKERFONDS_NOTITIE")
 @Entity(name = "kinderkankerfonds$Notitie")
-public class Notitie extends StandardEntity {
+public class Notitie extends StandardClientEntity {
     private static final long serialVersionUID = 2177009611870868993L;
 
     @Lob
     @Column(name = "OMSCHRIJVING")
     protected String omschrijving;
-
-
 
 
     @Lookup(type = LookupType.SCREEN)
@@ -47,6 +36,11 @@ public class Notitie extends StandardEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PERSOON_ID")
     protected Persoon persoon;
+
+    @Lookup(type = LookupType.SCREEN)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "AFSPRAAK_ID")
+    protected Afspraak afspraak;
 
     public void setContactinfo(ContactInfo contactinfo) {
         this.contactinfo = contactinfo;
@@ -83,7 +77,6 @@ public class Notitie extends StandardEntity {
     }
 
 
-
     public void setOmschrijving(String omschrijving) {
         this.omschrijving = omschrijving;
     }
@@ -92,5 +85,11 @@ public class Notitie extends StandardEntity {
         return omschrijving;
     }
 
+    public Afspraak getAfspraak() {
+        return afspraak;
+    }
 
+    public void setAfspraak(Afspraak afspraak) {
+        this.afspraak = afspraak;
+    }
 }

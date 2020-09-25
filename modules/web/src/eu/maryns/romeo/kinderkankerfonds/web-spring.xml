@@ -11,6 +11,10 @@
             <map>
                 <entry key="kinderkankerfonds_ImportService"
                        value="eu.maryns.romeo.kinderkankerfonds.service.ImportService"/>
+                <entry key="kinderkankerfonds_AfsprakenService"
+                       value="eu.maryns.romeo.kinderkankerfonds.service.AfsprakenService"/>
+                <entry key="kinderkankerfonds_DataGridDetailsGeneratorService"
+                       value="eu.maryns.romeo.kinderkankerfonds.service.DataGridDetailsGeneratorService"/>
             </map>
         </property>
     </bean>

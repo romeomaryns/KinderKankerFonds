@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://editorCaption"
-        class="eu.maryns.romeo.kinderkankerfonds.web.geslacht.GeslachtEdit"
-        datasource="geslachtDs"
-        focusComponent="fieldGroup"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://geslachtEdit.caption"
+        focusComponent="form"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.geslacht">
-    <dsContext>
-        <datasource id="geslachtDs"
-                    class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht"
-                    view="_local"/>
-    </dsContext>
+    <data>
+        <instance id="geslachtDc"
+                  class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht">
+            <view extends="_local"/>
+            <loader id="alleAfsprakenDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds_Afspraak e]]>
+                </query>
+            </loader>
+        </instance>
+    </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="windowActions"
-            spacing="true">
-        <fieldGroup id="fieldGroup"
-                    datasource="geslachtDs">
-            <column width="250px">
-                <field property="naam"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="geslachtDc">
+            <column width="350px">
+                <textField id="naamField" property="naam"/>
             </column>
-        </fieldGroup>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
     </layout>
 </window>

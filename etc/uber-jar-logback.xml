@@ -30,7 +30,7 @@
         </filter>
 
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %-40logger{36}- %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -60,16 +60,24 @@
     <!-- End CUBA -->
 
     <logger name="eclipselink" level="WARN"/>
-    
+
     <logger name="eclipselink.sql" level="INFO"/>
 
     <logger name="org.springframework" level="WARN"/>
 
+    <logger name="com.vaadin" level="WARN"/>
+
+    <logger name="org.atmosphere" level="WARN"/>
+
     <logger name="org.activiti" level="INFO"/>
+
+    <logger name="org.jgroups" level="INFO"/>
     
     <logger name="freemarker" level="INFO"/>
 
     <logger name="org.thymeleaf.TemplateEngine" level="INFO"/>
+
+    <logger name="com.zaxxer.hikari" level="INFO"/>
 
     <logger name="org.docx4j" level="WARN"/>
     
@@ -87,13 +95,21 @@
 
     <logger name="org.apache" level="INFO"/>
 
-    <logger name="org.atmosphere" level="INFO"/>
+    <logger name="org.eclipse.jetty" level="INFO"/>
 
     <logger name="org.docx4j.utils.ResourceUtils" level="ERROR"/>
 
     <logger name="org.docx4j.Docx4jProperties" level="ERROR"/>
 
     <logger name="org.xlsx4j.jaxb.Context" level="ERROR"/>
+
+    <logger name="org.docx4j.utils.XSLTUtils" level="ERROR"/>
+
+    <logger name="org.docx4j.jaxb.JaxbValidationEventHandler" level="ERROR"/>
+
+    <logger name="org.docx4j.TraversalUtil" level="ERROR"/>
+
+    <logger name="org.docx4j.fonts" level="ERROR"/>
 
     <!-- Begin Perf4J  -->
 

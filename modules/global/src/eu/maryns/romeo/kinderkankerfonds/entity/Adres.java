@@ -21,7 +21,7 @@ import javax.persistence.OneToMany;
 @NamePattern("%s %s, %s %s|straatnaam,huisnummer,postcode,stad")
 @Table(name = "KINDERKANKERFONDS_ADRES")
 @Entity(name = "kinderkankerfonds$Adres")
-public class Adres extends StandardEntity {
+public class Adres extends StandardClientEntity {
     private static final long serialVersionUID = 8728189552192102273L;
 
     @Column(name = "STRAATNAAM")

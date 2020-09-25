@@ -29,6 +29,9 @@
             <upload id="KKFrelaField"
                     caption="KKFRELA- relaties"
                     showFileName="true"/>
+            <upload id="raakpuntField"
+                    caption="Raakpunt"
+                    showFileName="true"/>
         </hbox>
     </layout>
 </window>
