@@ -1,69 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://editorCaption"
-        class="eu.maryns.romeo.kinderkankerfonds.web.categorie.CategorieEdit"
-        datasource="categorieDs"
-        focusComponent="personenTable"
-        lookupComponent="personenTable"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://categorieEdit.caption"
+        focusComponent="form"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.categorie">
-    <dsContext>
-        <datasource id="categorieDs"
-                    class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie"
-                    view="categorie-view">
-            <collectionDatasource id="personenDs"
-                                  property="personen"
-            >
-            </collectionDatasource>
-        </datasource>
-    </dsContext>
+    <data>
+        <instance id="categorieDc"
+                  class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie">
+            <view extends="_local"/>
+            <loader/>
+        </instance>
+    </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="windowActions"
-            spacing="true">
-        <scrollBox>
-            <filter id="personenFilter"
-                    applyTo="personenTable"
-                    datasource="personenDs">
-                <properties include=".*"/>
-            </filter>
-            <table id="personenTable"
-                   height="500px"
-                   width="100%">
-                <actions>
-                    <action id="excel"
-                            caption="mainMsg://button.excel"
-                            icon="EXCEL_ACTION"/>
-                </actions>
-                <columns>
-                    <column id="adressen" caption="Adres"/>
-                    <column id="voornaam"/>
-                    <column id="familienaam"/>
-                    <column id="geboortedatum"/>
-                    <column id="overlijdensdatum"/>
-                    <column id="familiedag"/>
-                    <column id="ontmoetingsdag"/>
-                    <column id="raakpunt"/>
-                    <column id="oudercomite"/>
-                    <column id="actief"/>
-                    <column id="uniekeid"/>
-                </columns>
-                <rows datasource="personenDs"/>
-                <rowsCount/>
-                <buttonsPanel>
-                    <button id="excellBtn"
-                            action="personenTable.excel"
-                            caption="Excel"/>
-                </buttonsPanel>
-            </table>
-        </scrollBox>
-        <fieldGroup id="fieldGroup"
-                    datasource="categorieDs"
-                    editable="false">
-            <column width="250px">
-                <field property="naam"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="categorieDc">
+            <column width="350px">
+                <textField id="clientField" property="client" visible="false"/>
+                <textField id="naamField" property="naam" caption="Naam"/>
             </column>
-        </fieldGroup>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
     </layout>
 </window>

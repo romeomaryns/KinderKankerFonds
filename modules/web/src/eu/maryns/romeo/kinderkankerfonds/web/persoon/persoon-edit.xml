@@ -51,20 +51,20 @@
             <fieldGroup id="fieldGroup"
                         datasource="persoonDs">
                 <column width="250px">
-                    <field property="voornaam"/>
-                    <field property="familienaam"/>
-                    <field optionsDatasource="geslachtsDs"
+                    <field property="voornaam" tabIndex="1" required="true"/>
+                    <field property="familienaam" tabIndex="1" required="true"/>
+                    <field optionsDatasource="geslachtsDs" tabIndex="1"
                            property="geslacht"/>
                 </column>
                 <column>
-                    <field property="geboortedatum"/>
-                    <field property="overlijdensdatum"/>
-                    <field optionsDatasource="ziekenhuisesDs"
+                    <field property="geboortedatum" tabIndex="2"/>
+                    <field property="overlijdensdatum" tabIndex="2"/>
+                    <field optionsDatasource="ziekenhuisesDs" tabIndex="2"
                            property="ziekenhuis"/>
                 </column>
                 <column>
-                    <field property="aanspreking1" caption="Aanspreking1"/>
-                    <field property="aanspreking2" caption="Aanspreking2"/>
+                    <field property="aanspreking1" caption="Aanspreking1" tabIndex="3"/>
+                    <field property="aanspreking2" caption="Aanspreking2" tabIndex="3"/>
                 </column>
                 <column>
                     <field editable="false"

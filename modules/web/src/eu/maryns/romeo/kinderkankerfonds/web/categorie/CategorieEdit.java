@@ -1,7 +1,11 @@
 package eu.maryns.romeo.kinderkankerfonds.web.categorie;
 
-import com.haulmont.cuba.gui.components.AbstractEditor;
+import com.haulmont.cuba.gui.screen.*;
 import eu.maryns.romeo.kinderkankerfonds.entity.Categorie;
 
-public class CategorieEdit extends AbstractEditor<Categorie> {
+@UiController("kinderkankerfonds$Categorie.edit")
+@UiDescriptor("categorie-edit.xml")
+@EditedEntityContainer("categorieDc")
+@LoadDataBeforeShow
+public class CategorieEdit extends StandardEditor<Categorie> {
 }

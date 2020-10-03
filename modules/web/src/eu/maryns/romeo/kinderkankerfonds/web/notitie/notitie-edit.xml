@@ -30,7 +30,6 @@
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="notitieDc">
             <column width="100%">
-
             </column>
         </form>
         <hbox id="editActions" spacing="true">

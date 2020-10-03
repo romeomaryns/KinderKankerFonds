@@ -22,6 +22,9 @@ public class KalenderKleur extends StandardClientEntity {
     @Column(name = "CSS_STYLE_NAME", nullable = false)
     protected String cssStyleName;
 
+    @Column(name = "LEGENDE")
+    protected String legende;
+
     public void setNaam(String naam) {
         this.naam = naam;
     }
@@ -35,5 +38,13 @@ public class KalenderKleur extends StandardClientEntity {
 
     public void setCssStyleName(String cssStyleName) {
         this.cssStyleName = cssStyleName;
+    }
+
+    public String getLegende() {
+        return legende;
+    }
+
+    public void setLegende(String legende) {
+        this.legende = legende;
     }
 }

@@ -142,5 +142,43 @@
     .v-calendar-back, .v-calendar-next {
       display: block ;
     }
+
+    .v-calendar-event.event-warning {
+      background-color: OrangeRed;
+      color: DarkRed;
+    }
+
+    .v-calendar-week-wrapper .v-calendar-event-event-warning, .v-calendar-event-event-warning:before {
+      color: DarkRed;
+    }
+
+    .v-calendar-week-wrapper .v-calendar-event-event-warning .v-calendar-event-content {
+      background-color: OrangeRed;
+    }
+    .table-style-warning{
+      background-color: OrangeRed;
+      color: DarkRed;
+      font-weight: bold;
+    }
+    .table-style-event-red {
+          background-color: #f4c8c8;
+          color: #e00000;
+        }
+     .table-style-event-yellow {
+           background-color: #f4efc8;
+           color: #5f5c41;
+         }
+     .table-style-event-blue {
+           background-color: #c8daf4;
+           color: #0300e0;
+         }
+      .table-style-event-green {
+            background-color: #c8f4c9;
+            color: #037516;
+          }
+       .table-style-event-red {
+             background-color: #f4c8c8;
+             color: #e00000;
+           }
 }
 

@@ -49,6 +49,15 @@
                 </query>
             </loader>
         </collection>
+        <collection id="personeelDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
+                    view="_local">
+            <loader id="personeelDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Persoon e where e.personeel=true]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="auto"
                 width="auto"/>
@@ -61,8 +70,10 @@
                         <lookupPickerField id="afdelingPickerField" property="afdeling" caption="Afdeling" optionsContainer="afdelingDc"/>
                         <lookupPickerField id="kleurPickerField" property="kalenderKleur" caption="Kleur" optionsContainer="kleurenDc"/>
                         <textField id="topicField" property="topic" caption="Titel"/>
+                        <lookupPickerField id="ingeplandPickerField" property="ingepland" caption="Ingepland door" optionsContainer="personeelDc" />
                         <dateField id="plannedStartDateField" property="plannedStartDate" caption="Geplande Start"/>
                         <dateField id="plannedEndDateField" property="plannedEndDate" caption="Gepland Einde"/>
+                        <lookupPickerField id="uitgevoerdPickerField" property="uitgevoerd" caption="Uitgevoerd door" optionsContainer="personeelDc" />
                         <dateField id="startDateField" property="startDate" caption="Effectieve Start"/>
                         <dateField id="endDateField" property="endDate" caption="Effectief Einde"/>
                         <richTextArea id="descriptionField" property="description" caption="Omschrijving"/>
@@ -79,12 +90,12 @@
             </tab>
             <tab id="tableTab" caption="Notities" expand="notitiesTable" spacing="true" margin="true,false,false,false">
                 <groupTable id="notitiesTable"
-                            width="auto"
+                            width="100%"
                             dataContainer="notitiesDs" >
                     <actions>
-                        <action id="create" type="create"/>
-                        <action id="edit" type="edit"/>
-                        <action id="remove" type="remove"/>
+                        <action id="create" type="create" caption="mainMsg://button.create"/>
+                        <action id="edit" type="edit" caption="mainMsg://button.edit"/>
+                        <action id="remove" type="remove" caption="mainMsg://button.remove"/>
                     </actions>
                     <columns>
                         <column id="createTs" caption="Aangemaakt op"/>
@@ -95,9 +106,9 @@
                     <rowsCount/>
                     <buttonsPanel id="buttonsPanel"
                                   alwaysVisible="true" margin="true,false,false,false">
-                        <button id="createBtn" caption="Toevoegen"/>
-                        <button id="editBtn" caption="Aanpassen"/>
-                        <button id="removeBtn" action="notitiesTable.remove" caption="Verwijderen"/>
+                        <button id="createBtn" caption="mainMsg://button.create"/>
+                        <button id="editBtn" caption="mainMsg://button.edit"/>
+                        <button id="removeBtn" action="notitiesTable.remove" caption="mainMsg://button.remove"/>
                     </buttonsPanel>
                 </groupTable>
             </tab>

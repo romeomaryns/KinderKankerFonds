@@ -247,3 +247,44 @@ GROUP BY
 ,kkf_ziekenhuis_adres.stad
 ,kkf_ziekenhuis_adres.actief
 ORDER BY kkf_adres.uniekeid DESC;
+
+
+ssh root@195.238.75.94
+=> V3ryStr0ng
+
+Acces group constraint :
+{E}.client = :session$client_id
+"Read"
+
+Session attributes :
+client_id / Integer / 1 / 2
+
+cp 200502-1-updatePersoon.sql /home/kinderkankerfonds/
+chown kinderkankerfonds  /home/kinderkankerfonds/200502-1-updatePersoon.sql
+su kinderkankerfonds
+
+
+
+sudo -u postgres psql postgres
+sudo -u postgres psql -d kinderkankerfonds -f backup_kkf_2020-oktober-insert.sql
+
+
+UPDATE kinderkankerfonds_adres SET client = 1;
+
+
+
+UPDATE kinderkankerfonds_adres_type SET client = 1;
+UPDATE kinderkankerfonds_afdeling SET client = 1;
+UPDATE kinderkankerfonds_afspraak SET client = 1;
+UPDATE kinderkankerfonds_categorie SET client = 1;
+UPDATE kinderkankerfonds_contact_info SET client = 1;
+UPDATE kinderkankerfonds_dagboek_entry SET client = 1;
+UPDATE kinderkankerfonds_geslacht SET client = 1;
+UPDATE kinderkankerfonds_kalender_kleur SET client = 1;
+UPDATE kinderkankerfonds_land SET client = 1;
+UPDATE kinderkankerfonds_notitie SET client = 1;
+UPDATE kinderkankerfonds_persoon SET client = 1;
+UPDATE kinderkankerfonds_relatie SET client = 1;
+UPDATE kinderkankerfonds_relatie_type SET client = 1;
+UPDATE kinderkankerfonds_ziekenhuis SET client = 1;
+

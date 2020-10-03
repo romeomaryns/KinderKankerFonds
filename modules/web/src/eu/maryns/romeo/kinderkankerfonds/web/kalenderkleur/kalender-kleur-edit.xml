@@ -17,6 +17,7 @@
             <column width="350px">
                 <textField id="naamField" property="naam" caption="Naam"/>
                 <textField id="cssStyleNamefield" property="cssStyleName" caption="CssStyleName"/>
+                <textArea id="legendeField" property="legende" caption="Legende" rows="2"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

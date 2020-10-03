@@ -62,18 +62,18 @@
                     <fieldGroup id="fieldGroup"
                                 datasource="adresDs">
                         <column width="250px">
-                            <field property="straatnaam"/>
-                            <field property="huisnummer"/>
-                            <field property="bus"/>
-                            <field optionsDatasource="typesDs"
+                            <field property="straatnaam" tabIndex="1"/>
+                            <field property="huisnummer" tabIndex="1"/>
+                            <field property="bus" tabIndex="1"/>
+                            <field optionsDatasource="typesDs" tabIndex="1"
                                    property="type"/>
                         </column>
                         <column>
-                            <field property="postcode"/>
-                            <field property="stad"/>
-                            <field optionsDatasource="landsDs"
+                            <field property="postcode" tabIndex="2"/>
+                            <field property="stad" tabIndex="2"/>
+                            <field optionsDatasource="landsDs" tabIndex="2"
                                    property="land"/>
-                            <field property="actief"/>
+                            <field property="actief" tabIndex="2"/>
                         </column>
                     </fieldGroup>
                     <groupBox id="categorieBox"

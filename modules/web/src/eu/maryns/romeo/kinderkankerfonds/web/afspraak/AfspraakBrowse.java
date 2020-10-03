@@ -10,16 +10,14 @@ import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.LookupComponent;
 import com.haulmont.cuba.gui.screen.*;
 import eu.maryns.romeo.kinderkankerfonds.entity.Afspraak;
+import eu.maryns.romeo.kinderkankerfonds.entity.DagboekEntry;
 import eu.maryns.romeo.kinderkankerfonds.entity.Notitie;
 import eu.maryns.romeo.kinderkankerfonds.service.AfsprakenService;
 import eu.maryns.romeo.kinderkankerfonds.service.DataGridDetailsGeneratorService;
 
 import javax.inject.Inject;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
+import java.time.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +25,7 @@ import java.util.Map;
 
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.DayOfWeek.SUNDAY;
+import static java.time.LocalDate.*;
 import static java.time.temporal.TemporalAdjusters.nextOrSame;
 import static java.time.temporal.TemporalAdjusters.previousOrSame;
 
@@ -46,6 +45,8 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
     private CollectionLoader<Afspraak> afspraaksDl;
 
     @Inject
+    private CollectionLoader<DagboekEntry> dagboekDl;
+    @Inject
     private AfsprakenService afsprakenService;
 
     @Inject
@@ -54,6 +55,8 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
     @Inject
     private DateField dateField;
 
+    @Inject
+    private DateField<Date> dateFieldDagboek;
 
     @Inject
     private DataGrid<Afspraak> logboekDataGrid;
@@ -61,8 +64,6 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
     private UiComponents uiComponents;
     @Inject
     private DataGridDetailsGeneratorService service;
-    @Inject
-    private MetadataTools metadataTools;
 
     @Subscribe
     private void onInit(InitEvent event) {
@@ -73,6 +74,8 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
         afsprakenCalendar.setEndDate(endDag);
        // afsprakenCalendar.setNavigationButtonsVisible(true);
         datesChanged(startDag,endDag);
+        dateFieldDagboek.setValue(new Date());
+        dagboekDl.load();
         afspraaksDl.load();
 
         logboekDataGrid.setItemClickAction(new BaseAction("itemClickAction")
@@ -90,13 +93,6 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
         VBoxLayout headerBox = uiComponents.create(VBoxLayout.class);
         headerBox.setWidth("100%");
 
-
-        Label<String> commentaarLabel = uiComponents.create(Label.TYPE_STRING);
-        commentaarLabel.setHtmlEnabled(true);
-        commentaarLabel.setStyleName("h1");
-        commentaarLabel.setValue("Commentaar:<br/> " );
-
-
         Label<String> commentLabel = uiComponents.create(Label.TYPE_STRING);
         commentLabel.setHtmlEnabled(true);
         commentLabel.setValue(afspraak.getDescription());
@@ -109,7 +105,6 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
         infoLabel.setValue("Notities voor afspraak: " +afspraak.getTopic());
 
         Component closeButton = createCloseButton(afspraak);
-        headerBox.add(commentaarLabel);
         headerBox.add(commentLabel);
         horizontalBox.add(infoLabel);
         horizontalBox.add(closeButton);
@@ -130,7 +125,13 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
         content.setHtmlEnabled(true);
 
         StringBuilder sb = new StringBuilder();
-        sb.append("<table cellspacing=3px cellpadding=3px>")
+        sb.append("<table cellspacing=3px cellpadding=3px style=\"width:100%;table-layout:fixed;\" >")
+                .append("<colgroup>")
+                    .append("<col style=\"width:70%\">")
+                    .append("<col style=\"width:15%\">")
+                    .append("<col style=\"width:15%\">")
+                .append("</colgroup>")
+                .append("<tbody>")
                 .append("<tr>")
                 .append("<th>Notitie</th>")
                 .append("<th>Aangemaakt op</th>")
@@ -151,6 +152,7 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
                 .append("<th></th>").append("<th></th>")
                 .append("<th>").append(entity.getNotities().size()).append("</th>")
                 .append("</tr>")
+                .append("</tbody>")
                 .append("</table>");
         content.setValue(sb.toString());
         return content;
@@ -171,13 +173,13 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
         Map<DayOfWeek, String> days = new HashMap<>(7);
-        days.put(DayOfWeek.MONDAY,"Maandag");
+        days.put(MONDAY,"Maandag");
         days.put(DayOfWeek.TUESDAY,"Dinsdag");
         days.put(DayOfWeek.WEDNESDAY,"Woensdag");
         days.put(DayOfWeek.THURSDAY,"Donderdag");
         days.put(DayOfWeek.FRIDAY,"Vrijdag");
         days.put(DayOfWeek.SATURDAY,"Zaterdag");
-        days.put(DayOfWeek.SUNDAY,"Zondag");
+        days.put(SUNDAY,"Zondag");
         afsprakenCalendar.setDayNames(days);
 
         Map<Month, String> months = new HashMap<>(12);
@@ -301,6 +303,12 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
         switchNaarDagDateDatePicker((Date) event.getValue());
     }
 
+    @Subscribe("dateFieldDagboek")
+    public void onDateFieldDagboekChange(DateField.ValueChangeEvent event)
+    {
+        dateChanged((Date) event.getValue());
+    }
+
     public void switchNaarDagDate(LocalDateTime date) {
         LocalDateTime dt = LocalDateTime.now();
         if(date != null)
@@ -316,7 +324,7 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
 
 
     public void switchNaarDagDateDatePicker(Date date) {
-        LocalDate dt = LocalDate.now();
+        LocalDate dt = now();
         if(date != null)
             dt = new java.sql.Date(date.getTime()).toLocalDate();
         LocalDateTime startDag = dt.minusDays(0).atStartOfDay();
@@ -338,7 +346,7 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
     }
 
     public void switchNaarWeek() {
-        LocalDate today = LocalDate.now();
+        LocalDate today = now();
         LocalDateTime monday = today.with(previousOrSame(MONDAY)).atStartOfDay();
         LocalDateTime sunday = today.with(nextOrSame(SUNDAY)).atTime(23,59,59);
         afsprakenCalendar.setStartDate(monday);
@@ -347,7 +355,7 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
     }
 
     public void switchNaarMaand() {
-        LocalDate today = LocalDate.now();
+        LocalDate today = now();
         LocalDateTime firstDay = today.withDayOfMonth(1).atStartOfDay();
         LocalDateTime lastDay = today.withDayOfMonth(today.lengthOfMonth()).atTime(23,59,59);
         afsprakenCalendar.setStartDate(firstDay);
@@ -356,7 +364,7 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
     }
 
     private void datesChanged(LocalDateTime startDate,LocalDateTime endDate) {
-        LocalDate today = LocalDate.now();
+        LocalDate today = now();
         LocalDateTime begin = today.minusYears(1).atStartOfDay();
         LocalDateTime end = today.plusYears(1).atTime(23,59,59);
         if (startDate != null) {
@@ -374,11 +382,74 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
         afspraaksDl.load();
     }
 
+    private void dateChanged(Date date) {
+        if (date != null) {
+            dagboekDl.setParameter("date",date);
+        }
+        else {
+            dagboekDl.setParameter("date", new Date());
+        }
+        dagboekDl.load();
+    }
+
     public void toonAlles() {
         dateField.setValue(null);
         datesChanged(null,null);
         for (Afspraak afspraak:afsprakenDc.getItems()
              ) {
+            logboekDataGrid.setDetailsVisible(afspraak,false);
+        }
+    }
+
+    public void dagErvoor() {
+        Date dt = (Date) dagboekDl.getParameter("date");
+    //    System.out.println("Date : " + dt);
+        LocalDate localDate = from(dt.toInstant().atZone(ZoneId.systemDefault())).minusDays(1l);
+     //   System.out.println("localDate : " + localDate);
+        dt =Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        dateFieldDagboek.setValue(dt);
+        dateChanged(dt);
+    }
+
+    public void dagErna() {
+        Date dt = (Date) dagboekDl.getParameter("date");
+     //   System.out.println("Date : " + dt);
+        LocalDate localDate = from(dt.toInstant().atZone(ZoneId.systemDefault())).plusDays(1l);
+     //   System.out.println("localDate : " + localDate);
+        dt =Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        dateFieldDagboek.setValue(dt);
+        dateChanged(dt);
+    }
+
+    @Install(to = "dagboekTable", subject = "styleProvider")
+    protected String dagboekTableStyleProvider(DagboekEntry dagboekEntry, String property) {
+        if (property == null) {
+            if (Boolean.TRUE.equals(dagboekEntry.getAttentie())) {
+                return "table-style-warning";
+            }
+        }
+        return null;
+    }
+
+    @Install(to = "afspraaksTable", subject = "styleProvider")
+    protected String afspraakTableStyleProvider(Afspraak afspraak, String property) {
+        if (property == null) {
+            return "table-style-"+afspraak.getKleur();
+        }
+        return null;
+    }
+
+    public void openAlles() {
+        for (Afspraak afspraak:afsprakenDc.getItems()
+        ) {
+            if(!afspraak.getNotities().isEmpty())
+                logboekDataGrid.setDetailsVisible(afspraak,true);
+        }
+    }
+
+    public void sluitAlles() {
+        for (Afspraak afspraak:afsprakenDc.getItems()
+        ) {
             logboekDataGrid.setDetailsVisible(afspraak,false);
         }
     }

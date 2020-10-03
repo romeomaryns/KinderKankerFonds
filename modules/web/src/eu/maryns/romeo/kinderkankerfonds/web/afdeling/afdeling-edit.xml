@@ -16,8 +16,8 @@
         <form id="form" dataContainer="afdelingDc">
             <column width="350px">
                 <textField id="clientField" property="client" visible="false"/>
-                <textField id="naamField" property="naam"/>
-                <checkBox id="actiefField" property="actief"/>
+                <textField id="naamField" property="naam" caption="Naam"/>
+                <checkBox id="actiefField" property="actief" caption="Actief"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

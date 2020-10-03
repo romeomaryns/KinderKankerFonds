@@ -23,6 +23,15 @@
                 </query>
             </loader>
         </collection>
+        <collection id="dagboekEntriesDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.DagboekEntry"
+                    view="dagboekEntry-view">
+            <loader id="dagboekDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds_DagboekEntry e where e.date = :date  ]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
@@ -64,17 +73,20 @@
                             width="100%"
                             dataContainer="alleAfsprakenDc" >
                     <actions>
-                        <action id="create" type="create"/>
-                        <action id="edit" type="edit"/>
-                        <action id="remove" type="remove"/>
+                        <action id="create" type="create" caption="mainMsg://button.create"/>
+                        <action id="edit" type="edit" caption="mainMsg://button.edit"/>
+                        <action id="remove" type="remove" caption="mainMsg://button.remove"/>
+                        <action id="excel" type="excel" caption="mainMsg://button.excel"/>
                     </actions>
                     <columns>
-                        <column id="topic" caption="Titel"/>
                         <column id="startDate" sort="DESCENDING" caption="Start" />
                         <column id="endDate" caption="Einde"/>
-                        <column id="duration" caption="Duur"/>
                         <column id="afdeling" caption="Afdeling"/>
+                        <column id="persoon" caption="Bezoeker"/>
                         <column id="description" caption="Omschrijving"/>
+                        <column id="ingepland" caption="Ingepland"/>
+                        <column id="uitgevoerd" caption="Uitgevoerd"/>
+
                     </columns>
                     <rowsCount/>
                     <buttonsPanel id="buttonsPanel"
@@ -82,6 +94,7 @@
                         <button id="createBtn" action="afspraaksTable.create"/>
                         <button id="editBtn" action="afspraaksTable.edit"/>
                         <button id="removeBtn" action="afspraaksTable.remove"/>
+                        <button id="excelBtn" action="afspraaksTable.excel"/>
                     </buttonsPanel>
                 </groupTable>
                 <hbox id="lookupActions" spacing="true" visible="false">
@@ -95,7 +108,9 @@
 
                                resolution="DAY"
                                caption="Datum"/>
-                    <button id="clearButton" caption="Toon Alles" invoke="toonAlles" />
+                    <button id="clearButton" caption="Toon Alles" invoke="toonAlles" css="margin-top:20px;"/>
+                    <button id="openButton" caption="Open notities" invoke="openAlles" css="margin-top:20px;"/>
+                    <button id="sluitButton" caption="Sluit notities" invoke="sluitAlles" css="margin-top:20px;"/>
                 </hbox>
 
                 <dataGrid id="logboekDataGrid"
@@ -104,15 +119,48 @@
                           width="100%"
                 >
                     <columns>
-                        <column property="startDate" caption="startDatum" />
-                        <column property="endDate" caption="eindDatum" />
-                        <column property="topic" caption="Onderwerp"/>
+                        <column property="startDate" caption="Start" />
+                        <column property="endDate" caption="Einde" />
+                        <column property="afdeling" caption="Afdeling"/>
                         <column property="persoon" caption="Persoon" />
                         <column property="description" caption="Omschrijving"/>
-                        <column property="createdBy" caption="Aangemaakt door"/>
-                        <column property="createTs" caption="Aangemaakt op" />
+                        <column property="ingepland" caption="Ingepland"/>
+                        <column property="uitgevoerd" caption="Uitgevoerd" />
                     </columns>
                 </dataGrid>
+            </tab>
+            <tab id="dagboekTab" caption="Dagboek" expand="dagboekTable">
+                <hbox spacing="true" margin="true">
+                    <button id="vorigeButtonDagboek" icon="ARROW_LEFT" invoke="dagErvoor" css="margin-top:20px;"/>
+                    <dateField id="dateFieldDagboek"
+                               resolution="DAY"
+                               caption="Datum"/>
+                    <button id="volgendeButtonDagboek" icon="ARROW_RIGHT" invoke="dagErna" css="margin-top:20px;" />
+                </hbox>
+
+                <groupTable id="dagboekTable"
+                            width="100%"
+                            dataContainer="dagboekEntriesDc" >
+                    <actions>
+                        <action id="create" type="create" caption="mainMsg://button.create"/>
+                        <action id="edit" type="edit" caption="mainMsg://button.edit"/>
+                        <action id="remove" type="remove" caption="mainMsg://button.remove"/>
+                        <action id="excel" type="excel" caption="mainMsg://button.excel"/>
+                    </actions>
+                    <columns>
+                        <column id="date"  caption="Datum" />
+                        <column id="auteur" caption="Auteur"/>
+                        <column id="tekst" caption="Tekst"/>
+                    </columns>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanelDagboek"
+                                  alwaysVisible="true" margin="true,false,false,false">
+                        <button id="createBtnDagboek" action="dagboekTable.create"/>
+                        <button id="editBtnDagboek" action="dagboekTable.edit"/>
+                        <button id="removeBtnDagboek" action="dagboekTable.remove"/>
+                        <button id="excelBtnDagboek" action="dagboekTable.excel"/>
+                    </buttonsPanel>
+                </groupTable>
             </tab>
         </tabSheet>
     </layout>

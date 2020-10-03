@@ -28,10 +28,10 @@
                     width="100%"
                     dataContainer="geslachtsDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
-                <action id="excel" type="excel"/>
+                <action id="create" type="create" caption="mainMsg://button.create"/>
+                <action id="edit" type="edit" caption="mainMsg://button.edit"/>
+                <action id="remove" type="remove" caption="mainMsg://button.remove"/>
+                <action id="excel" type="excel" caption="mainMsg://button.excel"/>
             </actions>
             <columns>
                 <column id="naam"/>

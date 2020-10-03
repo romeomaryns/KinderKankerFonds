@@ -17,9 +17,6 @@ import java.util.List;
 public class Afspraak extends StandardClientEntity {
     private static final long serialVersionUID = -1679199206504790964L;
 
-    @Column(name = "TOPIC")
-    protected String topic;
-
     @Column(name = "START_DATE")
     protected LocalDateTime startDate;
 
@@ -50,13 +47,13 @@ public class Afspraak extends StandardClientEntity {
     @JoinColumn(name = "KALENDER_KLEUR_ID")
     protected KalenderKleur kalenderKleur;
 
-    public String getTopic() {
-        return topic;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INGEPLAND_ID")
+    protected Persoon ingepland;
 
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UITGEVOERD_ID")
+    protected Persoon uitgevoerd;
 
     public LocalDateTime getStartDate() {
         return startDate;
@@ -122,6 +119,21 @@ public class Afspraak extends StandardClientEntity {
         this.afdeling = afdeling;
     }
 
+    public Persoon getIngepland() {
+        return ingepland;
+    }
+
+    public void setIngepland(Persoon ingepland) {
+        this.ingepland = ingepland;
+    }
+
+    public Persoon getUitgevoerd() {
+        return uitgevoerd;
+    }
+
+    public void setUitgevoerd(Persoon uitgevoerd) {
+        this.uitgevoerd = uitgevoerd;
+    }
 
     @Positive
     @Transient
@@ -154,6 +166,17 @@ public class Afspraak extends StandardClientEntity {
         if(kalenderKleur != null)
             return kalenderKleur.getCssStyleName();
         else return null;
+    }
+
+    @Transient
+    @MetaProperty(related = {"persoon","afdeling"})
+    public String getTopic() {
+        String result = "";
+        if(persoon != null )
+            result = persoon.getVoornaam()+" "+persoon.getFamilienaam();
+        if(afdeling != null )
+            result += " : "+afdeling.getNaam();
+        return result;
     }
 
 }

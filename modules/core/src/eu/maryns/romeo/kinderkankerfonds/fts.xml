@@ -43,5 +43,8 @@
         <entity class="eu.maryns.romeo.kinderkankerfonds.entity.KalenderKleur">
             <include re=".*"/>
         </entity>
+        <entity class="eu.maryns.romeo.kinderkankerfonds.entity.DagboekEntry">
+            <include re=".*"/>
+        </entity>
     </entities>
 </fts-config>

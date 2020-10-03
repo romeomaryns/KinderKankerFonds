@@ -23,13 +23,13 @@
               screen="kinderkankerfonds$AdresType.browse"/>
         <item icon="WRENCH"
               openType="NEW_TAB"
+              caption="Categorieën"
               screen="kinderkankerfonds$Categorie.browse"/>
         <item icon="FLAG"
               screen="kinderkankerfonds$Land.browse"/>
         <item screen="kinderkankerfonds$Alles.browse" openType="NEW_TAB" icon="HOME"/>
         <item icon="UPLOAD"
               screen="import"/>
-
     </menu>
     <menu id="application-delieving" insertBefore="application-kinderkankerfonds">
         <item icon="BRIEFCASE"
@@ -40,5 +40,8 @@
               caption="mainMsg://menu_config.kinderkankerfonds_KalenderKleur.browse"/>
         <item icon="CALENDAR"
               screen="kinderkankerfonds_Afspraak.browse"/>
+        <item icon="BOOKMARK"
+                screen="kinderkankerfonds_DagboekEntry.browse"
+              caption="mainMsg://menu_config.kinderkankerfonds_DagboekEntry.browse"/>
     </menu>
 </menu-config>

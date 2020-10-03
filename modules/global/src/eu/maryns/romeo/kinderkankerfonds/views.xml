@@ -88,17 +88,17 @@
           extends="_local"
           name="notitie-view-full">
         <property name="contactinfo"
-                  view="_minimal"/>
+                  view="_local"/>
         <property name="persoon"
-                  view="_minimal">
+                  view="_base">
             <property name="actief"/>
         </property>
         <property name="adressen"
-                  view="_minimal">
+                  view="_base">
             <property name="actief"/>
         </property>
         <property name="ziekenhuis"
-                  view="_minimal"/>
+                  view="_base"/>
         <property name="afspraak"
                   view="_minimal">
         </property>
@@ -139,8 +139,10 @@
         <property name="persoon" fetch="JOIN" view="_local"/>
         <property name="notities" fetch="JOIN" view="_local"/>
         <property name="afdeling" fetch="JOIN" view="_local"/>
+        <property name="ingepland" fetch="JOIN" view="_local"/>
+        <property name="uitgevoerd" fetch="JOIN" view="_local"/>
         <property name="createdBy" />
-        <property name="createTs"/>
+        <property name="createTs" />
         <property name="updatedBy" />
         <property name="updateTs"/>
         <property name="topic"/>
@@ -152,6 +154,14 @@
         <property name="duration"/>
         <property name="plannedDuration"/>
         <property name="kleur"/>
-        <property name="kalenderKleur"/>
+        <property name="kalenderKleur" fetch="JOIN" view="_local"/>
+    </view>
+    <view entity="kinderkankerfonds_DagboekEntry" name="dagboekEntry-view" extends="_local">
+        <property name="auteur" fetch="JOIN" view="_local"/>
+        <property name="createdBy" />
+        <property name="createTs"/>
+        <property name="updatedBy" />
+        <property name="updateTs"/>
+
     </view>
 </views>

@@ -38,7 +38,7 @@ public class Notitie extends StandardClientEntity {
     protected Persoon persoon;
 
     @Lookup(type = LookupType.SCREEN)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "AFSPRAAK_ID")
     protected Afspraak afspraak;
 

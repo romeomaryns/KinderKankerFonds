@@ -17,8 +17,8 @@
         <fieldGroup id="fieldGroup"
                     datasource="landDs">
             <column width="250px">
-                <field property="naam"/>
-                <field property="landcode"/>
+                <field property="naam" caption="Naam"/>
+                <field property="landcode" caption="Landcode"/>
             </column>
         </fieldGroup>
         <frame id="windowActions"

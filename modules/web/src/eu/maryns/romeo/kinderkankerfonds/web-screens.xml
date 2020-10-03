@@ -18,8 +18,6 @@
             template="eu/maryns/romeo/kinderkankerfonds/web/relatie/relatie-edit.xml"/>
     <screen id="kinderkankerfonds$Categorie.browse"
             template="eu/maryns/romeo/kinderkankerfonds/web/categorie/categorie-browse.xml"/>
-    <screen id="kinderkankerfonds$Categorie.edit"
-            template="eu/maryns/romeo/kinderkankerfonds/web/categorie/categorie-edit.xml"/>
     <screen id="kinderkankerfonds$ContactInfo.browse"
             template="eu/maryns/romeo/kinderkankerfonds/web/contactinfo/contact-info-browse.xml"/>
     <screen id="kinderkankerfonds$ContactInfo.edit"

@@ -1,4 +1,4 @@
-package eu.maryns.romeo.kinderkankerfonds.web.categorie;
+package eu.maryns.romeo.kinderkankerfonds.web.screens;
 
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.GroupTable;

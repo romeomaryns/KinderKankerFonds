@@ -25,37 +25,64 @@
             <DependencyModelState>
               <option name="group" value="com.haulmont.cuba" />
               <option name="name" value="cuba-global" />
-              <option name="version" value="7.1.1" />
+              <option name="version" value="7.2.8" />
             </DependencyModelState>
             <DependencyModelState>
               <option name="group" value="com.haulmont.fts" />
               <option name="name" value="fts-global" />
-              <option name="version" value="7.1.1" />
+              <option name="version" value="7.2.8" />
+            </DependencyModelState>
+            <DependencyModelState>
+              <option name="group" value="com.haulmont.reports" />
+              <option name="name" value="reports-global" />
+              <option name="version" value="7.2.8" />
+            </DependencyModelState>
+            <DependencyModelState>
+              <option name="group" value="com.haulmont.charts" />
+              <option name="name" value="charts-global" />
+              <option name="version" value="7.2.8" />
+            </DependencyModelState>
+            <DependencyModelState>
+              <option name="group" value="com.haulmont.addon.dashboard" />
+              <option name="name" value="dashboard-global" />
+              <option name="version" value="3.2.3" />
+            </DependencyModelState>
+            <DependencyModelState>
+              <option name="group" value="com.haulmont.addon.helium" />
+              <option name="name" value="helium-global" />
+              <option name="version" value="0.3.1" />
+            </DependencyModelState>
+            <DependencyModelState>
+              <option name="group" value="com.haulmont.addon.restapi" />
+              <option name="name" value="restapi-global" />
+              <option name="version" value="7.2.2" />
             </DependencyModelState>
           </list>
         </option>
         <option name="artifactGroup" value="eu.maryns.romeo.kinderkankerfonds" />
-        <option name="artifactVersion" value="1.2" />
+        <option name="artifactVersion" value="1.6" />
         <option name="tomcatDir" value="$PROJECT_DIR$/deploy/tomcat" />
         <option name="uberJar" value="true" />
         <option name="uberCustomJettyEnvironmentXml" value="modules/core/web/META-INF/jetty-env.xml" />
-        <option name="uberAppProperties" value="{cuba.automaticDatabaseUpdate=true}" />
+        <option name="uberAppProperties" value="[cuba.automaticDatabaseUpdate:true, cuba.dataSourceProvider:jndi]" />
         <option name="uberCorePort" value="8079" />
-        <option name="uberWebPort" value="8080" />
+        <option name="uberWebPort" value="443" />
         <option name="uberPortalPort" value="8081" />
         <option name="uberLogbackConfigFile" value="etc/uber-jar-logback.xml" />
         <option name="singleUberJar" value="true" />
-        <option name="groovySupport" value="true" />
-        <option name="gradleVersion" value="4.10.3" />
-        <option name="dbmsDbType" value="postgres" />
-        <option name="oracleSystemUser" value="system" />
-        <option name="oracleSystemPassword" value="manager" />
+        <option name="gradleVersion" value="5.6.4" />
+        <option name="gradlePluginJarPath" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.gradle/cuba-plugin/7.2.8/ba9b6963a35e2e0136b660768b05e7fea6b0e637/cuba-plugin-7.2.8.jar" />
       </CubaModelState>
     </option>
     <option name="dbArtifacts">
       <map>
-        <entry key="com.haulmont.cuba" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.cuba/cuba-core/7.1.1/c794239ddfcb259598676480d34d040ae36f60de/cuba-core-7.1.1-db.zip" />
+        <entry key="com.haulmont.addon.dashboard" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.addon.dashboard/dashboard-core/3.2.3/e3c5f54776674297dd9c6cfba1b4ed2edfa1f8e7/dashboard-core-3.2.3-db.zip" />
+        <entry key="com.haulmont.addon.helium" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.addon.helium/helium-core/0.3.1/f32f01124ca5740d61806e5892373e14449bf48e/helium-core-0.3.1-db.zip" />
+        <entry key="com.haulmont.addon.restapi" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.addon.restapi/restapi-core/7.2.2/50180631225aa28d00cede5dca35b17ae559427e/restapi-core-7.2.2-db.zip" />
+        <entry key="com.haulmont.cuba" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.cuba/cuba-core/7.2.8/bc0c33161e3651b1f82191da3a5fc0f7a65a6df1/cuba-core-7.2.8-db.zip" />
+        <entry key="com.haulmont.reports" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.reports/reports-core/7.2.8/5a64fe1a684e8927c73d5922d876f9ae7f9067dc/reports-core-7.2.8-db.zip" />
       </map>
     </option>
+    <option name="gradleFilesCRC" value="5661415980" />
   </component>
 </project>

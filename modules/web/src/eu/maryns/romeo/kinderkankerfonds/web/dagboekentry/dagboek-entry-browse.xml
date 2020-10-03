@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://dagboekEntryBrowse.caption"
+        focusComponent="dagboekEntriesTable"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.dagboekentry">
+    <data readOnly="true">
+        <collection id="dagboekEntriesDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.DagboekEntry"
+                    view="dagboekEntry-view">
+            <loader id="dagboekEntriesDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds_DagboekEntry e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="dagboekEntriesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="dagboekEntriesTable"
+                dataLoader="dagboekEntriesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="dagboekEntriesTable"
+                    width="100%"
+                    dataContainer="dagboekEntriesDc">
+            <actions>
+                <action id="create" type="create" caption="mainMsg://button.create"/>
+                <action id="edit" type="edit" caption="mainMsg://button.edit"/>
+                <action id="remove" type="remove" caption="mainMsg://button.remove"/>
+                <action id="excel" type="excel" caption="mainMsg://button.excel"/>
+            </actions>
+            <columns>
+                <column id="date" caption="Datum" sort="DESCENDING"/>
+                <column id="tekst" caption="Tekst"/>
+                <column id="auteur" caption="Auteur"/>
+                <column id="attentie" caption="Waarschuwing"/>
+                <column id="createTs" caption="Aangemaakt op"/>
+                <column id="createdBy" caption="Aangemaakt door" />
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="dagboekEntriesTable.create" caption="mainMsg://button.create"/>
+                <button id="editBtn" action="dagboekEntriesTable.edit" caption="mainMsg://button.edit"/>
+                <button id="removeBtn" action="dagboekEntriesTable.remove" caption="mainMsg://button.remove"/>
+                <button id="excelBtn" action="dagboekEntriesTable.excel" caption="mainMsg://button.excel"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

@@ -46,7 +46,7 @@
             </columns>
             <rows datasource="ziekenhuisesDs"/>
             <rowsCount/>
-            <buttonsPanel id="buttonsPanel"
+            <buttonsPanel id="buttonsPanel" 
                           alwaysVisible="true">
                 <button id="createBtn"
                         action="ziekenhuisesTable.create"/>

@@ -251,7 +251,6 @@ create table KINDERKANKERFONDS_AFSPRAAK (
     DELETED_BY varchar(50),
     CLIENT integer not null,
     --
-    TOPIC varchar(255),
     START_DATE timestamp,
     END_DATE timestamp,
     PLANNED_START_DATE timestamp,
@@ -260,6 +259,8 @@ create table KINDERKANKERFONDS_AFSPRAAK (
     AFDELING_ID uuid,
     DESCRIPTION varchar(255),
     KALENDER_KLEUR_ID uuid,
+    INGEPLAND_ID uuid,
+    UITGEVOERD_ID uuid,
     --
     primary key (ID)
 )^
@@ -296,7 +297,28 @@ create table KINDERKANKERFONDS_KALENDER_KLEUR (
     --
     NAAM varchar(255) not null,
     CSS_STYLE_NAME varchar(255) not null,
+    LEGENDE varchar(255),
     --
     primary key (ID)
 )^
 -- end KINDERKANKERFONDS_KALENDER_KLEUR
+-- begin KINDERKANKERFONDS_DAGBOEK_ENTRY
+create table KINDERKANKERFONDS_DAGBOEK_ENTRY (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    CLIENT integer not null,
+    --
+    TEXT varchar(255),
+    PERSOON_ID uuid,
+    ATTENTION boolean,
+    DATE date,
+    --
+    primary key (ID)
+)^
+-- end KINDERKANKERFONDS_DAGBOEK_ENTRY

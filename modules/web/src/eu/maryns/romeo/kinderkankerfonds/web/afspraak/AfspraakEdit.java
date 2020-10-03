@@ -40,10 +40,14 @@ public class AfspraakEdit extends StandardEditor<Afspraak> {
     @Inject
     private CollectionLoader<Afdeling> afdelingDl;
 
+    @Inject
+    private InstanceLoader<Afspraak> alleAfsprakenDl;
+
     @Subscribe
     protected void onBeforeShow(BeforeShowEvent event)
     {
-        if(null != getEditedEntity().getCreateTs()) {
+        Afspraak afspraak =getEditedEntity();
+        if(null != afspraak && null != afspraak.getCreateTs()) {
             System.out.println("Edited Entity start : " + getEditedEntity().getPlannedStartDate());
             System.out.println("Edited Entity end : " + getEditedEntity().getPlannedEndDate());
             getScreenData().loadAll();

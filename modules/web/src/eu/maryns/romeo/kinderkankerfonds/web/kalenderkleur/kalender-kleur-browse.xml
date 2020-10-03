@@ -28,13 +28,14 @@
                     width="100%"
                     dataContainer="kalenderKleursDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
+                <action id="create" type="create" caption="mainMsg://button.create"/>
+                <action id="edit" type="edit" caption="mainMsg://button.edit"/>
+                <action id="remove" type="remove" caption="mainMsg://button.remove"/>
             </actions>
             <columns>
                 <column id="naam" caption="Naam"/>
                 <column id="cssStyleName" caption="CssStyleName"/>
+                <column id="legende" caption="Legende"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

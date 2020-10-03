@@ -45,7 +45,6 @@
                           spacing="true">
                     <searchPickerField id="adresPickerField"
                                        datasource="ziekenhuisDs"
-                                       nullOptionVisible="false"
                                        optionsDatasource="adresesDs"
                                        property="adres"/>
                 </groupBox>

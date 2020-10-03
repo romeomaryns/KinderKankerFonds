@@ -23,7 +23,7 @@
                       width="100%">
                     <label id="appTitleLabel"
                            align="MIDDLE_CENTER"
-                           value="mainMsg://application.logoLabel"/>
+                           value="Kinderkankerfonds"/>
                 </hbox>
                 <embedded id="logoImage"
                           align="MIDDLE_CENTER"
@@ -61,7 +61,7 @@
                     <label id="welcomeLabel"
                            align="MIDDLE_CENTER"
                            stylename="c-welcome-text"
-                           value="mainMsg://application.welcomeText"/>
+                           value="Welkom bij het Kinderkankerfonds"/>
                 </main:initialLayout>
             </main:workArea>
         </hbox>
