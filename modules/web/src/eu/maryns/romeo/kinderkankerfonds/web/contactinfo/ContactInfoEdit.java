@@ -1,7 +1,11 @@
 package eu.maryns.romeo.kinderkankerfonds.web.contactinfo;
 
-import com.haulmont.cuba.gui.components.AbstractEditor;
+import com.haulmont.cuba.gui.screen.*;
 import eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo;
 
-public class ContactInfoEdit extends AbstractEditor<ContactInfo> {
+@UiController("kinderkankerfonds$ContactInfo.edit")
+@UiDescriptor("contact-info-edit.xml")
+@EditedEntityContainer("contactInfoDc")
+@LoadDataBeforeShow
+public class ContactInfoEdit extends StandardEditor<ContactInfo> {
 }

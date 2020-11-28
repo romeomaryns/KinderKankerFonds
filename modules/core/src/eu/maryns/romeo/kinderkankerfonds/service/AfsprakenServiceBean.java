@@ -13,13 +13,6 @@ public class AfsprakenServiceBean implements AfsprakenService {
     @Inject
     private DataManager dataManager;
 
-    public Afspraak verzetAfspraak(Afspraak afspraak, LocalDateTime newStartDate){
-        afspraak.setEndDate(newStartDate.plusMinutes(afspraak.getDuration()));
-        afspraak.setStartDate(newStartDate);
-        System.out.println("Moving afspraak : " + afspraak);
-        return dataManager.commit(afspraak);
-    }
-
     public void verwijderAfspraak(Afspraak afspraak){
         System.out.println("Deleting afspraak : " + afspraak);
         dataManager.remove(afspraak);
@@ -27,8 +20,8 @@ public class AfsprakenServiceBean implements AfsprakenService {
 
     @Override
     public Afspraak resizeAfspraak(Afspraak afspraak, LocalDateTime newStartDate, LocalDateTime newEndDate) {
-        afspraak.setStartDate(newStartDate);
-        afspraak.setEndDate(newEndDate);
+        afspraak.setPlannedStartDate(newStartDate);
+        afspraak.setPlannedEndDate(newEndDate);
         System.out.println("Resizing afspraak : " + afspraak);
         return dataManager.commit(afspraak);
     }

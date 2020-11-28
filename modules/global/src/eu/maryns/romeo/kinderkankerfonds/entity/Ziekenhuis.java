@@ -1,5 +1,6 @@
 package eu.maryns.romeo.kinderkankerfonds.entity;
 
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.CaseConversion;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
@@ -21,7 +22,8 @@ public class Ziekenhuis extends StandardClientEntity {
     @Column(name = "AFKORTING")
     protected String afkorting;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @Composition
+    @OneToOne
     @OnDelete(DeletePolicy.CASCADE)
     @JoinColumn(name = "ADRES_ID")
     protected Adres adres;
@@ -29,6 +31,7 @@ public class Ziekenhuis extends StandardClientEntity {
     @OneToMany(mappedBy = "ziekenhuis")
     protected List<Persoon> contactpersonen;
 
+    @Composition
     @OneToMany(mappedBy = "ziekenhuis")
     protected List<Notitie> notities;
 

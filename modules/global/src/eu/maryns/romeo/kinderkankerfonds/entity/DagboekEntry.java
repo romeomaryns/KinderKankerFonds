@@ -1,11 +1,9 @@
 package eu.maryns.romeo.kinderkankerfonds.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 
 @NamePattern("%s|tekst")
@@ -17,7 +15,7 @@ public class DagboekEntry extends StandardClientEntity {
     @Column(name = "TEXT")
     protected String tekst;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "PERSOON_ID")
     protected Persoon auteur;
 

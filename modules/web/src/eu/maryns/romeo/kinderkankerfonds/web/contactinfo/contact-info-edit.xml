@@ -1,92 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://editorCaption"
-        class="eu.maryns.romeo.kinderkankerfonds.web.contactinfo.ContactInfoEdit"
-        datasource="contactInfoDs"
-        focusComponent="fieldGroup"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://contactInfoEdit.caption"
+        focusComponent="form"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.contactinfo">
-    <dsContext>
-        <datasource id="contactInfoDs"
-                    class="eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo"
-                    view="contactInfo-view-full">
-            <collectionDatasource id="notitiesDs"
-                                  property="notities"/>
-        </datasource>
-        <collectionDatasource id="persoonsDs"
-                              class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
-                              view="_minimal">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$Persoon e]]>
-            </query>
-        </collectionDatasource>
-    </dsContext>
+    <data>
+        <instance id="contactInfoDc"
+                  class="eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo">
+            <view extends="_local">
+                <property name="persoon" view="_minimal"/>
+                <property name="notities" view="_minimal"/>
+            </view>
+            <loader/>
+            <collection id="notitiesDc" property="notities"/>
+        </instance>
+    </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="windowActions"
-            spacing="true">
-        <groupBox caption="Persoon">
-            <lookupPickerField id="persoonLookupPickerField"
-                               datasource="contactInfoDs"
-                               nullOptionVisible="false"
-                               optionsDatasource="persoonsDs"
-                               property="persoon"
-                               stylename="borderless"
-                               width="100%"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="contactInfoDc">
+            <column width="350px">
+                <pickerField id="persoonField" property="persoon"/>
+                <textField id="telefoonField" property="telefoon"/>
+                <textField id="gsmField" property="gsm"/>
+                <textField id="emailField" property="email"/>
+                <checkBox id="actiefField" property="actief"/>
+            </column>
+        </form>
+        <groupBox id="notitiesBox" caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/ContactInfo.notities">
+            <table id="notitiesTable" dataContainer="notitiesDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="omschrijving"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="notitiesTable.create" caption="mainMsg://button.create"/>
+                    <button action="notitiesTable.edit" caption="mainMsg://button.edit"/>
+                    <button action="notitiesTable.remove" caption="mainMsg://button.remove"/>
+                </buttonsPanel>
+            </table>
         </groupBox>
-        <tabSheet tabCaptionsAsHtml="true">
-            <tab id="algemeenTab"
-                 caption="Algemeen"
-                 icon="CHEVRON_RIGHT"
-                 margin="true,false,false,false"
-                 spacing="true">
-                <fieldGroup id="fieldGroup"
-                            datasource="contactInfoDs"
-                            height="100%">
-                    <column width="250px">
-                        <field property="telefoon"/>
-                        <field property="gsm"/>
-                        <field property="email"/>
-                        <field property="actief"/>
-                    </column>
-                </fieldGroup>
-            </tab>
-            <tab id="notitiesTab"
-                 caption="Notities"
-                 icon="COMMENTS_O"
-                 lazy="true"
-                 margin="true,false,false,false"
-                 spacing="true">
-                <table id="notitiesTable"
-                       height="100%"
-                       width="100%">
-                    <actions>
-                        <action id="create"
-                                caption="mainMsg://button.create"
-                                icon="ADD_ACTION"
-                                openType="DIALOG"/>
-                        <action id="edit"
-                                caption="mainMsg://button.edit"
-                                icon="EDIT_ACTION"/>
-                        <action id="remove"
-                                caption="mainMsg://button.remove"
-                                icon="REMOVE_ACTION"/>
-                    </actions>
-                    <columns>
-                        <column id="omschrijving"/>
-                    </columns>
-                    <rows datasource="notitiesDs"/>
-                    <buttonsPanel>
-                        <button id="create"
-                                action="notitiesTable.create"/>
-                        <button id="editButton"
-                                action="notitiesTable.edit"/>
-                        <button id="remove"
-                                action="notitiesTable.remove"/>
-                    </buttonsPanel>
-                </table>
-            </tab>
-        </tabSheet>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
     </layout>
 </window>

@@ -288,3 +288,19 @@ UPDATE kinderkankerfonds_relatie SET client = 1;
 UPDATE kinderkankerfonds_relatie_type SET client = 1;
 UPDATE kinderkankerfonds_ziekenhuis SET client = 1;
 
+
+
+Keystore procedure :
+    cd test
+    openssl genrsa -out myCA.key
+    openssl req -x509 -new -nodes -key myCA.key -sha256 -days 825 -out myCA.pem
+    cd ..
+    ls
+    keytool -keystore keystore.jks -alias jetty -genkey -keyalg RSA -validity 825
+    ls
+    keytool -keystore keystore.jks -certreq --alias jetty -keyalg rsa -file jetty.csr
+    openssl x509 -req -CA test/myCA.pem -CAkey test/myCA.key -in jetty.csr -out jetty.cer -days 825 -CAcreateserial
+    keytool -import -keystore keystore.jks -file test/myCA.pem -alias theCARoot
+    keytool -import -keystore keystore.jks -file jetty.cer -alias jetty
+    
+

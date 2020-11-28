@@ -1,8 +1,11 @@
 package eu.maryns.romeo.kinderkankerfonds.entity;
 
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,6 +30,8 @@ public class ContactInfo extends StandardClientEntity {
     @JoinColumn(name = "PERSOON_ID")
     protected Persoon persoon;
 
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "contactinfo")
     protected List<Notitie> notities;
 

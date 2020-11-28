@@ -1,5 +1,6 @@
 package eu.maryns.romeo.kinderkankerfonds.web.notitie;
 
+import com.haulmont.cuba.core.global.PersistenceHelper;
 import com.haulmont.cuba.gui.UiComponents;
 import com.haulmont.cuba.gui.actions.picker.ClearAction;
 import com.haulmont.cuba.gui.actions.picker.LookupAction;
@@ -39,7 +40,13 @@ public class NotitieEdit extends StandardEditor<Notitie> {
         System.out.println("Notitie in Init : " + notitie);
         if(notitie != null) {
             System.out.println("on Init notitie is not null");
-            try{
+
+            if (PersistenceHelper.isNew(getEditedEntity())) {
+                System.out.println("edited Entity is NEW");
+                getScreenData().getDataContext().commit();
+                getScreenData().loadAll();
+            }
+            try {
                 Adres adres = notitie.getAdressen();
                 if (adres != null) {
                     System.out.println("Adres : " + adres.toString());

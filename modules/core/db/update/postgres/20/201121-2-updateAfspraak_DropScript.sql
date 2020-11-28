@@ -1,0 +1,1 @@
+alter table KINDERKANKERFONDS_AFSPRAAK drop column AFDELING_ID__U13729 cascade ;

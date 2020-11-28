@@ -14,6 +14,8 @@ create table KINDERKANKERFONDS_PERSOON (
     FAMILIENAAM varchar(255),
     AANSPREKING1 varchar(255),
     AANSPREKING2 varchar(255),
+    VADER varchar(255),
+    MOEDER varchar(255),
     GEBOORTEDATUM date,
     OVERLIJDENSDATUM date,
     FAMILIEDAG boolean,
@@ -27,6 +29,7 @@ create table KINDERKANKERFONDS_PERSOON (
     GESLACHT_ID uuid,
     ZIEKENHUIS_ID uuid,
     UNIEKEID varchar(255),
+    AFDELING_ID uuid,
     --
     primary key (ID)
 )^
@@ -256,7 +259,6 @@ create table KINDERKANKERFONDS_AFSPRAAK (
     PLANNED_START_DATE timestamp,
     PLANNED_END_DATE timestamp,
     PERSOON_ID uuid,
-    AFDELING_ID uuid,
     DESCRIPTION varchar(255),
     KALENDER_KLEUR_ID uuid,
     INGEPLAND_ID uuid,

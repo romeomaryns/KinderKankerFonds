@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
 
 public interface AfsprakenService {
     String NAME = "kinderkankerfonds_AfsprakenService";
-
-    Afspraak verzetAfspraak(Afspraak afspraak, LocalDateTime newStartDate);
     void verwijderAfspraak(Afspraak afspraak);
 
     Afspraak resizeAfspraak(Afspraak entity, LocalDateTime newStart, LocalDateTime newEnd);

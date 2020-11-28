@@ -6,7 +6,10 @@ import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @NamePattern(" %s: |type,persoonDoel")
 @Table(name = "KINDERKANKERFONDS_RELATIE")
@@ -15,30 +18,18 @@ public class Relatie extends StandardClientEntity {
     private static final long serialVersionUID = -371006789725188469L;
 
     @Lookup(type = LookupType.DROPDOWN)
-    @OnDelete(DeletePolicy.CASCADE)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(DeletePolicy.UNLINK)
+    @ManyToOne
     @JoinColumn(name = "TYPE_ID")
     protected RelatieType type;
 
-
-
-
-
-
-
-
-
-
-
-
-
     @Lookup(type = LookupType.SCREEN, actions = {"lookup", "open", "clear"})
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "PERSOON_ORIGINE_ID")
     protected Persoon persoonOrigine;
 
     @Lookup(type = LookupType.SCREEN, actions = {"lookup", "open", "clear"})
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "PERSOON_DOEL_ID")
     protected Persoon persoonDoel;
 

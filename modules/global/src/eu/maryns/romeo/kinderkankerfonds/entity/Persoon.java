@@ -8,6 +8,7 @@ import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.Past;
 import java.util.Date;
@@ -19,6 +20,7 @@ import java.util.List;
 public class Persoon extends StandardClientEntity {
     private static final long serialVersionUID = 5417610545967716680L;
 
+    @Nullable
     @Column(name = "VOORNAAM")
     protected String voornaam;
 
@@ -30,6 +32,13 @@ public class Persoon extends StandardClientEntity {
 
     @Column(name = "AANSPREKING2")
     protected String aanspreking2;
+
+    @Column(name = "VADER")
+    protected String vader;
+
+    @Column(name = "MOEDER")
+    protected String moeder;
+
 
     @Temporal(TemporalType.DATE)
     @Past(message = "geboortedatum moet in het verleden liggen")
@@ -66,12 +75,12 @@ public class Persoon extends StandardClientEntity {
 
     @Lookup(type = LookupType.DROPDOWN)
     @OnDeleteInverse(DeletePolicy.UNLINK)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "GESLACHT_ID")
     protected Geslacht geslacht;
 
     @Lookup(type = LookupType.DROPDOWN)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ZIEKENHUIS_ID")
     protected Ziekenhuis ziekenhuis;
 
@@ -81,6 +90,7 @@ public class Persoon extends StandardClientEntity {
     @ManyToMany
     protected List<Categorie> categorieen;
 
+    @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "persoon")
     protected List<ContactInfo> contactinfo;
 
@@ -93,11 +103,17 @@ public class Persoon extends StandardClientEntity {
     @OnDelete(DeletePolicy.CASCADE)
     protected List<Relatie> relaties;
 
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "persoon")
     protected List<Notitie> notities;
 
     @Column(name = "UNIEKEID", unique = true)
     protected String uniekeid;
+
+    @ManyToOne
+    @JoinColumn(name = "AFDELING_ID")
+    protected Afdeling afdeling;
 
     public void setCategorieen(List<Categorie> categorieen) {
         this.categorieen = categorieen;
@@ -290,5 +306,29 @@ public class Persoon extends StandardClientEntity {
 
     public void setPersoneel(Boolean personeel) {
         this.personeel = personeel;
+    }
+
+    public Afdeling getAfdeling() {
+        return afdeling;
+    }
+
+    public void setAfdeling(Afdeling afdeling) {
+        this.afdeling = afdeling;
+    }
+
+    public String getVader() {
+        return vader;
+    }
+
+    public void setVader(String vader) {
+        this.vader = vader;
+    }
+
+    public String getMoeder() {
+        return moeder;
+    }
+
+    public void setMoeder(String moeder) {
+        this.moeder = moeder;
     }
 }

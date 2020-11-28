@@ -1,44 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://browseCaption"
-        class="eu.maryns.romeo.kinderkankerfonds.web.persoon.PersoonBrowse"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://persoonBrowse.caption"
         focusComponent="persoonsTable"
-        lookupComponent="persoonsTable"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.persoon">
-    <dsContext>
-        <groupDatasource id="persoonsDs"
-                         class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
-                         view="persoon-browse-view">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$Persoon e]]>
-            </query>
-        </groupDatasource>
-    </dsContext>
+    <data readOnly="true">
+        <collection id="persoonsDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
+                    view="persoon-browse-view">
+            <loader id="persoonsDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Persoon e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="persoonsTable"
             spacing="true">
         <filter id="filter"
                 applyTo="persoonsTable"
-                datasource="persoonsDs">
+                dataLoader="persoonsDl">
             <properties include=".*"/>
         </filter>
         <groupTable id="persoonsTable"
-                    multiselect="true"
-                    width="100%">
+                    width="100%"
+                    dataContainer="persoonsDc">
             <actions>
-                <action id="create"
-                        caption="mainMsg://button.create"
-                        icon="ADD_ACTION"/>
-                <action id="edit"
-                        caption="mainMsg://button.edit"
-                        icon="EDIT_ACTION"/>
-                <action id="remove"
-                        caption="mainMsg://button.remove"
-                        icon="REMOVE_ACTION"/>
-                <action id="excel"
-                        caption="mainMsg://button.excel"
-                        icon="EXCEL_ACTION"/>
+                <action id="create" type="create" caption="mainMsg://button.create" icon="ADD_ACTION"/>
+                <action id="edit" type="edit" caption="mainMsg://button.edit" icon="EDIT_ACTION"/>
+                <action id="remove" type="remove" caption="mainMsg://button.remove" icon="REMOVE_ACTION"/>
+                <action id="refresh" type="refresh" caption="mainMsg://button.refresh" icon="REFRESH_ACTION"/>
+                <action id="excel" type="excel" caption="mainMsg://button.excel" icon="EXCEL_ACTION"/>
             </actions>
             <columns>
                 <column id="voornaam"/>
@@ -59,19 +52,19 @@
                 <column id="adressen"/>
                 <column id="contactinfo"/>
             </columns>
-            <rows datasource="persoonsDs"/>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn"
-                        action="persoonsTable.create"/>
-                <button id="editBtn"
-                        action="persoonsTable.edit"/>
-                <button id="removeBtn"
-                        action="persoonsTable.remove"/>
-                <button id="excelButton"
-                        action="persoonsTable.excel"/>
+                <button id="createBtn" action="persoonsTable.create"/>
+                <button id="editBtn" action="persoonsTable.edit"/>
+                <button id="refreshBtn" action="persoonsTable.refresh"/>
+                <button id="removeBtn" action="persoonsTable.remove"/>
+                <button id="excelBtn" action="persoonsTable.excel"/>
             </buttonsPanel>
         </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
     </layout>
 </window>

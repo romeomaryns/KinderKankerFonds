@@ -1,111 +1,102 @@
 package eu.maryns.romeo.kinderkankerfonds.web.afspraak;
 
 import com.haulmont.cuba.core.global.Metadata;
-import com.haulmont.cuba.gui.ScreenBuilders;
-import com.haulmont.cuba.gui.components.Button;
-import com.haulmont.cuba.gui.components.GroupTable;
+import com.haulmont.cuba.core.global.MetadataTools;
+import com.haulmont.cuba.gui.UiComponents;
+import com.haulmont.cuba.gui.components.Component;
+import com.haulmont.cuba.gui.components.Label;
+import com.haulmont.cuba.gui.components.SuggestionPickerField;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.InstanceContainer;
-import com.haulmont.cuba.gui.model.InstanceLoader;
 import com.haulmont.cuba.gui.screen.*;
-import eu.maryns.romeo.kinderkankerfonds.entity.*;
-import eu.maryns.romeo.kinderkankerfonds.web.notitie.NotitieEdit;
+import eu.maryns.romeo.kinderkankerfonds.entity.Afspraak;
+import eu.maryns.romeo.kinderkankerfonds.entity.Notitie;
+import eu.maryns.romeo.kinderkankerfonds.entity.Persoon;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @UiController("kinderkankerfonds_Afspraak.edit")
 @UiDescriptor("afspraak-edit.xml")
-@EditedEntityContainer("afsprakenDc")
-//@LoadDataBeforeShow
+@EditedEntityContainer("afspraakDc")
+@LoadDataBeforeShow
 public class AfspraakEdit extends StandardEditor<Afspraak> {
+    @Inject
+    private UiComponents uiComponents;
+    @Inject
+    private Metadata metadata;
+    @Inject
+    private InstanceContainer<Afspraak> afspraakDc;
 
     @Inject
-    private CollectionLoader<Notitie> geselecteerdeAfspraakNotitiesDl;
-
-    @Inject
-    private ScreenBuilders screenBuilders;
-
+    private CollectionContainer<Persoon> personenDc;
     @Inject
     private CollectionLoader<Persoon> personenDl;
     @Inject
-    private CollectionLoader<KalenderKleur> kleurenDl;
+    private SuggestionPickerField<Persoon> persoonSuggestionField;
     @Inject
-    private CollectionContainer<Notitie> notitiesDs;
-
+    private SuggestionPickerField<Persoon> ingeplandSuggestionField;
     @Inject
-    private GroupTable<Notitie> notitiesTable;
-
+    private SuggestionPickerField<Persoon> uitgevoerdSuggestionField;
     @Inject
-    private CollectionLoader<Afdeling> afdelingDl;
-
-    @Inject
-    private InstanceLoader<Afspraak> alleAfsprakenDl;
+    private MetadataTools metadataTools;
 
     @Subscribe
-    protected void onBeforeShow(BeforeShowEvent event)
-    {
-        Afspraak afspraak =getEditedEntity();
-        if(null != afspraak && null != afspraak.getCreateTs()) {
-            System.out.println("Edited Entity start : " + getEditedEntity().getPlannedStartDate());
-            System.out.println("Edited Entity end : " + getEditedEntity().getPlannedEndDate());
-            getScreenData().loadAll();
+    public void onAfterInit(AfterInitEvent event) {
+        Afspraak afspraak = metadata.create(Afspraak.class);
+        afspraakDc.setItem(afspraak);
+
+        personenDl.load();
+        List<Persoon> personen = new ArrayList<>(personenDc.getItems());
+        persoonSuggestionField.setSearchExecutor((searchString, searchParams) ->
+                personen.stream()
+                        .filter(persoon ->
+                                StringUtils.containsIgnoreCase(metadataTools.getInstanceName(persoon), searchString))
+                        .collect(Collectors.toList()));
+        ingeplandSuggestionField.setSearchExecutor((searchString, searchParams) ->
+                personen.stream()
+                        .filter(persoon ->
+                                StringUtils.containsIgnoreCase(metadataTools.getInstanceName(persoon), searchString))
+                        .collect(Collectors.toList()));
+        uitgevoerdSuggestionField.setSearchExecutor((searchString, searchParams) ->
+                personen.stream()
+                        .filter(persoon ->
+                                StringUtils.containsIgnoreCase(metadataTools.getInstanceName(persoon), searchString))
+                        .collect(Collectors.toList()));
+
+    }
+/*
+    @Inject
+    private InstanceContainer<Afspraak> afsprakenDc;
+    @Inject
+    private Metadata metadata;
+    @Inject
+    private InstanceLoader<Afspraak> afspraakDl;*/
+/*
+    @Subscribe
+    public void onInitEntity(InitEntityEvent<Afspraak> event) {
+        System.out.println("OnInitEntity " + event.getEntity().toString());
+        //   afspraakDl.load();
+        //Afspraak afspraak = metadata.create(Afspraak.class);
+        Afspraak afspraak = new Afspraak();
+        afsprakenDc.setItem(afspraak);
+        getScreenData().loadAll();
+    }*/
+
+
+    public Component renderHtmlDescription(Notitie entity) {
+
+        Label label = uiComponents.create(Label.class);
+        label.setHtmlEnabled(true);
+        try {
+            label.setValue(entity.getOmschrijving());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        else {
-            //alleAfsprakenDl.load();
-            afdelingDl.load();
-            personenDl.load();
-            kleurenDl.load();
-        }
+        return label;
     }
-
-    @Subscribe(id = "afsprakenDc", target = Target.DATA_CONTAINER)
-    public void onAfsprakenDcItemChange(InstanceContainer.ItemChangeEvent<Afspraak> event) {
-        geselecteerdeAfspraakNotitiesDl.setParameter("afspraak",event.getItem());
-        geselecteerdeAfspraakNotitiesDl.load();
-    }
-
-    @Subscribe("createBtn")
-    public void onCreateBtnClick(Button.ClickEvent event) {
-        screenBuilders.editor(Notitie.class,this)
-                .withScreenClass(NotitieEdit.class)
-                .newEntity()
-                .withOpenMode(OpenMode.DIALOG)
-                .withInitializer(notitie -> {
-                            notitie.setAfspraak((Afspraak) geselecteerdeAfspraakNotitiesDl.getParameter("afspraak"));
-                        }
-                )
-                .withAfterCloseListener(notitieEditAfterScreenCloseEvent -> {
-                    CloseAction closeAction = notitieEditAfterScreenCloseEvent.getCloseAction();
-                    if(closeAction.equals(WINDOW_COMMIT_AND_CLOSE_ACTION)){
-                        Notitie editedEntity = notitieEditAfterScreenCloseEvent.getScreen().getEditedEntity();
-                        notitiesDs.replaceItem(editedEntity);
-                        geselecteerdeAfspraakNotitiesDl.load();
-                    }
-                }).show();
-    }
-
-    @Subscribe("editBtn")
-    public void onEditBtnClick(Button.ClickEvent event) {
-         screenBuilders.editor(notitiesTable)
-                .withScreenClass(NotitieEdit.class)
-                .withOpenMode(OpenMode.DIALOG)
-               // .editEntity(notitiesTable.getSingleSelected())
-                .withAfterCloseListener(notitieEditAfterScreenCloseEvent -> {
-                    CloseAction closeAction = notitieEditAfterScreenCloseEvent.getCloseAction();
-                    if(closeAction.equals(WINDOW_COMMIT_AND_CLOSE_ACTION)){
-                        Notitie editedEntity = notitieEditAfterScreenCloseEvent.getScreen().getEditedEntity();
-                        notitiesDs.replaceItem(editedEntity);
-                        geselecteerdeAfspraakNotitiesDl.load();
-                    }
-                }).show();
-    }
-    
-    
-    
-    
-
-
-
 }

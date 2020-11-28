@@ -3,8 +3,7 @@
     <view class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
           extends="_local"
           name="persoon-browse-view">
-        <property fetch="AUTO"
-                  name="adressen"
+        <property name="adressen"
                   view="_local">
             <property name="type"
                       view="_minimal"/>
@@ -15,6 +14,7 @@
             <property name="notities"
                       view="_minimal"/>
         </property>
+        <property name="afdeling" view="_local"/>
         <property name="geslacht"
                   view="_minimal"/>
         <property name="relaties"
@@ -29,7 +29,7 @@
             <property name="actief"/>
         </property>
         <property name="notities"
-                  view="_minimal"/>
+                  view="notitie-view-full"/>
         <property name="categorieen"
                   view="_minimal">
             <property name="personen"
@@ -39,8 +39,7 @@
     <view class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
           extends="_local"
           name="adres-full-view">
-        <property fetch="AUTO"
-                  name="persoon"
+        <property name="persoon"
                   view="_minimal">
             <property name="geboortedatum"/>
             <property name="geslacht"
@@ -53,8 +52,7 @@
             <property name="actief"/>
             <property name="ziekenhuis"
                       view="_minimal"/>
-            <property fetch="AUTO"
-                      name="contactinfo"
+            <property name="contactinfo"
                       view="_minimal"/>
             <property name="relaties"
                       view="_minimal">
@@ -90,17 +88,16 @@
         <property name="contactinfo"
                   view="_local"/>
         <property name="persoon"
-                  view="_base">
-            <property name="actief"/>
+                  view="_local">
         </property>
         <property name="adressen"
-                  view="_base">
+                  view="_local">
             <property name="actief"/>
         </property>
         <property name="ziekenhuis"
-                  view="_base"/>
+                  view="_local"/>
         <property name="afspraak"
-                  view="_minimal">
+                  view="_local">
         </property>
         <property name="createdBy" />
         <property name="createTs"/>
@@ -109,9 +106,13 @@
           extends="_local"
           name="contactInfo-view-full">
         <property name="persoon"
-                  view="_minimal"/>
+                  view="_local"/>
         <property name="notities"
-                  view="_minimal"/>
+                  view="_local"/>
+        <property name="email"/>
+        <property name="actief"/>
+        <property name="telefoon"/>
+        <property name="gsm"/>
     </view>
     <view class="eu.maryns.romeo.kinderkankerfonds.entity.Ziekenhuis"
           extends="_local"
@@ -136,28 +137,27 @@
     <view entity="kinderkankerfonds_Afspraak"
           extends="_local"
           name="afspraak-full-view">
-        <property name="persoon" fetch="JOIN" view="_local"/>
-        <property name="notities" fetch="JOIN" view="_local"/>
-        <property name="afdeling" fetch="JOIN" view="_local"/>
-        <property name="ingepland" fetch="JOIN" view="_local"/>
-        <property name="uitgevoerd" fetch="JOIN" view="_local"/>
-        <property name="createdBy" />
-        <property name="createTs" />
-        <property name="updatedBy" />
+        <property name="persoon" view="persoon-browse-view"/>
+        <property name="notities" view="notitie-view-full"/>
+        <property name="ingepland" view="_local"/>
+        <property name="uitgevoerd" view="_local"/>
+        <property name="createdBy"/>
+        <property name="createTs"/>
+        <property name="updatedBy"/>
         <property name="updateTs"/>
         <property name="topic"/>
         <property name="description"/>
         <property name="startDate"/>
-        <property name ="endDate"/>
+        <property name="endDate"/>
         <property name="plannedStartDate"/>
         <property name="plannedEndDate"/>
         <property name="duration"/>
         <property name="plannedDuration"/>
         <property name="kleur"/>
-        <property name="kalenderKleur" fetch="JOIN" view="_local"/>
+        <property name="kalenderKleur" view="_local"/>
     </view>
     <view entity="kinderkankerfonds_DagboekEntry" name="dagboekEntry-view" extends="_local">
-        <property name="auteur" fetch="JOIN" view="_local"/>
+        <property name="auteur" view="_local"/>
         <property name="createdBy" />
         <property name="createTs"/>
         <property name="updatedBy" />

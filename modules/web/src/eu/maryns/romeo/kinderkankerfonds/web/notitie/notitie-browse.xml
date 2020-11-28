@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://notitieBrowse.caption"
         focusComponent="notitiesTable"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.notitie">
     <data readOnly="true">
         <collection id="notitiesDc"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Notitie"
-                    view="notitie-view-full">
+        >
+            <view extends="_local">
+                <property name="adressen" view="_minimal">
+                    <property name="categorie" view="_minimal"/>
+                </property>
+                <property name="ziekenhuis" view="_minimal"/>
+                <property name="contactinfo" view="_minimal"/>
+                <property name="persoon" view="_minimal"/>
+                <property name="afspraak" view="afspraak-full-view"/>
+            </view>
             <loader id="notitiesDl">
                 <query>
                     <![CDATA[select e from kinderkankerfonds$Notitie e]]>
@@ -26,6 +34,7 @@
         </filter>
         <groupTable id="notitiesTable"
                     width="100%"
+                    multiselect="true"
                     dataContainer="notitiesDc">
             <actions>
                 <action id="create" type="create" caption="mainMsg://button.create"/>
@@ -39,7 +48,8 @@
                 <column id="adressen" caption="Adres" link="true" linkScreen="kinderkankerfonds$Adres.edit" linkScreenOpenType="DIALOG"/>
                 <column id="ziekenhuis" caption="Ziekenhuis" link="true" linkScreen="kinderkankerfonds$Ziekenhuis.edit" linkScreenOpenType="DIALOG"/>
                 <column id="contactinfo" caption="Contactinfo" link="true" linkScreen="kinderkankerfonds$ContactInfo.edit" linkScreenOpenType="DIALOG"/>
-                <column id="persoon" caption="Persoon" link="true" linkScreen="kinderkankerfonds$Persoon.edit" linkScreenOpenType="DIALOG"/>
+                <column id="persoon" caption="Persoon" link="true" linkScreen="kinderkankerfonds$Persoon.edit"
+                        linkScreenOpenType="DIALOG"/>
                 <column id="afspraak" caption="Afspraak" link="true" linkScreen="kinderkankerfonds_Afspraak.edit" linkScreenOpenType="DIALOG"/>
             </columns>
             <rowsCount/>

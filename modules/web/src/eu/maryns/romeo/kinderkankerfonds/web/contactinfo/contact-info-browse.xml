@@ -1,70 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://browseCaption"
-        class="eu.maryns.romeo.kinderkankerfonds.web.contactinfo.ContactInfoBrowse"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://contactInfoBrowse.caption"
         focusComponent="contactInfoesTable"
-        lookupComponent="contactInfoesTable"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.contactinfo">
-    <dsContext>
-        <groupDatasource id="contactInfoesDs"
-                         class="eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo"
-                         view="contactInfo-view-full">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$ContactInfo e]]>
-            </query>
-            <datasource id="persoonDs"
-                        property="persoon"/>
-        </groupDatasource>
-    </dsContext>
+    <data readOnly="true">
+        <collection id="contactInfoesDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.ContactInfo">
+            <view extends="_local">
+                <property name="persoon" view="_minimal"/>
+                <property name="notities" view="_minimal"/>
+            </view>
+            <loader id="contactInfoesDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$ContactInfo e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="contactInfoesTable"
             spacing="true">
         <filter id="filter"
                 applyTo="contactInfoesTable"
-                datasource="contactInfoesDs">
+                dataLoader="contactInfoesDl">
             <properties include=".*"/>
         </filter>
         <groupTable id="contactInfoesTable"
-                    multiselect="true"
-                    width="100%">
+                    width="100%"
+                    dataContainer="contactInfoesDc"
+                    multiselect="true">
             <actions>
-                <action id="create"
-                        caption="mainMsg://button.create"
-                        icon="ADD_ACTION"/>
-                <action id="edit"
-                        caption="mainMsg://button.edit"
-                        icon="EDIT_ACTION"/>
-                <action id="remove"
-                        caption="mainMsg://button.remove"
-                        icon="REMOVE_ACTION"/>
-                <action id="excel"
-                        caption="mainMsg://button.excel"
-                        icon="EXCEL_ACTION"/>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="refresh" type="refresh"/>
+                <action id="excel" type="excel"/>
             </actions>
             <columns>
                 <column id="telefoon"/>
                 <column id="gsm"/>
                 <column id="email"/>
-                <column id="persoon"
-                        link="true"
-                        linkScreen="kinderkankerfonds$Persoon.edit"
-                        linkScreenOpenType="THIS_TAB"/>
+                <column id="persoon"/>
                 <column id="actief"/>
             </columns>
-            <rows datasource="contactInfoesDs"/>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn"
-                        action="contactInfoesTable.create"/>
-                <button id="editBtn"
-                        action="contactInfoesTable.edit"/>
-                <button id="removeBtn"
-                        action="contactInfoesTable.remove"/>
-                <button id="excelButton"
-                        action="contactInfoesTable.excel"/>
+                <button id="createBtn" action="contactInfoesTable.create" caption="mainMsg://button.create"/>
+                <button id="editBtn" action="contactInfoesTable.edit" caption="mainMsg://button.edit"/>
+                <button id="removeBtn" action="contactInfoesTable.remove" caption="mainMsg://button.remove"/>
+                <button id="refreshBtn" action="contactInfoesTable.refresh" caption="mainMsg://button.refresh"/>
+                <button id="excelBtn" action="contactInfoesTable.excel" caption="mainMsg://button.excel"/>
             </buttonsPanel>
         </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
     </layout>
 </window>

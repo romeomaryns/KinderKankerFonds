@@ -1,46 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://browseCaption"
-        class="eu.maryns.romeo.kinderkankerfonds.web.adres.AdresBrowse"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://adresBrowse.caption"
         focusComponent="adresesTable"
-        lookupComponent="adresesTable"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.adres">
-    <dsContext>
-        <groupDatasource id="adresesDs"
-                         class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
-                         view="adres-full-view">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$Adres e]]>
-            </query>
-            <collectionDatasource id="notitiesDs"
-                                  property="notities"/>
-        </groupDatasource>
-    </dsContext>
+    <data readOnly="true">
+        <collection id="adresesDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
+                    view="adres-full-view">
+            <loader id="adresesDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Adres e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
     <dialogMode height="600"
                 width="800"/>
     <layout expand="adresesTable"
             spacing="true">
         <filter id="filter"
                 applyTo="adresesTable"
-                datasource="adresesDs">
+                dataLoader="adresesDl">
             <properties include=".*"/>
         </filter>
         <groupTable id="adresesTable"
-                    multiselect="true"
-                    width="100%">
+                    width="100%"
+                    dataContainer="adresesDc">
             <actions>
-                <action id="create"
-                        caption="mainMsg://button.create"
-                        icon="ADD_ACTION"/>
-                <action id="edit"
-                        caption="mainMsg://button.edit"
-                        icon="EDIT_ACTION"/>
-                <action id="remove"
-                        caption="mainMsg://button.remove"
-                        icon="REMOVE_ACTION"/>
-                <action id="excel"
-                        caption="mainMsg://button.excel"
-                        icon="EXCEL_ACTION"/>
+                <action id="create" type="create" caption="mainMsg://button.create" icon="ADD_ACTION"/>
+                <action id="edit" type="edit" caption="mainMsg://button.edit" icon="EDIT_ACTION"/>
+                <action id="remove" type="remove" caption="mainMsg://button.remove" icon="REMOVE_ACTION"/>
+                <action id="excel" type="excel" caption="mainMsg://button.excel" icon="EXCEL_ACTION"/>
             </actions>
             <columns>
                 <column id="straatnaam"/>
@@ -59,21 +49,21 @@
                 <column id="land"/>
                 <column id="categorie"/>
             </columns>
-            <rows datasource="adresesDs"/>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn"
-                        action="adresesTable.create"/>
-                <button id="editBtn"
-                        action="adresesTable.edit"/>
-                <button id="removeBtn"
-                        action="adresesTable.remove"/>
+                <button id="createBtn" action="adresesTable.create"/>
+                <button id="editBtn" action="adresesTable.edit"/>
+                <button id="removeBtn" action="adresesTable.remove"/>
                 <button id="excelBtn"
                         action="adresesTable.excel"/>
                 <button id="printList"
                         caption="Export"/>
             </buttonsPanel>
         </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
     </layout>
 </window>

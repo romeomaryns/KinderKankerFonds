@@ -18,27 +18,27 @@ public class Notitie extends StandardClientEntity {
 
 
     @Lookup(type = LookupType.SCREEN)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ADRESSEN_ID")
     protected Adres adressen;
 
     @Lookup(type = LookupType.DROPDOWN)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ZIEKENHUIS_ID")
     protected Ziekenhuis ziekenhuis;
 
     @Lookup(type = LookupType.SCREEN)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "CONTACTINFO_ID")
     protected ContactInfo contactinfo;
 
     @Lookup(type = LookupType.SCREEN)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "PERSOON_ID")
     protected Persoon persoon;
 
     @Lookup(type = LookupType.SCREEN)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "AFSPRAAK_ID")
     protected Afspraak afspraak;
 

@@ -1,78 +1,89 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="msg://editorCaption"
-        class="eu.maryns.romeo.kinderkankerfonds.web.persoon.PersoonEdit"
-        datasource="persoonDs"
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://persoonEdit.caption"
         focusComponent="fieldGroup"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.persoon">
-    <dsContext>
-        <datasource id="persoonDs"
-                    class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
-                    view="persoon-browse-view">
-            <collectionDatasource id="tagsDs"
-                                  property="categorieen"/>
-            <collectionDatasource id="adressenDs"
-                                  property="adressen"/>
-            <collectionDatasource id="relatiesDs"
-                                  property="relaties"/>
-            <collectionDatasource id="contactinfoDs"
-                                  property="contactinfo"/>
-            <collectionDatasource id="notitiesDs"
-                                  property="notities"/>
-        </datasource>
-        <collectionDatasource id="geslachtsDs"
-                              class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht"
-                              view="_minimal">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$Geslacht e]]>
-            </query>
-        </collectionDatasource>
-        <collectionDatasource id="ziekenhuisesDs"
-                              class="eu.maryns.romeo.kinderkankerfonds.entity.Ziekenhuis"
-                              view="_minimal">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$Ziekenhuis e]]>
-            </query>
-        </collectionDatasource>
-        <collectionDatasource id="categoriesDs"
-                              class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie"
-                              view="_local">
-            <query>
-                <![CDATA[select e from kinderkankerfonds$Categorie e]]>
-            </query>
-        </collectionDatasource>
-    </dsContext>
-    <dialogMode height="600"
-                width="800"/>
-    <layout expand="scrollBox"
-            spacing="true">
+    <data>
+        <instance id="persoonDc"
+                  class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
+                  view="persoon-browse-view">
+            <loader/>
+            <collection id="categorieenDc" property="categorieen"/>
+            <collection id="adressenDc" property="adressen"/>
+            <collection id="contactinfoDc" property="contactinfo"/>
+            <collection id="notitiesDc" property="notities"/>
+            <collection id="relatiesDc" property="relaties"/>
+        </instance>
+        <collection id="geslachtsDc" class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht" view="_minimal">
+            <loader id="geslachtsDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Geslacht e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="ziekenhuisesDc" class="eu.maryns.romeo.kinderkankerfonds.entity.Ziekenhuis" view="_minimal">
+            <loader id="ziekenhuisesDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Ziekenhuis e]]>
+                </query>
+            </loader>
+        </collection>
+
+        <collection id="categoriesDc" class="eu.maryns.romeo.kinderkankerfonds.entity.Categorie" view="_local">
+            <loader id="categoriesDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Categorie e]]>
+                </query>
+            </loader>
+        </collection>
+
+        <collection id="afdelingenDc" class="eu.maryns.romeo.kinderkankerfonds.entity.Afdeling" view="_local">
+            <loader id="afdelingenDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds_Afdeling e]]>
+                </query>
+            </loader>
+        </collection>
+
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO" resizable="true"/>
+    <layout expand="scrollBox" spacing="true">
         <scrollBox id="scrollBox"
                    spacing="true">
-            <fieldGroup id="fieldGroup"
-                        datasource="persoonDs">
-                <column width="250px">
-                    <field property="voornaam" tabIndex="1" required="true"/>
-                    <field property="familienaam" tabIndex="1" required="true"/>
-                    <field optionsDatasource="geslachtsDs" tabIndex="1"
-                           property="geslacht"/>
-                </column>
-                <column>
-                    <field property="geboortedatum" tabIndex="2"/>
-                    <field property="overlijdensdatum" tabIndex="2"/>
-                    <field optionsDatasource="ziekenhuisesDs" tabIndex="2"
-                           property="ziekenhuis"/>
-                </column>
-                <column>
-                    <field property="aanspreking1" caption="Aanspreking1" tabIndex="3"/>
-                    <field property="aanspreking2" caption="Aanspreking2" tabIndex="3"/>
-                </column>
-                <column>
-                    <field editable="false"
-                           property="uniekeid"
-                           visible="false"/>
-                </column>
-            </fieldGroup>
-            <tabSheet responsive="true"
+            <hbox id="horizontalBox" width="AUTO" spacing="true">
+                <form id="fieldGroup"
+                      dataContainer="persoonDc">
+                    <column width="250px">
+                        <field property="voornaam"/>
+                        <field property="aanspreking1" caption="Aanspreking1"/>
+                        <field property="vader" caption="Vader"/>
+                        <field optionsContainer="geslachtsDc"
+                               property="geslacht"/>
+                    </column>
+                    <column>
+                        <field property="familienaam"/>
+                        <field property="aanspreking2" caption="Aanspreking2"/>
+                        <field property="moeder" caption="Moeder"/>
+                        <field optionsContainer="ziekenhuisesDc"
+                               property="ziekenhuis"/>
+                    </column>
+                    <column>
+                        <field property="geboortedatum"/>
+                        <field property="overlijdensdatum"/>
+                        <field property="afdeling" caption="Afdeling" optionsContainer="afdelingenDc"/>
+                    </column>
+                    <column>
+                        <field editable="false"
+                               property="uniekeid"
+                               visible="false"/>
+                    </column>
+                </form>
+                <vbox id="saveButtonBox">
+                    <button id="saveButton" caption="Bewaren" tabIndex="4" invoke="Save"/>
+                </vbox>
+            </hbox>
+            <tabSheet id="tabSheet" responsive="true"
                       tabCaptionsAsHtml="true">
                 <tab id="algemeenTab"
                      caption="Algemene info"
@@ -81,13 +92,14 @@
                      spacing="true">
                     <groupBox id="tagsBox"
                               caption="Categorieën">
-                        <tokenList datasource="tagsDs"
+                        <tokenList dataContainer="categorieenDc"
+                                   property="naam"
                                    inline="true"
                                    position="TOP"
                                    responsive="true">
                             <clearButton caption="mainMsg://button.clear"
                                          icon="PICKERFIELD_CLEAR"/>
-                            <lookup optionsDatasource="categoriesDs"/>
+                            <lookup optionsContainer="categoriesDc"/>
                         </tokenList>
                     </groupBox>
                     <grid margin="true"
@@ -97,7 +109,7 @@
                             <row>
                                 <label value="Actief"/>
                                 <checkBox id="actiefCheckbox"
-                                          datasource="persoonDs"
+                                          dataContainer="persoonDc"
                                           height="100%"
                                           property="actief"
                                           stylename="onoffswitch"/>
@@ -105,7 +117,7 @@
                             <row>
                                 <label value="Oudercomite"/>
                                 <checkBox id="oudercomiteCheckbox"
-                                          datasource="persoonDs"
+                                          dataContainer="persoonDc"
                                           height="100%"
                                           property="oudercomite"
                                           stylename="onoffswitch"/>
@@ -113,7 +125,7 @@
                             <row>
                                 <label value="Familiedag"/>
                                 <checkBox id="familieCheckbox"
-                                          datasource="persoonDs"
+                                          dataContainer="persoonDc"
                                           height="100%"
                                           property="familiedag"
                                           stylename="onoffswitch"/>
@@ -121,7 +133,7 @@
                             <row>
                                 <label value="Ontmoetingsdag"/>
                                 <checkBox id="ontmoetingsdagCheckbox"
-                                          datasource="persoonDs"
+                                          dataContainer="persoonDc"
                                           height="100%"
                                           property="ontmoetingsdag"
                                           stylename="onoffswitch"/>
@@ -129,7 +141,7 @@
                             <row>
                                 <label value="Raakpunt"/>
                                 <checkBox id="raakpuntCheckbox"
-                                          datasource="persoonDs"
+                                          dataContainer="persoonDc"
                                           height="100%"
                                           property="raakpunt"
                                           stylename="onoffswitch"/>
@@ -137,7 +149,7 @@
                             <row>
                                 <label value="Comfort Forfait"/>
                                 <checkBox id="comfortforfaitCheckbox"
-                                          datasource="persoonDs"
+                                          dataContainer="persoonDc"
                                           height="100%"
                                           property="comfortforfait"
                                           stylename="onoffswitch"/>
@@ -145,7 +157,7 @@
                             <row>
                                 <label value="Palliatief Forfait"/>
                                 <checkBox id="palliatiefforfaitCheckbox"
-                                          datasource="persoonDs"
+                                          dataContainer="persoonDc"
                                           height="100%"
                                           property="palliatiefforfait"
                                           stylename="onoffswitch"/>
@@ -153,7 +165,7 @@
                             <row>
                                 <label value="Personeel"/>
                                 <checkBox id="personeelCheckbox"
-                                          datasource="persoonDs"
+                                          dataContainer="persoonDc"
                                           height="100%"
                                           property="personeel"
                                           stylename="onoffswitch"/>
@@ -164,7 +176,7 @@
                 <tab id="contactinfoTab"
                      caption="Contact info"
                      icon="PHONE"
-                     lazy="true"
+                     lazy="false"
                      margin="true,false,false,false"
                      spacing="true">
                     <groupBox id="contactinfoBox"
@@ -172,15 +184,20 @@
                               height="100%">
                         <table id="contactinfoTable"
                                height="100%"
-                               width="100%">
+                               width="100%"
+                               dataContainer="contactinfoDc"
+                        >
                             <actions>
                                 <action id="create"
+                                        type="create"
                                         caption="mainMsg://button.create"
                                         icon="ADD_ACTION"/>
                                 <action id="edit"
+                                        type="edit"
                                         caption="msg://button.edit"
                                         icon="EDIT_ACTION"/>
                                 <action id="remove"
+                                        type="remove"
                                         caption="mainMsg://button.remove"
                                         icon="REMOVE_ACTION"/>
                             </actions>
@@ -188,8 +205,9 @@
                                 <column id="telefoon"/>
                                 <column id="gsm"/>
                                 <column id="email"/>
+                                <column id="actief"/>
                             </columns>
-                            <rows datasource="contactinfoDs"/>
+                            <rowsCount/>
                             <buttonsPanel>
                                 <button action="contactinfoTable.create"/>
                                 <button action="contactinfoTable.edit"/>
@@ -201,7 +219,7 @@
                 <tab id="adressenTab"
                      caption="Adres info"
                      icon="ROAD"
-                     lazy="true"
+                     lazy="false"
                      margin="true,false,false,false"
                      spacing="true">
                     <groupBox id="adressenBox"
@@ -209,15 +227,20 @@
                               height="100%">
                         <table id="adressenTable"
                                height="100%"
-                               width="100%">
+                               width="100%"
+                               dataContainer="adressenDc"
+                        >
                             <actions>
                                 <action id="create"
+                                        type="create"
                                         caption="mainMsg://button.create"
                                         icon="ADD_ACTION"/>
                                 <action id="edit"
+                                        type="edit"
                                         caption="mainMsg://button.edit"
                                         icon="EDIT_ACTION"/>
                                 <action id="remove"
+                                        type="remove"
                                         caption="mainMsg://button.remove"
                                         icon="REMOVE_ACTION"/>
                             </actions>
@@ -233,7 +256,7 @@
                                 <column id="categorie"/>
                                 <column id="notities"/>
                             </columns>
-                            <rows datasource="adressenDs"/>
+                            <rowsCount/>
                             <buttonsPanel>
                                 <button action="adressenTable.create"/>
                                 <button action="adressenTable.edit"/>
@@ -245,7 +268,7 @@
                 <tab id="relatiesTab"
                      caption="Relatie info"
                      icon="RANDOM"
-                     lazy="true"
+                     lazy="false"
                      margin="true,false,false,false"
                      spacing="true">
                     <groupBox id="relatiesBox"
@@ -253,15 +276,20 @@
                               height="100%">
                         <table id="relatiesTable"
                                height="100%"
-                               width="100%">
+                               width="100%"
+                               dataContainer="relatiesDc"
+                        >
                             <actions>
                                 <action id="create"
+                                        type="create"
                                         caption="mainMsg://button.create"
                                         icon="ADD_ACTION"/>
                                 <action id="edit"
+                                        type="edit"
                                         caption="mainMsg://button.edit"
                                         icon="EDIT_ACTION"/>
                                 <action id="remove"
+                                        type="remove"
                                         caption="mainMsg://button.remove"
                                         icon="REMOVE_ACTION"/>
                             </actions>
@@ -276,7 +304,7 @@
                                         linkScreen="kinderkankerfonds$Persoon.edit"
                                         linkScreenOpenType="THIS_TAB"/>
                             </columns>
-                            <rows datasource="relatiesDs"/>
+                            <rowsCount/>
                             <buttonsPanel>
                                 <button action="relatiesTable.create"/>
                                 <button action="relatiesTable.edit"/>
@@ -288,7 +316,7 @@
                 <tab id="notitiesTab"
                      caption="Notities"
                      icon="COMMENTS_O"
-                     lazy="true"
+                     lazy="false"
                      margin="true,false,false,false"
                      spacing="true">
                     <groupBox id="notitiesBox"
@@ -296,22 +324,29 @@
                               height="100%">
                         <table id="notitiesTable"
                                height="100%"
-                               width="100%">
+                               width="100%"
+                               dataContainer="notitiesDc"
+                        >
                             <actions>
                                 <action id="create"
+                                        type="create"
                                         caption="mainMsg://button.create"
                                         icon="ADD_ACTION"/>
                                 <action id="edit"
+                                        type="edit"
                                         caption="mainMsg://button.edit"
                                         icon="EDIT_ACTION"/>
                                 <action id="remove"
+                                        type="remove"
                                         caption="mainMsg://button.remove"
                                         icon="REMOVE_ACTION"/>
                             </actions>
                             <columns>
-                                <column id="omschrijving"/>
+                                <column id="createTs"/>
+                                <column id="createdBy"/>
+                                <column id="omschrijving" generator="renderHtmlDescription"/>
                             </columns>
-                            <rows datasource="notitiesDs"/>
+                            <rowsCount/>
                             <buttonsPanel>
                                 <button action="notitiesTable.create"/>
                                 <button action="notitiesTable.edit"/>
@@ -322,7 +357,9 @@
                 </tab>
             </tabSheet>
         </scrollBox>
-        <frame id="windowActions"
-               screen="editWindowActions"/>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
     </layout>
 </window>

@@ -29,7 +29,7 @@ public class StandardClientEntity extends StandardEntity {
     @PostConstruct
     protected void init() {
         Integer client = AppBeans.get(UserSessionSource.class).getUserSession().getAttribute("client_id");
-        System.out.println("CLIENT in postConstruct : " + client);
+       // System.out.println("CLIENT in postConstruct : " + client);
         if (client == null) {
             throw new IllegalStateException("'client_id' user session attribute is absent. Log in as a client's user.");
         }

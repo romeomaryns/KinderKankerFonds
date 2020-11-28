@@ -1,17 +1,18 @@
 package eu.maryns.romeo.kinderkankerfonds.entity;
 
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-@NamePattern("%s|topic")
+@NamePattern("%s|persoon")
 @Table(name = "KINDERKANKERFONDS_AFSPRAAK")
 @Entity(name = "kinderkankerfonds_Afspraak")
 public class Afspraak extends StandardClientEntity {
@@ -29,29 +30,27 @@ public class Afspraak extends StandardClientEntity {
     @Column(name = "PLANNED_END_DATE")
     protected LocalDateTime plannedEndDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PERSOON_ID")
     protected Persoon persoon;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "AFDELING_ID")
-    protected Afdeling afdeling;
-
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "afspraak")
     protected List<Notitie> notities;
 
     @Column(name = "DESCRIPTION")
     protected String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "KALENDER_KLEUR_ID")
     protected KalenderKleur kalenderKleur;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "INGEPLAND_ID")
     protected Persoon ingepland;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "UITGEVOERD_ID")
     protected Persoon uitgevoerd;
 
@@ -112,11 +111,11 @@ public class Afspraak extends StandardClientEntity {
     }
 
     public Afdeling getAfdeling() {
-        return afdeling;
+        return persoon.getAfdeling();
     }
 
     public void setAfdeling(Afdeling afdeling) {
-        this.afdeling = afdeling;
+        this.persoon.setAfdeling(afdeling);
     }
 
     public Persoon getIngepland() {
@@ -169,13 +168,14 @@ public class Afspraak extends StandardClientEntity {
     }
 
     @Transient
-    @MetaProperty(related = {"persoon","afdeling"})
+    @MetaProperty(related = {"persoon"})
     public String getTopic() {
         String result = "";
-        if(persoon != null )
-            result = persoon.getVoornaam()+" "+persoon.getFamilienaam();
-        if(afdeling != null )
-            result += " : "+afdeling.getNaam();
+        if (persoon != null) {
+            result = persoon.getVoornaam() + " " + persoon.getFamilienaam();
+           /* if (persoon.getAfdeling() != null)
+                result += " : " + persoon.getAfdeling().getNaam();*/
+        }
         return result;
     }
 

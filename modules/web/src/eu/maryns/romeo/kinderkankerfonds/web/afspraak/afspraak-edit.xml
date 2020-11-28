@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://editorCaption"
+        caption="msg://afspraakEdit.caption"
         focusComponent="form"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.afspraak">
     <data>
-        <instance id="afsprakenDc"
-                  class="eu.maryns.romeo.kinderkankerfonds.entity.Afspraak"
-                  view="afspraak-full-view">
-            <loader id="alleAfsprakenDl">
-                <query>
-                    <![CDATA[select e from kinderkankerfonds_Afspraak e]]>
-                </query>
-            </loader>
+        <instance id="afspraakDc"
+                  class="eu.maryns.romeo.kinderkankerfonds.entity.Afspraak">
+            <view extends="afspraak-full-view">
+                <property name="persoon" view="persoon-browse-view" fetch="AUTO"/>
+            </view>
+            <loader/>
+            <collection id="notitiesDc" property="notities"/>
+            <instance id="persoonDc" property="persoon">
+                <instance id="afdelingDc" property="afdeling"/>
+            </instance>
+            <instance id="ingeplandDc" property="ingepland"/>
+            <instance id="uitgevoerdDc" property="uitgevoerd"/>
         </instance>
-        <collection id="personenDc"
-                    class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon"
-                    view="_local">
+        <collection id="personenDc" view="persoon-browse-view" class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon">
             <loader id="personenDl">
                 <query>
                     <![CDATA[select e from kinderkankerfonds$Persoon e]]>
                 </query>
             </loader>
         </collection>
-        <collection id="afdelingDc"
+        <collection id="afdelingenDc"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.Afdeling"
-                    view="_local">
-            <loader id="afdelingDl">
+                    view="_base">
+            <loader id="afdelingenDl">
                 <query>
                     <![CDATA[select e from kinderkankerfonds_Afdeling e]]>
                 </query>
@@ -33,19 +35,10 @@
         </collection>
         <collection id="kleurenDc"
                     class="eu.maryns.romeo.kinderkankerfonds.entity.KalenderKleur"
-                    view="_local">
+                    view="_base">
             <loader id="kleurenDl">
                 <query>
                     <![CDATA[select e from kinderkankerfonds_KalenderKleur e]]>
-                </query>
-            </loader>
-        </collection>
-        <collection id="notitiesDs"
-                             class="eu.maryns.romeo.kinderkankerfonds.entity.Notitie"
-                             view="notitie-view-full">
-            <loader id="geselecteerdeAfspraakNotitiesDl">
-                <query>
-                    <![CDATA[select e from kinderkankerfonds$Notitie e where e.afspraak =:afspraak]]>
                 </query>
             </loader>
         </collection>
@@ -59,39 +52,77 @@
             </loader>
         </collection>
     </data>
-    <dialogMode height="auto"
-                width="auto"/>
+    <dialogMode height="AUTO"
+                width="AUTO" resizable="true"/>
     <layout expand="editActions" spacing="true">
         <tabSheet id="afsprakenTabsheet">
-            <tab id="eventTab" caption="Kalender-event" expand="form" spacing="true" margin="true,false,false,false" >
-                <form id="form" dataContainer="afsprakenDc" >
+            <tab id="eventTab" caption="Kalender-event" expand="form" spacing="true" margin="true,false,false,false"
+                 lazy="false">
+                <form id="form" dataContainer="afspraakDc">
                     <column width="600px">
-                        <lookupPickerField id="persoonPickerField" property="persoon" caption="Bezoeker" optionsContainer="personenDc" />
-                        <lookupPickerField id="afdelingPickerField" property="afdeling" caption="Afdeling" optionsContainer="afdelingDc"/>
-                        <lookupPickerField id="kleurPickerField" property="kalenderKleur" caption="Kleur" optionsContainer="kleurenDc"/>
+                        <suggestionPickerField id="persoonSuggestionField"
+                                               dataContainer="afspraakDc"
+                                               inputPrompt="Bezoeker.."
+                                               property="persoon"
+                                               caption="Bezoeker">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="open" type="picker_open"/>
+                            </actions>
+                        </suggestionPickerField>
+                        <lookupField id="afdelingSuggestionField" dataContainer="persoonDc" inputPrompt="Afdeling .."
+                                     property="afdeling" caption="Afdeling" optionsContainer="afdelingenDc"/>
+                        <lookupField id="kalenderKleurField" property="kalenderKleur" caption="Kleur"
+                                     optionsContainer="kleurenDc" inputPrompt="Kleur .."/>
                         <textField id="topicField" property="topic" caption="Titel"/>
-                        <lookupPickerField id="ingeplandPickerField" property="ingepland" caption="Ingepland door" optionsContainer="personeelDc" />
-                        <dateField id="plannedStartDateField" property="plannedStartDate" caption="Geplande Start"/>
-                        <dateField id="plannedEndDateField" property="plannedEndDate" caption="Gepland Einde"/>
-                        <lookupPickerField id="uitgevoerdPickerField" property="uitgevoerd" caption="Uitgevoerd door" optionsContainer="personeelDc" />
+                        <suggestionPickerField id="ingeplandSuggestionField"
+                                               dataContainer="afspraakDc"
+                                               inputPrompt="Ingepland door.."
+                                               property="ingepland"
+                                               caption="Ingepland door">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="open" type="picker_open"/>
+                            </actions>
+                        </suggestionPickerField>
+                        <dateField id="plannedStartDateField" property="plannedStartDate" caption="Geplande Start"
+                                   required="true"/>
+                        <dateField id="plannedEndDateField" property="plannedEndDate" caption="Gepland Einde"
+                                   required="true"/>
+                        <suggestionPickerField id="uitgevoerdSuggestionField"
+                                               dataContainer="afspraakDc"
+                                               inputPrompt="Uitgevoerd door.."
+                                               property="uitgevoerd" caption="Uitgevoerd door">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="open" type="picker_open"/>
+                            </actions>
+                        </suggestionPickerField>
                         <dateField id="startDateField" property="startDate" caption="Effectieve Start"/>
                         <dateField id="endDateField" property="endDate" caption="Effectief Einde"/>
                         <richTextArea id="descriptionField" property="description" caption="Omschrijving"/>
                     </column>
                     <column width="300px">
-                        <textField id="plannedDurationField" property="plannedDuration" editable="false" caption="Geplande Duur"/>
-                        <textField id="durationField" property="duration" editable="false" caption="Effectieve Duur"/>
-                        <textField id="createTsField" property="createTs" editable="false" caption="Aangemaakt op"/>
-                        <textField id="createdByField" property="createdBy" editable="false" caption="Aangemaakt door"/>
-                        <textField id="updateTsField" property="updateTs" editable="false" caption="Gewijzigd op"/>
-                        <textField id="updatedByField" property="createdBy" editable="false" caption="Gewijzigd door"/>
+                        <textField id="plannedDurationField" property="plannedDuration" editable="false"
+                                   caption="Geplande Duur" enable="false"/>
+                        <textField id="durationField" property="duration" editable="false" caption="Effectieve Duur"
+                                   enable="false"/>
+                        <textField id="createTsField" property="createTs" editable="false" caption="Aangemaakt op"
+                                   enable="false"/>
+                        <textField id="createdByField" property="createdBy" editable="false" caption="Aangemaakt door"
+                                   enable="false"/>
+                        <textField id="updateTsField" property="updateTs" editable="false" caption="Gewijzigd op"
+                                   enable="false"/>
+                        <textField id="updatedByField" property="createdBy" editable="false" caption="Gewijzigd door"
+                                   enable="false"/>
                     </column>
                 </form>
             </tab>
-            <tab id="tableTab" caption="Notities" expand="notitiesTable" spacing="true" margin="true,false,false,false">
+            <tab id="tableTab" caption="Notities" expand="notitiesTable" spacing="true" margin="true,false,false,false"
+                 lazy="false">
                 <groupTable id="notitiesTable"
                             width="100%"
-                            dataContainer="notitiesDs" >
+                            dataContainer="notitiesDc">
                     <actions>
                         <action id="create" type="create" caption="mainMsg://button.create"/>
                         <action id="edit" type="edit" caption="mainMsg://button.edit"/>
@@ -100,8 +131,7 @@
                     <columns>
                         <column id="createTs" caption="Aangemaakt op"/>
                         <column id="createdBy" caption="Aangemaakt door"/>
-                        <column id="omschrijving"
-                                maxTextLength="200"/>
+                        <column id="omschrijving" generator="renderHtmlDescription"/>
                     </columns>
                     <rowsCount/>
                     <buttonsPanel id="buttonsPanel"
@@ -113,9 +143,10 @@
                 </groupTable>
             </tab>
         </tabSheet>
+
         <hbox id="editActions" spacing="true">
-            <button action="windowCommitAndClose"/>
-            <button action="windowClose"/>
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
         </hbox>
     </layout>
 </window>
