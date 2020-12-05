@@ -3,6 +3,7 @@ package eu.maryns.romeo.kinderkankerfonds.entity;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.annotation.IgnoreUserTimeZone;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
@@ -18,15 +19,19 @@ import java.util.List;
 public class Afspraak extends StandardClientEntity {
     private static final long serialVersionUID = -1679199206504790964L;
 
+    @IgnoreUserTimeZone
     @Column(name = "START_DATE")
     protected LocalDateTime startDate;
 
+    @IgnoreUserTimeZone
     @Column(name = "END_DATE")
     protected LocalDateTime endDate;
 
+    @IgnoreUserTimeZone
     @Column(name = "PLANNED_START_DATE")
     protected LocalDateTime plannedStartDate;
 
+    @IgnoreUserTimeZone
     @Column(name = "PLANNED_END_DATE")
     protected LocalDateTime plannedEndDate;
 

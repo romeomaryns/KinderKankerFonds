@@ -130,7 +130,8 @@
                                         <column id="plannedEndDate" caption="Einde" width="20"/>
                                         <column id="persoon.afdeling" caption="Afdeling"/>
                                         <column id="persoon" caption="Bezoeker"/>
-                                        <column id="description" caption="Omschrijving"/>
+                                        <column id="description" caption="Omschrijving"
+                                                generator="renderHtmlDescription"/>
                                         <column id="ingepland" caption="Ingepland"/>
                                         <column id="uitgevoerd" caption="Uitgevoerd"/>
 
@@ -160,7 +161,7 @@
                                         <action id="excel" type="excel" caption="mainMsg://button.excel"/>
                                     </actions>
                                     <columns>
-                                        <column id="tekst" caption="Tekst"/>
+                                        <column id="tekst" caption="Tekst" generator="renderTekstHtmlDescription"/>
                                         <column id="auteur" caption="Auteur"/>
                                         <column id="createTs" caption="Aangemaakt op">
                                             <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"

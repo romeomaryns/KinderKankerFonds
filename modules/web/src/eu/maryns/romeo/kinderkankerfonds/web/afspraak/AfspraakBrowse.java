@@ -2,6 +2,7 @@ package eu.maryns.romeo.kinderkankerfonds.web.afspraak;
 
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
+import com.haulmont.cuba.gui.UiComponents;
 import com.haulmont.cuba.gui.components.Calendar;
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.model.CollectionContainer;
@@ -60,6 +61,8 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
 
     @Inject
     private GroupTable<Afspraak> afspraaksTable;
+    @Inject
+    private UiComponents uiComponents;
 
 
     @Subscribe
@@ -111,23 +114,42 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
         monthsReverse.put("November", 11);
         monthsReverse.put("December", 12);
         maandField.setOptionsMap(monthsReverse);
-
+        setCalendarLocale();
     }
 
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
-        afsprakenCalendar.setDayNames(days);
-        afsprakenCalendar.setMonthNames(months);
+        //   System.out.println ( "locales: " + Arrays.toString ( Locale.getAvailableLocales () ) );
+        setCalendarLocale();
+    }
+
+    private void setCalendarLocale() {
         CubaCalendar vCalendar = afsprakenCalendar.unwrap(CubaCalendar.class);
-        vCalendar.setLocale(Locale.forLanguageTag("nl_BE"));
-        vCalendar.setDayNamesShort(days.values().toArray(new String[0]));
-        vCalendar.setMonthNamesShort(months.values().toArray(new String[0]));
+        //  System.out.println("Locale Before : " + vCalendar.getLocale());
+        Locale locale = new Locale("nl", "BE");
+        vCalendar.setLocale(locale);
+        //   System.out.println("Locale after : " + vCalendar.getLocale().toLanguageTag());
+        //   System.out.println("TimeZone Before : " + afsprakenCalendar.getTimeZone().getDisplayName());
+        vCalendar.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Europe/Brussels")));
+        //  System.out.println("TimeZone After : " + afsprakenCalendar.getTimeZone().getDisplayName());
+
+        //    vCalendar.setMonthNamesShort(months.values().toArray(new String[0]));
+
+        //  System.out.println("dayNames Before : " + vCalendar.getDayNamesShort().length);
+        //  Arrays.stream(vCalendar.getDayNamesShort()).sequential().forEach(dayName -> System.out.println("DayName : " + dayName));
+        // vCalendar.setDayNamesShort(days.values().toArray(new String[0]));
+        //   System.out.println("dayNames after : " + vCalendar.getDayNamesShort().length);
+        Arrays.stream(vCalendar.getDayNamesShort()).sequential().forEach(dayName -> System.out.println("DayName : " + dayName));
+
+        afsprakenCalendar.setDayNames(days);
+        afsprakenCalendar.getDayNames().values().stream().forEach(dayName -> System.out.println("DayName = " + dayName));
+        afsprakenCalendar.setMonthNames(months);
     }
 
 
     @Subscribe("afsprakenCalendar")
-    public void onAfspraakCalendarEventClick(Calendar.CalendarEventClickEvent<LocalDateTime> event){
+    public void onAfspraakCalendarEventClick(Calendar.CalendarEventClickEvent<LocalDateTime> event) {
         System.out.println("onAfspraakCalendarEventClick : " + event);
         screenBuilders.editor(Afspraak.class,this)
                 .withScreenClass(AfspraakEdit.class)
@@ -329,6 +351,7 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
         System.out.println("endDag : " + endDag.toString());*/
         afsprakenCalendar.setStartDate(startDag);
         afsprakenCalendar.setEndDate(endDag);
+        setCalendarLocale();
         //   datesChanged(startDag,endDag);
     }
 /*
@@ -445,8 +468,33 @@ public class AfspraakBrowse extends StandardLookup<Afspraak> {
     @Install(to = "afspraaksTable", subject = "styleProvider")
     protected String afspraakTableStyleProvider(Afspraak afspraak, String property) {
         if (property == null) {
-            return "table-style-"+afspraak.getKleur();
+            return "table-style-" + afspraak.getKleur();
         }
         return null;
+    }
+
+
+    public Component renderTekstHtmlDescription(DagboekEntry dagboekEntry) {
+
+        Label label = uiComponents.create(Label.class);
+        label.setHtmlEnabled(true);
+        try {
+            label.setValue(dagboekEntry.getTekst());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return label;
+    }
+
+    public Component renderHtmlDescription(Afspraak afspraak) {
+
+        Label label = uiComponents.create(Label.class);
+        label.setHtmlEnabled(true);
+        try {
+            label.setValue(afspraak.getDescription());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return label;
     }
 }
