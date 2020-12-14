@@ -47,7 +47,7 @@
                     view="_local">
             <loader id="personeelDl">
                 <query>
-                    <![CDATA[select e from kinderkankerfonds$Persoon e where e.personeel=true]]>
+                    <![CDATA[select e from kinderkankerfonds$Persoon e ]]>
                 </query>
             </loader>
         </collection>

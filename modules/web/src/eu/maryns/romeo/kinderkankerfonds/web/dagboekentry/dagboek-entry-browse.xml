@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://dagboekEntryBrowse.caption"
         focusComponent="dagboekEntriesTable"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.dagboekentry">
@@ -35,7 +34,7 @@
             </actions>
             <columns>
                 <column id="date" caption="Datum" sort="DESCENDING"/>
-                <column id="tekst" caption="Tekst"/>
+                <column id="tekst" caption="Tekst" generator="renderHtmlDescription"/>
                 <column id="auteur" caption="Auteur"/>
                 <column id="attentie" caption="Waarschuwing"/>
                 <column id="createTs" caption="Aangemaakt op"/>

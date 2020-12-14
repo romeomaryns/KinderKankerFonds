@@ -36,12 +36,18 @@
               screen="kinderkankerfonds_Afdeling.browse"
               caption="mainMsg://menu_config.kinderkankerfonds_Afdeling.browse"/>
         <item icon="PAINT_BRUSH"
-                screen="kinderkankerfonds_KalenderKleur.browse"
+              screen="kinderkankerfonds_KalenderKleur.browse"
               caption="mainMsg://menu_config.kinderkankerfonds_KalenderKleur.browse"/>
         <item icon="CALENDAR"
               screen="kinderkankerfonds_Afspraak.browse"/>
         <item icon="BOOKMARK"
-                screen="kinderkankerfonds_DagboekEntry.browse"
+              screen="kinderkankerfonds_DagboekEntry.browse"
               caption="mainMsg://menu_config.kinderkankerfonds_DagboekEntry.browse"/>
+        <item icon="USER"
+              screen="kinderkankerfonds$Bezoeker.browse"
+              caption="mainMsg://menu_config.kinderkankerfonds$Bezoeker.browse"/>
+        <item icon="BOOK"
+              screen="kinderkankerfonds_Rapportage.browse"
+              caption="mainMsg://menu_config.kinderkankerfonds_Rapportage.browse"/>
     </menu>
 </menu-config>

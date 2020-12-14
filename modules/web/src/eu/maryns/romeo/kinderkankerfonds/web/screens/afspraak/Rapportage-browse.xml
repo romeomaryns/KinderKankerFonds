@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://rapportageBrowse.caption"
+        focusComponent="afspraaksTable"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.screens.afspraak">
+    <data readOnly="true">
+        <collection id="afspraaksDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Afspraak">
+            <view extends="_local">
+                <property name="persoon" view="_minimal">
+                    <property name="vader"/>
+                    <property name="moeder"/>
+                    <property name="geboortedatum"/>
+                    <property name="overlijdensdatum"/>
+                    <property name="personeel"/>
+                    <property name="geslacht" view="_minimal"/>
+                    <property name="ziekenhuis" view="_minimal"/>
+                    <property name="contactinfo" view="_minimal"/>
+                    <property name="adressen" view="_minimal">
+                        <property name="bus"/>
+                        <property name="land" view="_minimal"/>
+                        <property name="type" view="_minimal"/>
+                    </property>
+                    <property name="notities" view="_minimal"/>
+                    <property name="afdeling" view="_minimal"/>
+                </property>
+                <property name="notities" view="_minimal"/>
+                <property name="ingepland" view="_minimal"/>
+                <property name="uitgevoerd" view="_minimal"/>
+                <property name="plannedDuration"/>
+                <property name="duration"/>
+                <property name="kleur"/>
+                <property name="kalenderKleur"/>
+            </view>
+            <loader id="afspraaksDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds_Afspraak e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="afspraaksTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="afspraaksTable"
+                dataLoader="afspraaksDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="afspraaksTable"
+                    width="100%"
+                    dataContainer="afspraaksDc"
+                    multiselect="true">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="excel" type="excel"/>
+            </actions>
+            <columns>
+                <column id="startDate" caption="Effectieve Start"/>
+                <column id="endDate" caption="Effectief Einde"/>
+                <column id="plannedStartDate" caption="Geplande Start"/>
+                <column id="plannedEndDate" caption="Gepland Einde"/>
+                <column id="persoon" caption="Bezoeker"/>
+                <column id="persoon.afdeling" caption="Afdeling"/>
+                <column id="persoon.geslacht" caption="Geslacht"/>
+                <column id="persoon.geboortedatum" caption="Geboortedatum"/>
+                <column id="persoon.overlijdensdatum" caption="Overlijdensdatum"/>
+                <column id="persoon.ziekenhuis" caption="Ziekenhuis"/>
+                <column id="persoon.personeel" caption="Personeel"/>
+                <column id="persoon.vader" caption="Vader"/>
+                <column id="persoon.moeder" caption="Moeder"/>
+                <column id="description" generator="renderHTMLDescription" caption="Omschrijving"/>
+                <column id="ingepland" caption="Ingepland door"/>
+                <column id="uitgevoerd" caption="Uitgevoerd door"/>
+                <column id="plannedDuration" caption="Geplande duur (m)"/>
+                <column id="duration" caption="Effectieve duur (m)"/>
+                <column id="kalenderKleur" caption="Kleur"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="afspraaksTable.create"/>
+                <button id="editBtn" action="afspraaksTable.edit"/>
+                <button id="removeBtn" action="afspraaksTable.remove"/>
+                <button id="excelBtn" action="afspraaksTable.excel"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

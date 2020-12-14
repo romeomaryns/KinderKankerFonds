@@ -1,28 +1,28 @@
-package eu.maryns.romeo.kinderkankerfonds.web.dagboekentry;
+package eu.maryns.romeo.kinderkankerfonds.web.screens.persoon;
 
 import com.haulmont.cuba.gui.UiComponents;
 import com.haulmont.cuba.gui.components.Component;
 import com.haulmont.cuba.gui.components.Label;
 import com.haulmont.cuba.gui.screen.*;
-import eu.maryns.romeo.kinderkankerfonds.entity.DagboekEntry;
+import eu.maryns.romeo.kinderkankerfonds.entity.Notitie;
+import eu.maryns.romeo.kinderkankerfonds.entity.Persoon;
 
 import javax.inject.Inject;
 
-@UiController("kinderkankerfonds_DagboekEntry.browse")
-@UiDescriptor("dagboek-entry-browse.xml")
-@LookupComponent("dagboekEntriesTable")
+@UiController("kinderkankerfonds$Bezoeker.browse")
+@UiDescriptor("bezoeker-browse.xml")
+@LookupComponent("table")
 @LoadDataBeforeShow
-public class DagboekEntryBrowse extends StandardLookup<DagboekEntry> {
-
+public class BezoekerBrowse extends MasterDetailScreen<Persoon> {
     @Inject
     private UiComponents uiComponents;
 
-    public Component renderHtmlDescription(DagboekEntry entry) {
+    public Component renderHTMLDescription(Notitie entry) {
 
         Label label = uiComponents.create(Label.class);
         label.setHtmlEnabled(true);
         try {
-            label.setValue(entry.getTekst());
+            label.setValue(entry.getOmschrijving());
         } catch (Exception e) {
             e.printStackTrace();
         }
