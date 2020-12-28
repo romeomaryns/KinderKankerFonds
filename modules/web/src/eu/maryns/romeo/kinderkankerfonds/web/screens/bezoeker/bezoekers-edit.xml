@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://bezoekersEdit.caption"
+        focusComponent="form"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.screens.bezoeker">
+    <data>
+        <instance id="persoonDc"
+                  class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon">
+            <view extends="_local">
+                <property name="geslacht" view="_minimal"/>
+                <property name="ziekenhuis" view="_minimal"/>
+                <property name="categorieen" view="_minimal"/>
+                <property name="contactinfo" view="_minimal">
+                    <property name="notities" view="_minimal"/>
+                    <property name="actief"/>
+                </property>
+                <property name="adressen" view="_minimal">
+                    <property name="bus"/>
+                    <property name="land" view="_minimal"/>
+                    <property name="type" view="_minimal"/>
+                    <property name="categorie" view="_minimal"/>
+                    <property name="notities" view="_minimal"/>
+                    <property name="actief"/>
+                </property>
+                <property name="notities" view="_minimal"/>
+                <property name="afdeling" view="_minimal"/>
+            </view>
+            <loader/>
+            <collection id="categorieenDc" property="categorieen"/>
+            <collection id="adressenDc" property="adressen"/>
+            <collection id="notitiesDc" property="notities"/>
+        </instance>
+        <collection id="geslachtsDc" class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht" view="_minimal">
+            <loader id="geslachtsDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Geslacht e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="ziekenhuisesDc" class="eu.maryns.romeo.kinderkankerfonds.entity.Ziekenhuis" view="_minimal">
+            <loader id="ziekenhuisesDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Ziekenhuis e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="persoonDc">
+                <column width="350px">
+                    <textField id="clientField" property="client"/>
+                    <textField id="voornaamField" property="voornaam"/>
+                    <textField id="familienaamField" property="familienaam"/>
+                    <textField id="aanspreking1Field" property="aanspreking1"/>
+                    <textField id="aanspreking2Field" property="aanspreking2"/>
+                    <textField id="vaderField" property="vader"/>
+                    <textField id="moederField" property="moeder"/>
+                    <dateField id="geboortedatumField" property="geboortedatum"/>
+                    <dateField id="overlijdensdatumField" property="overlijdensdatum"/>
+                    <checkBox id="familiedagField" property="familiedag"/>
+                    <checkBox id="ontmoetingsdagField" property="ontmoetingsdag"/>
+                    <checkBox id="raakpuntField" property="raakpunt"/>
+                    <checkBox id="oudercomiteField" property="oudercomite"/>
+                    <checkBox id="comfortforfaitField" property="comfortforfait"/>
+                    <checkBox id="palliatiefforfaitField" property="palliatiefforfait"/>
+                    <checkBox id="personeelField" property="personeel"/>
+                    <checkBox id="actiefField" property="actief"/>
+                    <lookupPickerField id="geslachtField" optionsContainer="geslachtsDc" property="geslacht"/>
+                    <lookupPickerField id="ziekenhuisField" optionsContainer="ziekenhuisesDc" property="ziekenhuis"/>
+                    <textField id="uniekeidField" property="uniekeid"/>
+                    <pickerField id="afdelingField" property="afdeling">
+                        <actions>
+                            <action id="lookup" type="picker_lookup"/>
+                            <action id="clear" type="picker_clear"/>
+                        </actions>
+                    </pickerField>
+                    <checkBox id="toestemmingFotosField" property="toestemmingFotos"/>
+                </column>
+            </form>
+            <groupBox id="categorieenBox" caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.categorieen">
+                <table id="categorieenTable" dataContainer="categorieenDc" width="100%" height="200px">
+                    <actions>
+                        <action id="add" type="add"/>
+                        <action id="exclude" type="exclude"/>
+                    </actions>
+                    <columns>
+                        <column id="naam"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="categorieenTable.add"/>
+                        <button action="categorieenTable.exclude"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+            <groupBox id="adressenBox" caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.adressen">
+                <table id="adressenTable" dataContainer="adressenDc" width="100%" height="200px">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="straatnaam"/>
+                        <column id="huisnummer"/>
+                        <column id="postcode"/>
+                        <column id="stad"/>
+                        <column id="bus"/>
+                        <column id="land"/>
+                        <column id="type"/>
+                        <column id="categorie"/>
+                        <column id="notities"/>
+                        <column id="actief"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="adressenTable.create"/>
+                        <button action="adressenTable.edit"/>
+                        <button action="adressenTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+            <groupBox id="notitiesBox" caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.notities">
+                <table id="notitiesTable" dataContainer="notitiesDc" width="100%" height="200px">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="omschrijving"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="notitiesTable.create"/>
+                        <button action="notitiesTable.edit"/>
+                        <button action="notitiesTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

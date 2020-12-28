@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://bezoekersBrowse.caption"
+        focusComponent="persoonsTable"
+        messagesPack="eu.maryns.romeo.kinderkankerfonds.web.screens.bezoeker">
+    <data readOnly="true">
+        <collection id="persoonsDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Persoon">
+            <view extends="_local">
+                <property name="geslacht" view="_minimal"/>
+                <property name="ziekenhuis" view="_minimal"/>
+                <property name="categorieen" view="_minimal"/>
+                <property name="contactinfo" view="_minimal">
+                    <property name="notities" view="_minimal"/>
+                    <property name="actief"/>
+                </property>
+                <property name="adressen" view="_minimal">
+                    <property name="bus"/>
+                    <property name="land" view="_minimal"/>
+                    <property name="type" view="_minimal"/>
+                    <property name="categorie" view="_minimal"/>
+                    <property name="notities" view="_minimal"/>
+                    <property name="actief"/>
+                </property>
+                <property name="notities" view="_minimal"/>
+                <property name="afdeling" view="_minimal"/>
+            </view>
+            <loader id="persoonsDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds$Persoon e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="persoonsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="persoonsTable"
+                dataLoader="persoonsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="persoonsTable"
+                    width="100%"
+                    dataContainer="persoonsDc"
+                    multiselect="true">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="excel" type="excel"/>
+            </actions>
+            <columns>
+                <column id="client"/>
+                <column id="voornaam"/>
+                <column id="familienaam"/>
+                <column id="aanspreking1"/>
+                <column id="aanspreking2"/>
+                <column id="vader"/>
+                <column id="moeder"/>
+                <column id="geboortedatum"/>
+                <column id="overlijdensdatum"/>
+                <column id="familiedag"/>
+                <column id="ontmoetingsdag"/>
+                <column id="raakpunt"/>
+                <column id="oudercomite"/>
+                <column id="comfortforfait"/>
+                <column id="palliatiefforfait"/>
+                <column id="personeel"/>
+                <column id="actief"/>
+                <column id="geslacht"/>
+                <column id="ziekenhuis"/>
+                <column id="uniekeid"/>
+                <column id="afdeling"/>
+                <column id="toestemmingFotos"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="persoonsTable.create"/>
+                <button id="editBtn" action="persoonsTable.edit"/>
+                <button id="removeBtn" action="persoonsTable.remove"/>
+                <button id="excelBtn" action="persoonsTable.excel"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
