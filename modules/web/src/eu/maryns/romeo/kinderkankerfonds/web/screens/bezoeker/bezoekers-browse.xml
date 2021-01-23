@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://bezoekersBrowse.caption"
         focusComponent="persoonsTable"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.screens.bezoeker">
@@ -44,37 +43,35 @@
         </filter>
         <groupTable id="persoonsTable"
                     width="100%"
-                    dataContainer="persoonsDc"
-                    multiselect="true">
+                    dataContainer="persoonsDc">
             <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
-                <action id="excel" type="excel"/>
+                <action id="create" type="create" caption="mainMsg://button.create">
+                    <properties>
+                        <property name="screenClass"
+                                  value="eu.maryns.romeo.kinderkankerfonds.web.screens.bezoeker.BezoekersEdit"/>
+                    </properties>
+                </action>
+                <action id="edit" type="edit" caption="mainMsg://button.edit">
+                    <properties>
+                        <property name="screenClass"
+                                  value="eu.maryns.romeo.kinderkankerfonds.web.screens.bezoeker.BezoekersEdit"/>
+                    </properties>
+                </action>
+                <action id="remove" type="remove" caption="mainMsg://button.remove"/>
+                <action id="excel" type="excel" caption="mainMsg://button.excel"/>
             </actions>
             <columns>
-                <column id="client"/>
                 <column id="voornaam"/>
                 <column id="familienaam"/>
-                <column id="aanspreking1"/>
-                <column id="aanspreking2"/>
-                <column id="vader"/>
-                <column id="moeder"/>
+                <column id="geslacht"/>
                 <column id="geboortedatum"/>
                 <column id="overlijdensdatum"/>
-                <column id="familiedag"/>
-                <column id="ontmoetingsdag"/>
-                <column id="raakpunt"/>
-                <column id="oudercomite"/>
-                <column id="comfortforfait"/>
-                <column id="palliatiefforfait"/>
-                <column id="personeel"/>
-                <column id="actief"/>
-                <column id="geslacht"/>
+                <column id="afdeling" caption="Afdeling"/>
+                <column id="vader" caption="Vader"/>
+                <column id="moeder" caption="Moeder"/>
+                <column id="personeel" caption="Personeel"/>
+                <column id="toestemmingFotos" caption="Toestemming foto's"/>
                 <column id="ziekenhuis"/>
-                <column id="uniekeid"/>
-                <column id="afdeling"/>
-                <column id="toestemmingFotos"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

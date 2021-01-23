@@ -47,6 +47,15 @@ public class PersoonEdit extends StandardEditor<Persoon> {
     @Inject
     private CheckBox personeelCheckbox;
 
+    /*@Inject
+    private CheckBox toestemmingFotosCheckbox;*/
+
+    @Inject
+    private CheckBox adowerkingCheckbox;
+
+    @Inject
+    private CheckBox nadowerkingCheckbox;
+
     @Inject
     private UiComponents uiComponents;
     @Inject
@@ -115,6 +124,18 @@ public class PersoonEdit extends StandardEditor<Persoon> {
         com.vaadin.ui.CheckBox vaadin8CheckBox = personeelCheckbox.unwrap(com.vaadin.ui.CheckBox.class);
         vaadin8CheckBox.setCaptionAsHtml(true);
         vaadin8CheckBox.setCaption("<span class=\"onoffswitch-inner\"></span><span class=\"onoffswitch-switch\"></span>");
+
+        com.vaadin.ui.CheckBox vaadin9CheckBox = adowerkingCheckbox.unwrap(com.vaadin.ui.CheckBox.class);
+        vaadin9CheckBox.setCaptionAsHtml(true);
+        vaadin9CheckBox.setCaption("<span class=\"onoffswitch-inner\"></span><span class=\"onoffswitch-switch\"></span>");
+
+        com.vaadin.ui.CheckBox vaadin10CheckBox = nadowerkingCheckbox.unwrap(com.vaadin.ui.CheckBox.class);
+        vaadin10CheckBox.setCaptionAsHtml(true);
+        vaadin10CheckBox.setCaption("<span class=\"onoffswitch-inner\"></span><span class=\"onoffswitch-switch\"></span>");
+
+      /*  com.vaadin.ui.CheckBox vaadin9CheckBox = toestemmingFotosCheckbox.unwrap(com.vaadin.ui.CheckBox.class);
+        vaadin9CheckBox.setCaptionAsHtml(true);
+        vaadin9CheckBox.setCaption("<span class=\"onoffswitch-inner\"></span><span class=\"onoffswitch-switch\"></span>");*/
     }
 
   /*  @Subscribe("contactinfoTable.create")

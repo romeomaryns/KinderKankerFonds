@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
-        caption="mainMsg://application.caption"
+        caption="KinderKankerfonds / DeLieving"
         class="eu.maryns.romeo.kinderkankerfonds.web.screens.ExtAppMainWindow"
         messagesPack="eu.maryns.romeo.kinderkankerfonds.web.screens"
         xmlns:main="http://schemas.haulmont.com/cuba/mainwindow.xsd">
@@ -40,10 +40,10 @@
                     <main:userIndicator id="userIndicator"
                                         align="MIDDLE_CENTER"/>
                     <main:newWindowButton id="newWindowButton"
-                                          description="mainMsg://newWindowBtnDescription"
+                                          description="Nieuw scherm"
                                           icon="app/images/new-window.png"/>
                     <main:logoutButton id="logoutButton"
-                                       description="mainMsg://logoutBtnDescription"
+                                       description="Uitloggen"
                                        icon="app/images/exit.png"/>
                 </hbox>
                 <main:timeZoneIndicator id="timeZoneIndicator"

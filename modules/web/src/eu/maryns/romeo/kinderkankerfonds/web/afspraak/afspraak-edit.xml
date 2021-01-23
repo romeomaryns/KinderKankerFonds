@@ -8,6 +8,7 @@
                   class="eu.maryns.romeo.kinderkankerfonds.entity.Afspraak">
             <view extends="afspraak-full-view">
                 <property name="persoon" view="persoon-browse-view" fetch="AUTO"/>
+                <property name="notities" view="notitie-view-full" fetch="AUTO"/>
             </view>
             <loader/>
             <collection id="notitiesDc" property="notities"/>
@@ -66,8 +67,20 @@
                                                property="persoon"
                                                caption="Bezoeker">
                             <actions>
-                                <action id="lookup" type="picker_lookup"/>
-                                <action id="open" type="picker_open"/>
+                                <action id="lookup" type="picker_lookup">
+                                    <properties>
+                                        <property name="openMode" value="DIALOG"/>
+                                        <property name="screenClass"
+                                                  value="eu.maryns.romeo.kinderkankerfonds.web.screens.bezoeker.BezoekersBrowse"/>
+                                    </properties>
+                                </action>
+                                <action id="open" type="picker_open">
+                                    <properties>
+                                        <property name="openMode" value="DIALOG"/>
+                                        <property name="screenClass"
+                                                  value="eu.maryns.romeo.kinderkankerfonds.web.screens.bezoeker.BezoekersEdit"/>
+                                    </properties>
+                                </action>
                             </actions>
                         </suggestionPickerField>
                         <lookupField id="afdelingSuggestionField" dataContainer="persoonDc" inputPrompt="Afdeling .."
@@ -81,8 +94,20 @@
                                                property="ingepland"
                                                caption="Ingepland door">
                             <actions>
-                                <action id="lookup" type="picker_lookup"/>
-                                <action id="open" type="picker_open"/>
+                                <action id="lookup" type="picker_lookup">
+                                    <properties>
+                                        <property name="openMode" value="DIALOG"/>
+                                        <property name="screenClass"
+                                                  value="eu.maryns.romeo.kinderkankerfonds.web.screens.bezoeker.BezoekersBrowse"/>
+                                    </properties>
+                                </action>
+                                <action id="open" type="picker_open">
+                                    <properties>
+                                        <property name="openMode" value="DIALOG"/>
+                                        <property name="screenClass"
+                                                  value="eu.maryns.romeo.kinderkankerfonds.web.screens.bezoeker.BezoekersEdit"/>
+                                    </properties>
+                                </action>
                             </actions>
                         </suggestionPickerField>
                         <dateField id="plannedStartDateField" property="plannedStartDate" caption="Geplande Start"
@@ -94,8 +119,20 @@
                                                inputPrompt="Uitgevoerd door.."
                                                property="uitgevoerd" caption="Uitgevoerd door">
                             <actions>
-                                <action id="lookup" type="picker_lookup"/>
-                                <action id="open" type="picker_open"/>
+                                <action id="lookup" type="picker_lookup">
+                                    <properties>
+                                        <property name="openMode" value="DIALOG"/>
+                                        <property name="screenClass"
+                                                  value="eu.maryns.romeo.kinderkankerfonds.web.screens.bezoeker.BezoekersBrowse"/>
+                                    </properties>
+                                </action>
+                                <action id="open" type="picker_open">
+                                    <properties>
+                                        <property name="openMode" value="DIALOG"/>
+                                        <property name="screenClass"
+                                                  value="eu.maryns.romeo.kinderkankerfonds.web.screens.bezoeker.BezoekersEdit"/>
+                                    </properties>
+                                </action>
                             </actions>
                         </suggestionPickerField>
                         <dateField id="startDateField" property="startDate" caption="Effectieve Start"/>
@@ -131,13 +168,13 @@
                     <columns>
                         <column id="createTs" caption="Aangemaakt op"/>
                         <column id="createdBy" caption="Aangemaakt door"/>
-                        <column id="omschrijving" generator="renderHtmlDescription"/>
+                        <column id="omschrijving" caption="Omschrijving" generator="renderHtmlDescription"/>
                     </columns>
                     <rowsCount/>
                     <buttonsPanel id="buttonsPanel"
                                   alwaysVisible="true" margin="true,false,false,false">
-                        <button id="createBtn" caption="mainMsg://button.create"/>
-                        <button id="editBtn" caption="mainMsg://button.edit"/>
+                        <button id="createBtn" caption="mainMsg://button.create" action="notitiesTable.create"/>
+                        <button id="editBtn" caption="mainMsg://button.edit" action="notitiesTable.edit"/>
                         <button id="removeBtn" action="notitiesTable.remove" caption="mainMsg://button.remove"/>
                     </buttonsPanel>
                 </groupTable>

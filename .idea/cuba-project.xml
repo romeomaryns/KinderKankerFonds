@@ -25,22 +25,22 @@
             <DependencyModelState>
               <option name="group" value="com.haulmont.cuba" />
               <option name="name" value="cuba-global" />
-              <option name="version" value="7.2.10" />
+              <option name="version" value="7.2.11" />
             </DependencyModelState>
             <DependencyModelState>
               <option name="group" value="com.haulmont.fts" />
               <option name="name" value="fts-global" />
-              <option name="version" value="7.2.10" />
+              <option name="version" value="7.2.11" />
             </DependencyModelState>
             <DependencyModelState>
               <option name="group" value="com.haulmont.reports" />
               <option name="name" value="reports-global" />
-              <option name="version" value="7.2.10" />
+              <option name="version" value="7.2.11" />
             </DependencyModelState>
             <DependencyModelState>
               <option name="group" value="com.haulmont.charts" />
               <option name="name" value="charts-global" />
-              <option name="version" value="7.2.10" />
+              <option name="version" value="7.2.11" />
             </DependencyModelState>
             <DependencyModelState>
               <option name="group" value="com.haulmont.addon.dashboard" />
@@ -83,7 +83,7 @@
             </entry>
           </map>
         </option>
-        <option name="gradlePluginJarPath" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.gradle/cuba-plugin/7.2.10/ac3ea6c93114f19a878e2ad89353ad02e4d1d829/cuba-plugin-7.2.10.jar" />
+        <option name="gradlePluginJarPath" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.gradle/cuba-plugin/7.2.11/c9362c63dff490bbb49d870b98c138c371abc78a/cuba-plugin-7.2.11.jar" />
         <option name="projectPath" value="$PROJECT_DIR$" />
       </CubaModelState>
     </option>
@@ -92,10 +92,10 @@
         <entry key="com.haulmont.addon.dashboard" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.addon.dashboard/dashboard-core/3.2.3/e3c5f54776674297dd9c6cfba1b4ed2edfa1f8e7/dashboard-core-3.2.3-db.zip" />
         <entry key="com.haulmont.addon.helium" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.addon.helium/helium-core/0.3.1/f32f01124ca5740d61806e5892373e14449bf48e/helium-core-0.3.1-db.zip" />
         <entry key="com.haulmont.addon.restapi" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.addon.restapi/restapi-core/7.2.2/50180631225aa28d00cede5dca35b17ae559427e/restapi-core-7.2.2-db.zip" />
-        <entry key="com.haulmont.cuba" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.cuba/cuba-core/7.2.10/7240671633192948556927fbefe039b080aa5445/cuba-core-7.2.10-db.zip" />
-        <entry key="com.haulmont.reports" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.reports/reports-core/7.2.10/8ac7280a3a2acead6b412bb6840497264d81909c/reports-core-7.2.10-db.zip" />
+        <entry key="com.haulmont.cuba" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.cuba/cuba-core/7.2.11/719bcff65c1686eff8a8cc2d1b2c44013a93d589/cuba-core-7.2.11-db.zip" />
+        <entry key="com.haulmont.reports" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.reports/reports-core/7.2.11/737eaf20ba27ffe29e4276e097abddce3f339f00/reports-core-7.2.11-db.zip" />
       </map>
     </option>
-    <option name="gradleFilesCRC" value="4365715265" />
+    <option name="gradleFilesCRC" value="4624020197" />
   </component>
 </project>

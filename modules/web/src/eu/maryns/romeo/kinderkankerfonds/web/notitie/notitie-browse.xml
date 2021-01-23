@@ -44,7 +44,7 @@
             </actions>
             <columns>
                 <column id="client" visible="false"/>
-                <column id="omschrijving" maxTextLength="100" caption="Omschrijving"/>
+                <column id="omschrijving" maxTextLength="100" caption="Omschrijving" generator="renderHTMLDescription"/>
                 <column id="adressen" caption="Adres" link="true" linkScreen="kinderkankerfonds$Adres.edit" linkScreenOpenType="DIALOG"/>
                 <column id="ziekenhuis" caption="Ziekenhuis" link="true" linkScreen="kinderkankerfonds$Ziekenhuis.edit" linkScreenOpenType="DIALOG"/>
                 <column id="contactinfo" caption="Contactinfo" link="true" linkScreen="kinderkankerfonds$ContactInfo.edit" linkScreenOpenType="DIALOG"/>

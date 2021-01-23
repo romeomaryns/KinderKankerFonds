@@ -35,6 +35,9 @@
             <property name="personen"
                       view="_minimal"/>
         </property>
+        <property name="toestemmingFotos"/>
+        <property name="adowerking"/>
+        <property name="nadowerking"/>
     </view>
     <view class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
           extends="_local"

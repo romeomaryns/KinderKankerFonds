@@ -12,6 +12,11 @@
                     <![CDATA[select e from kinderkankerfonds$Persoon e]]>
                 </query>
             </loader>
+            <collection id="categorieenDc" property="categorieen"/>
+            <collection id="adressenDc" property="adressen"/>
+            <collection id="contactinfoDc" property="contactinfo"/>
+            <collection id="notitiesDc" property="notities"/>
+            <collection id="relatiesDc" property="relaties"/>
         </collection>
     </data>
     <dialogMode height="600"
@@ -22,6 +27,12 @@
                 applyTo="persoonsTable"
                 dataLoader="persoonsDl">
             <properties include=".*"/>
+            <custom name="adressen"
+                    caption="Straatnaam"
+                    paramClass="java.lang.String"
+                    join="join {E}.adressen ad">
+                ad.straatnaam like ?
+            </custom>
         </filter>
         <groupTable id="persoonsTable"
                     width="100%"
@@ -44,6 +55,8 @@
                 <column id="oudercomite"/>
                 <column id="comfortforfait" caption="Comfort Forfait"/>
                 <column id="palliatiefforfait" caption="Palliatief Forfait"/>
+                <column id="adowerking" caption="Adowerking"/>
+                <column id="nadowerking" caption="Nadowerking"/>
                 <column id="personeel" caption="Personeel"/>
                 <column id="geslacht"/>
                 <column id="categorieen"

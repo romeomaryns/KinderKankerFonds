@@ -30,6 +30,9 @@ create table KINDERKANKERFONDS_PERSOON (
     ZIEKENHUIS_ID uuid,
     UNIEKEID varchar(255),
     AFDELING_ID uuid,
+    TOESTEMMING_FOTO boolean,
+    ADOWERKING boolean,
+    NADOWERKING boolean,
     --
     primary key (ID)
 )^

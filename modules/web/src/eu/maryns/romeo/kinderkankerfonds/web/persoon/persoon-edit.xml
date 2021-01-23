@@ -170,6 +170,22 @@
                                           property="personeel"
                                           stylename="onoffswitch"/>
                             </row>
+                            <row>
+                                <label value="Adowerking"/>
+                                <checkBox id="adowerkingCheckbox"
+                                          dataContainer="persoonDc"
+                                          height="100%"
+                                          property="adowerking"
+                                          stylename="onoffswitch"/>
+                            </row>
+                            <row>
+                                <label value="Nadowerking"/>
+                                <checkBox id="nadowerkingCheckbox"
+                                          dataContainer="persoonDc"
+                                          height="100%"
+                                          property="nadowerking"
+                                          stylename="onoffswitch"/>
+                            </row>
                         </rows>
                     </grid>
                 </tab>

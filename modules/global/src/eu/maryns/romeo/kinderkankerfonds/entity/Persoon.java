@@ -115,6 +115,15 @@ public class Persoon extends StandardClientEntity {
     @JoinColumn(name = "AFDELING_ID")
     protected Afdeling afdeling;
 
+    @Column(name = "TOESTEMMING_FOTO")
+    protected Boolean toestemmingFotos;
+
+    @Column(name = "ADOWERKING")
+    protected Boolean adowerking;
+
+    @Column(name = "NADOWERKING")
+    protected Boolean nadowerking;
+
     public void setCategorieen(List<Categorie> categorieen) {
         this.categorieen = categorieen;
     }
@@ -330,5 +339,30 @@ public class Persoon extends StandardClientEntity {
 
     public void setMoeder(String moeder) {
         this.moeder = moeder;
+    }
+
+    public Boolean getToestemmingFotos() {
+        return toestemmingFotos;
+    }
+
+    public void setToestemmingFotos(Boolean toestemmingFotos) {
+        this.toestemmingFotos = toestemmingFotos;
+    }
+
+
+    public Boolean getAdowerking() {
+        return adowerking;
+    }
+
+    public void setAdowerking(Boolean adowerking) {
+        this.adowerking = adowerking;
+    }
+
+    public Boolean getNadowerking() {
+        return nadowerking;
+    }
+
+    public void setNadowerking(Boolean nadowerking) {
+        this.nadowerking = nadowerking;
     }
 }

@@ -59,14 +59,14 @@
                           dataContainer="adresDc">
                         <column width="250px">
                             <field property="straatnaam"/>
-                            <field property="huisnummer"/>
                             <field property="bus"/>
+                            <field property="stad"/>
                             <field optionsContainer="typesDc"
                                    property="type"/>
                         </column>
                         <column>
+                            <field property="huisnummer"/>
                             <field property="postcode"/>
-                            <field property="stad"/>
                             <field optionsContainer="landsDc"
                                    property="land"/>
                             <field property="actief"/>

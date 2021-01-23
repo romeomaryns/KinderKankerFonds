@@ -75,7 +75,8 @@
                     <button id="dagBtn" invoke="switchNaarDag" caption="Dag"/>
                     <button id="weekBtn" invoke="switchNaarWeek" caption="Week"/>
                     <button id="maandBtn" invoke="switchNaarMaand" caption="Maand"/>
-                    <lookupField id="maandField" property="maand" visible="false" nullOptionVisible="false"/>
+                    <lookupField id="maandField" property="maand" visible="false" nullOptionVisible="false"
+                                 pageLength="12"/>
                 </buttonsPanel>
                 <calendar id="afsprakenCalendar"
                           dataContainer="alleAfsprakenDc"

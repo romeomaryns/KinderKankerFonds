@@ -34,7 +34,7 @@
                     <action id="remove" type="remove"/>
                 </actions>
                 <columns>
-                    <column id="omschrijving"/>
+                    <column id="omschrijving" generator="renderHTMLDescription"/>
                 </columns>
                 <buttonsPanel>
                     <button action="notitiesTable.create" caption="mainMsg://button.create"/>

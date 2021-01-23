@@ -29,6 +29,7 @@
             <collection id="categorieenDc" property="categorieen"/>
             <collection id="adressenDc" property="adressen"/>
             <collection id="notitiesDc" property="notities"/>
+            <collection id="contactinfoDc" property="contactinfo"/>
         </instance>
         <collection id="geslachtsDc" class="eu.maryns.romeo.kinderkankerfonds.entity.Geslacht" view="_minimal">
             <loader id="geslachtsDl">
@@ -44,101 +45,112 @@
                 </query>
             </loader>
         </collection>
+        <collection id="afdelingenDc"
+                    class="eu.maryns.romeo.kinderkankerfonds.entity.Afdeling"
+                    view="_base">
+            <loader id="afdelingenDl">
+                <query>
+                    <![CDATA[select e from kinderkankerfonds_Afdeling e]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="scrollBox" spacing="true">
-        <scrollBox id="scrollBox" spacing="true">
-            <form id="form" dataContainer="persoonDc">
-                <column width="350px">
-                    <textField id="clientField" property="client"/>
-                    <textField id="voornaamField" property="voornaam"/>
-                    <textField id="familienaamField" property="familienaam"/>
-                    <textField id="aanspreking1Field" property="aanspreking1"/>
-                    <textField id="aanspreking2Field" property="aanspreking2"/>
-                    <textField id="vaderField" property="vader"/>
-                    <textField id="moederField" property="moeder"/>
-                    <dateField id="geboortedatumField" property="geboortedatum"/>
-                    <dateField id="overlijdensdatumField" property="overlijdensdatum"/>
-                    <checkBox id="familiedagField" property="familiedag"/>
-                    <checkBox id="ontmoetingsdagField" property="ontmoetingsdag"/>
-                    <checkBox id="raakpuntField" property="raakpunt"/>
-                    <checkBox id="oudercomiteField" property="oudercomite"/>
-                    <checkBox id="comfortforfaitField" property="comfortforfait"/>
-                    <checkBox id="palliatiefforfaitField" property="palliatiefforfait"/>
-                    <checkBox id="personeelField" property="personeel"/>
-                    <checkBox id="actiefField" property="actief"/>
-                    <lookupPickerField id="geslachtField" optionsContainer="geslachtsDc" property="geslacht"/>
-                    <lookupPickerField id="ziekenhuisField" optionsContainer="ziekenhuisesDc" property="ziekenhuis"/>
-                    <textField id="uniekeidField" property="uniekeid"/>
-                    <pickerField id="afdelingField" property="afdeling">
+    <layout expand="tabSheetBox" spacing="true">
+        <vbox id="tabSheetBox">
+            <tabSheet id="tabSheet" height="100%">
+                <tab id="mainTab" caption="msg://persoon.editorMainTab.caption" margin="true">
+                    <scrollBox id="fieldGroupBox"
+                               height="100%">
+                        <form id="form" dataContainer="persoonDc">
+                            <column width="350px">
+                                <textField id="voornaamField" property="voornaam"/>
+                                <textField id="familienaamField" property="familienaam"/>
+                                <lookupPickerField id="geslachtField" optionsContainer="geslachtsDc"
+                                                   property="geslacht"/>
+                                <lookupField id="afdelingSuggestionField" dataContainer="persoonDc"
+                                             inputPrompt="Afdeling .."
+                                             property="afdeling" caption="Afdeling"
+                                             optionsContainer="afdelingenDc"/>
+                                <dateField id="geboortedatumField" property="geboortedatum"/>
+                                <dateField id="overlijdensdatumField" property="overlijdensdatum"/>
+                                <textField id="vaderField" property="vader" caption="Vader"/>
+                                <textField id="moederField" property="moeder" caption="Moeder"/>
+                                <checkBox id="personeelField" property="personeel" caption="Personeel"/>
+                                <checkBox id="toestemmingFotosField" property="toestemmingFotos"
+                                          caption="Toestemming Foto's"/>
+                                <lookupPickerField id="ziekenhuisField" optionsContainer="ziekenhuisesDc"
+                                                   property="ziekenhuis"/>
+                            </column>
+                        </form>
+                    </scrollBox>
+                </tab>
+                <tab id='adressenTab' caption='msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.adressen'
+                     margin='true,false,false,false'>
+                    <table id="adressenTable" dataContainer="adressenDc" width="100%" height="200px">
                         <actions>
-                            <action id="lookup" type="picker_lookup"/>
-                            <action id="clear" type="picker_clear"/>
+                            <action id="create" type="create" caption="mainMsg://button.create"/>
+                            <action id="edit" type="edit" caption="mainMsg://button.edit"/>
+                            <action id="remove" type="remove" caption="mainMsg://button.remove"/>
                         </actions>
-                    </pickerField>
-                    <checkBox id="toestemmingFotosField" property="toestemmingFotos"/>
-                </column>
-            </form>
-            <groupBox id="categorieenBox" caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.categorieen">
-                <table id="categorieenTable" dataContainer="categorieenDc" width="100%" height="200px">
-                    <actions>
-                        <action id="add" type="add"/>
-                        <action id="exclude" type="exclude"/>
-                    </actions>
-                    <columns>
-                        <column id="naam"/>
-                    </columns>
-                    <buttonsPanel>
-                        <button action="categorieenTable.add"/>
-                        <button action="categorieenTable.exclude"/>
-                    </buttonsPanel>
-                </table>
-            </groupBox>
-            <groupBox id="adressenBox" caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.adressen">
-                <table id="adressenTable" dataContainer="adressenDc" width="100%" height="200px">
-                    <actions>
-                        <action id="create" type="create"/>
-                        <action id="edit" type="edit"/>
-                        <action id="remove" type="remove"/>
-                    </actions>
-                    <columns>
-                        <column id="straatnaam"/>
-                        <column id="huisnummer"/>
-                        <column id="postcode"/>
-                        <column id="stad"/>
-                        <column id="bus"/>
-                        <column id="land"/>
-                        <column id="type"/>
-                        <column id="categorie"/>
-                        <column id="notities"/>
-                        <column id="actief"/>
-                    </columns>
-                    <buttonsPanel>
-                        <button action="adressenTable.create"/>
-                        <button action="adressenTable.edit"/>
-                        <button action="adressenTable.remove"/>
-                    </buttonsPanel>
-                </table>
-            </groupBox>
-            <groupBox id="notitiesBox" caption="msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.notities">
-                <table id="notitiesTable" dataContainer="notitiesDc" width="100%" height="200px">
-                    <actions>
-                        <action id="create" type="create"/>
-                        <action id="edit" type="edit"/>
-                        <action id="remove" type="remove"/>
-                    </actions>
-                    <columns>
-                        <column id="omschrijving"/>
-                    </columns>
-                    <buttonsPanel>
-                        <button action="notitiesTable.create"/>
-                        <button action="notitiesTable.edit"/>
-                        <button action="notitiesTable.remove"/>
-                    </buttonsPanel>
-                </table>
-            </groupBox>
-        </scrollBox>
+                        <columns>
+                            <column id="type"/>
+                            <column id="straatnaam"/>
+                            <column id="huisnummer"/>
+                            <column id="bus"/>
+                            <column id="postcode"/>
+                            <column id="stad"/>
+                            <column id="land"/>
+                            <column id="categorie"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="adressenTable.create"/>
+                            <button action="adressenTable.edit"/>
+                            <button action="adressenTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </tab>
+                <tab id='contactinfoTab' caption='msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.contactinfo'
+                     margin='true,false,false,false'>
+                    <table id="contactinfoTable" dataContainer="contactinfoDc" width="100%" height="200px">
+                        <actions>
+                            <action id="create" type="create" caption="mainMsg://button.create"/>
+                            <action id="edit" type="edit" caption="mainMsg://button.edit"/>
+                            <action id="remove" type="remove" caption="mainMsg://button.remove"/>
+                        </actions>
+                        <columns>
+                            <column id="telefoon"/>
+                            <column id="email"/>
+                            <column id="gsm"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="contactinfoTable.create"/>
+                            <button action="contactinfoTable.edit"/>
+                            <button action="contactinfoTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </tab>
+                <tab id='notitiesTab' caption='msg://eu.maryns.romeo.kinderkankerfonds.entity/Persoon.notities'
+                     margin='true,false,false,false'>
+                    <table id="notitiesTable" dataContainer="notitiesDc" width="100%" height="200px">
+                        <actions>
+                            <action id="create" type="create" caption="mainMsg://button.create"/>
+                            <action id="edit" type="edit" caption="mainMsg://button.edit"/>
+                            <action id="remove" type="remove" caption="mainMsg://button.remove"/>
+                        </actions>
+                        <columns>
+                            <column id="omschrijving" generator="renderHTMLDescription"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="notitiesTable.create"/>
+                            <button action="notitiesTable.edit"/>
+                            <button action="notitiesTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </tab>
+            </tabSheet>
+        </vbox>
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>

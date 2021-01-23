@@ -44,7 +44,7 @@
               screen="kinderkankerfonds_DagboekEntry.browse"
               caption="mainMsg://menu_config.kinderkankerfonds_DagboekEntry.browse"/>
         <item icon="USER"
-              screen="kinderkankerfonds$Bezoeker.browse"
+              screen="kinderkankerfonds$Bezoekers.browse"
               caption="mainMsg://menu_config.kinderkankerfonds$Bezoeker.browse"/>
         <item icon="BOOK"
               screen="kinderkankerfonds_Rapportage.browse"
