@@ -60,13 +60,13 @@
           </list>
         </option>
         <option name="artifactGroup" value="eu.maryns.romeo.kinderkankerfonds" />
-        <option name="artifactVersion" value="1.7" />
+        <option name="artifactVersion" value="1.8" />
         <option name="tomcatDir" value="$PROJECT_DIR$/deploy/tomcat" />
         <option name="uberJar" value="true" />
         <option name="uberCustomJettyEnvironmentXml" value="modules/core/web/META-INF/jetty-env.xml" />
         <option name="uberAppProperties" value="[cuba.automaticDatabaseUpdate:true, cuba.dataSourceProvider:jndi]" />
         <option name="uberCorePort" value="8079" />
-        <option name="uberWebPort" value="443" />
+        <option name="uberWebPort" value="8443" />
         <option name="uberPortalPort" value="8081" />
         <option name="uberLogbackConfigFile" value="etc/uber-jar-logback.xml" />
         <option name="singleUberJar" value="true" />
@@ -96,6 +96,6 @@
         <entry key="com.haulmont.reports" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.haulmont.reports/reports-core/7.2.11/737eaf20ba27ffe29e4276e097abddce3f339f00/reports-core-7.2.11-db.zip" />
       </map>
     </option>
-    <option name="gradleFilesCRC" value="4624020197" />
+    <option name="gradleFilesCRC" value="2744024871" />
   </component>
 </project>

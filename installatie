@@ -304,3 +304,38 @@ Keystore procedure :
     keytool -import -keystore keystore.jks -file jetty.cer -alias jetty
     
 
+gradle clean builUberJar
+cp build/distributions/uberJar/kkf.jar docker-image/kkf.jar
+sudo chmod -Rv 777 docker-image
+cd docker-image
+docker-compose up --build
+
+docker build -t kkf .
+java -jar build/distributions/uberJar/kkf.jar
+
+
+
+
+
+kill all running containers with
+    docker kill $(docker ps -q)
+delete all stopped containers with
+    docker rm $(docker ps -a -q)
+delete all images with
+    docker rmi $(docker images -q)
+update and stop a container that is in a crash-loop with
+    docker update --restart=no && docker stop
+bash shell into container
+    docker exec -i -t /bin/bash - if bash is not available use /bin/sh
+bash shell with root if container is running in a different user context
+    docker exec -i -t -u root /bin/bash
+
+
+
+
+
+
+ls -haltr /u01/backups/
+
+ls -haltr /u01/backups/daily/kinderkankerfonds/
+

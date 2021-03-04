@@ -38,6 +38,9 @@
         <property name="toestemmingFotos"/>
         <property name="adowerking"/>
         <property name="nadowerking"/>
+        <property name="residentieKoester"/>
+        <property name="studioNona"/>
+        <property name="koesterNietOnco"/>
     </view>
     <view class="eu.maryns.romeo.kinderkankerfonds.entity.Adres"
           extends="_local"
@@ -52,6 +55,11 @@
             <property name="ontmoetingsdag"/>
             <property name="raakpunt"/>
             <property name="oudercomite"/>
+            <property name="adowerking"/>
+            <property name="nadowerking"/>
+            <property name="residentieKoester"/>
+            <property name="studioNona"/>
+            <property name="koesterNietOnco"/>
             <property name="actief"/>
             <property name="ziekenhuis"
                       view="_minimal"/>

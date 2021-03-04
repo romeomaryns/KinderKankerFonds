@@ -15,16 +15,16 @@
         <Arg name="server">
             <Ref refid="Server"/>
         </Arg>
-        <Arg>
-            <New class="org.eclipse.jetty.util.ssl.SslContextFactory">
-                <Set name="keyStorePath">keystore.jks</Set>
-                <Set name="keyStorePassword">P0ns0nby</Set>
-                <Set name="keyManagerPassword">P0ns0nby</Set>
-                <Set name="trustStorePath">keystore.jks</Set>
-                <Set name="trustStorePassword">P0ns0nby</Set>
-            </New>
-        </Arg>
-        <Set name="port">443</Set>
+        <!--        <Arg>-->
+        <!--            <New class="org.eclipse.jetty.util.ssl.SslContextFactory">-->
+        <!--                <Set name="keyStorePath">keystore.jks</Set>-->
+        <!--                <Set name="keyStorePassword">P0ns0nby</Set>-->
+        <!--                <Set name="keyManagerPassword">P0ns0nby</Set>-->
+        <!--                <Set name="trustStorePath">keystore.jks</Set>-->
+        <!--                <Set name="trustStorePassword">P0ns0nby</Set>-->
+        <!--            </New>-->
+        <!--        </Arg>-->
+        <Set name="port">8080</Set>
     </New>
 </Arg>
 </Call>

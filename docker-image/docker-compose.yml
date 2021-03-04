@@ -14,9 +14,11 @@ services:
   web:
     image: kkf
     ports:
-     - "8080:8080"
+      - "8080:8080"
+    env_file:
+      - ./kkf.env
     networks:
-     - kkf-network
+      - kkf-network
 
 networks:
   kkf-network:

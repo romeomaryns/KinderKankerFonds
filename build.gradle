@@ -36,7 +36,7 @@ apply(plugin: 'cuba')
 cuba {
     artifact {
         group = 'eu.maryns.romeo.kinderkankerfonds'
-        version = '1.7'
+        version = '1.8'
         isSnapshot = false
     }
     tomcat {
@@ -215,5 +215,5 @@ task buildUberJar(type: CubaUberJarBuilding) {
     appProperties = ['cuba.automaticDatabaseUpdate': true,
                      'cuba.dataSourceProvider'     : 'jndi']
     webJettyConfPath = 'jetty.xml'
-    webPort = 443
+    webPort = 8443
 }

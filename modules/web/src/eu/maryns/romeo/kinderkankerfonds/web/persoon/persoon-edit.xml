@@ -186,6 +186,30 @@
                                           property="nadowerking"
                                           stylename="onoffswitch"/>
                             </row>
+                            <row>
+                                <label value="Residentie Koester"/>
+                                <checkBox id="koesterCheckbox"
+                                          dataContainer="persoonDc"
+                                          height="100%"
+                                          property="residentieKoester"
+                                          stylename="onoffswitch"/>
+                            </row>
+                            <row>
+                                <label value="Studio Nona"/>
+                                <checkBox id="studioNonaCheckbox"
+                                          dataContainer="persoonDc"
+                                          height="100%"
+                                          property="studioNona"
+                                          stylename="onoffswitch"/>
+                            </row>
+                            <row>
+                                <label value="Koester Niet-Onco"/>
+                                <checkBox id="koesterNietOncoCheckbox"
+                                          dataContainer="persoonDc"
+                                          height="100%"
+                                          property="koesterNietOnco"
+                                          stylename="onoffswitch"/>
+                            </row>
                         </rows>
                     </grid>
                 </tab>

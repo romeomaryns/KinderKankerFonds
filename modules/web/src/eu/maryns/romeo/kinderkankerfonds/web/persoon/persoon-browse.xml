@@ -57,6 +57,9 @@
                 <column id="palliatiefforfait" caption="Palliatief Forfait"/>
                 <column id="adowerking" caption="Adowerking"/>
                 <column id="nadowerking" caption="Nadowerking"/>
+                <column id="residentieKoester" caption="Residentie Koester"/>
+                <column id="studioNona" caption="Studio Nona"/>
+                <column id="koesterNietOnco" caption="Koester Niet-Onco"/>
                 <column id="personeel" caption="Personeel"/>
                 <column id="geslacht"/>
                 <column id="categorieen"

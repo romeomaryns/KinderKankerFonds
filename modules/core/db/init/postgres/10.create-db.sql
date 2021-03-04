@@ -33,6 +33,9 @@ create table KINDERKANKERFONDS_PERSOON (
     TOESTEMMING_FOTO boolean,
     ADOWERKING boolean,
     NADOWERKING boolean,
+    RESIDENTIE_KOESTER boolean,
+    STUDIO_NONA boolean,
+    KOESTER_NIET_ONCO boolean,
     --
     primary key (ID)
 )^

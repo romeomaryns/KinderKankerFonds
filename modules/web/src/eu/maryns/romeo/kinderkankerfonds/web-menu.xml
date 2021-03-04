@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-kinderkankerfonds" insertBefore="administration">
+        <item screen="kinderkankerfonds$Alles.browse" openType="NEW_TAB" icon="HOME"/>
         <item icon="USERS"
               screen="kinderkankerfonds$Persoon.browse" openType="NEW_TAB"/>
         <item icon="MAP"
@@ -27,7 +28,7 @@
               screen="kinderkankerfonds$Categorie.browse"/>
         <item icon="FLAG"
               screen="kinderkankerfonds$Land.browse"/>
-        <item screen="kinderkankerfonds$Alles.browse" openType="NEW_TAB" icon="HOME"/>
+
         <item icon="UPLOAD"
               screen="import"/>
     </menu>

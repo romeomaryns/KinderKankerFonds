@@ -24,10 +24,10 @@
                     dataContainer="adresesDc"
                     multiselect="true">
             <actions>
-                <action id="create" type="create" caption="mainMsg://button.create"/>
-                <action id="edit" type="edit" caption="mainMsg://button.edit"/>
-                <action id="remove" type="remove" caption="mainMsg://button.remove"/>
-            <!--    <action id="excel" type="excel"/> -->
+                <!--                <action id="create" type="create" caption="mainMsg://button.create"/>-->
+                <!--                <action id="edit" type="edit" caption="mainMsg://button.edit"/>-->
+                <!--                <action id="remove" type="remove" caption="mainMsg://button.remove"/>-->
+                <action id="excel" type="excel"/>
             </actions>
             <columns>
                 <column id="straatnaam"/>
@@ -44,14 +44,19 @@
                 <column id="persoon.oudercomite"/>
                 <column id="persoon.contactinfo"/>
                 <column id="persoon.categorieen"/>
+                <column id="persoon.adowerking" caption="Adowerking"/>
+                <column id="persoon.nadowerking" caption="Nadowerking"/>
+                <column id="persoon.residentieKoester" caption="Residentie Koester"/>
+                <column id="persoon.studioNona" caption="Studio Nona"/>
+                <column id="persoon.koesterNietOnco" caption="Koester Niet-Onco"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="adressenTable.create"/>
-                <button id="editBtn" action="adressenTable.edit"/>
-                <button id="removeBtn" action="adressenTable.remove"/>
-              <!--  <button id="excelBtn" action="adressenTable.excel"/>-->
+                <!--                <button id="createBtn" action="adressenTable.create"/>-->
+                <!--                <button id="editBtn" action="adressenTable.edit"/>-->
+                <!--                <button id="removeBtn" action="adressenTable.remove"/>-->
+                <button id="excelBtn" action="adressenTable.excel"/>
                 <button id="printReportButton" caption="Report"/>
             </buttonsPanel>
             <rowsCount/>

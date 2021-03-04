@@ -1,0 +1,42 @@
+version: '3'
+services:
+  nginx:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx
+    restart: always
+    env_file:
+      - ./nginx/nginx.env
+    depends_on:
+      - nginx-db
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./nginx/config.json:/app/config/production.json
+      - ./nginx/data:/data
+      - ./nginx/letsencrypt:/etc/letsencrypt
+    networks:
+      - nginx-network
+  nginx-db:
+    image: 'mariadb:latest'
+    container_name: nginx-db
+    restart: always
+    env_file:
+      - ./nginx-db/nginx-db.env
+    volumes:
+      - ./nginx-db/db:/var/lib/mysql
+    networks:
+      - nginx-network
+  app:
+    build: docker-image
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./app/:/usr/kkf
+    env_file:
+      - ./kkf.env
+    network_mode: "host"
+networks:
+  nginx-network:
+    external: false

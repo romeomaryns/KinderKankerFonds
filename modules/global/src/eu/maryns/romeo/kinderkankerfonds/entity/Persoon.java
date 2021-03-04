@@ -124,6 +124,15 @@ public class Persoon extends StandardClientEntity {
     @Column(name = "NADOWERKING")
     protected Boolean nadowerking;
 
+    @Column(name = "RESIDENTIE_KOESTER")
+    protected Boolean residentieKoester;
+
+    @Column(name = "STUDIO_NONA")
+    protected Boolean studioNona;
+
+    @Column(name = "KOESTER_NIET_ONCO")
+    protected Boolean koesterNietOnco;
+
     public void setCategorieen(List<Categorie> categorieen) {
         this.categorieen = categorieen;
     }
@@ -364,5 +373,29 @@ public class Persoon extends StandardClientEntity {
 
     public void setNadowerking(Boolean nadowerking) {
         this.nadowerking = nadowerking;
+    }
+
+    public Boolean getResidentieKoester() {
+        return residentieKoester;
+    }
+
+    public void setResidentieKoester(Boolean residentieKoester) {
+        this.residentieKoester = residentieKoester;
+    }
+
+    public Boolean getStudioNona() {
+        return studioNona;
+    }
+
+    public void setStudioNona(Boolean studioNona) {
+        this.studioNona = studioNona;
+    }
+
+    public Boolean getKoesterNietOnco() {
+        return koesterNietOnco;
+    }
+
+    public void setKoesterNietOnco(Boolean koesterNietOnco) {
+        this.koesterNietOnco = koesterNietOnco;
     }
 }
